@@ -2,8 +2,12 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
-exports.helloWorld = (req, res) => {
-    res.send('hello world auth routes');
+exports.helloWorldAuth = (req, res) => {
+    res.send('hello world auth routes authorized user');
+};
+
+exports.helloWorldAdmin = (req, res) => {
+    res.send('hello world auth routes admin');
 };
 
 exports.signup = (req, res) => {
@@ -60,3 +64,18 @@ exports.isSignedIn = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty: 'auth'
 });
+
+exports.isAuth = (req, res, next) => {
+    let user = req.profile && req.auth && req.profile._id.toString() === req.auth._id.toString();
+    if(!user) {
+        return res.status(403).json({error: 'You are not authorized to do that.'});
+    }
+    next();
+};
+
+exports.isAdmin = (req, res, next) => {
+    if(req.profile.role === 0) {
+        return res.status(403).json({error: 'You must be an admin to do that.'});
+    }
+    next();
+};
