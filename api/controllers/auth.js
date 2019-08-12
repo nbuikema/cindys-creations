@@ -2,14 +2,6 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
-exports.helloWorldAuth = (req, res) => {
-    res.send('hello world auth routes authorized user');
-};
-
-exports.helloWorldAdmin = (req, res) => {
-    res.send('hello world auth routes admin');
-};
-
 exports.signup = (req, res) => {
     const user = new User(req.body);
     user.save((err, user) => {
