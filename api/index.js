@@ -12,8 +12,10 @@ const orderRoutes = require('./routes/order');
 const braintreeRoutes = require('./routes/braintree');
 
 const app = express();
-mongoose.connect(process.env.DATABASE, {useNewUrlParser: true})
-.then(() => {
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+}).then(() => {
     console.log('database connected');
 });
 
