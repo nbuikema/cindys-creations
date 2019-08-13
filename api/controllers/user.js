@@ -37,7 +37,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
     User.findOneAndDelete(
         {_id: req.profile._id},
-        (err, deletedUser) => {
+        (err) => {
             if(err) {
                 return res.status(400).json({error: 'You are not authorized to do that.'});
             }
