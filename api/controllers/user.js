@@ -37,11 +37,13 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
     User.findOneAndDelete(
         {_id: req.profile._id},
-        (err) => {
+        (err, user) => {
             if(err) {
                 return res.status(400).json({error: 'You are not authorized to do that.'});
             }
-            return res.json({message: 'User successfully deleted.'});
+            user.hashed_password = undefined;
+            user.salt = undefined;
+            return res.json(`Email: "${user.email}" has been deleted.`);
         }
     );
 };
