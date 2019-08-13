@@ -8,6 +8,7 @@ router.get('/user/auth/:userId', isSignedIn, isAuth, helloWorldAuth);
 router.get('/user/admin/:userId', isSignedIn, isAuth, isAdmin, helloWorldAdmin);
 // createUser = auth-signup
 router.get('/user/:userId', isSignedIn, isAuth, readUser);
+router.put('/user/:userId', isSignedIn, isAuth, updateUser);
 
 router.param('userId', userById);
 
