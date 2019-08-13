@@ -14,6 +14,7 @@ const braintreeRoutes = require('./routes/braintree');
 const app = express();
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
+    useFindAndModify: false,
     useCreateIndex: true
 }).then(() => {
     console.log('database connected');

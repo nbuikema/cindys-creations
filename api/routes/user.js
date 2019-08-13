@@ -9,6 +9,7 @@ router.get('/user/admin/:userId', isSignedIn, isAuth, isAdmin, helloWorldAdmin);
 // createUser = auth-signup
 router.get('/user/:userId', isSignedIn, isAuth, readUser);
 router.put('/user/:userId', isSignedIn, isAuth, updateUser);
+router.delete('/user/:userId', isSignedIn, isAuth, deleteUser);
 
 router.param('userId', userById);
 
