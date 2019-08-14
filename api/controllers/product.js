@@ -89,3 +89,15 @@ exports.updateProduct = (req, res) => {
         });
     });
 };
+
+exports.deleteProduct = (req, res) => {
+    Product.findOneAndDelete(
+        {_id: req.product._id},
+        (err, product) => {
+            if(err) {
+                return res.status(400).json({error: 'You are not authorized to do that.'});
+            }
+            return res.json(`Product: "${product.name}" has been deleted.`);
+        }
+    );
+};
