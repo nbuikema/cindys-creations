@@ -5,14 +5,12 @@ const {helloWorldAuth, helloWorldAdmin, productById, createProduct, readProduct,
 const {isSignedIn, isAuth, isAdmin} = require('../controllers/auth');
 const {userById} = require('../controllers/user');
 
-router.get('/product/auth/:userId', isSignedIn, isAuth, helloWorldAuth);
-router.get('/product/admin/:userId', isSignedIn, isAuth, isAdmin, helloWorldAdmin);
 router.post('/product/create/:userId', isSignedIn, isAuth, isAdmin, createProduct);
 router.get('/product/read/:productId', readProduct);
+router.get('/products/read/all', readAllProducts);
+router.get('/products/read', readProductsByQuery);
 router.put('/product/update/:productId/:userId', isSignedIn, isAuth, isAdmin, updateProduct);
 router.delete('/product/delete/:productId/:userId', isSignedIn, isAuth, isAdmin, deleteProduct);
-router.get('/products/all', readAllProducts);
-router.get('/products', readProductsByQuery);
 
 router.param('userId', userById);
 router.param('productId', productById);

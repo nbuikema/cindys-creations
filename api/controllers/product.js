@@ -3,14 +3,6 @@ const _ = require('lodash');
 const fs = require('fs');
 const Product = require('../models/product');
 
-exports.helloWorldAuth = (req, res) => {
-    res.send('hello world product routes authorized user');
-};
-
-exports.helloWorldAdmin = (req, res) => {
-    res.send('hello world product routes admin');
-};
-
 exports.productById = (req, res, next, id) => {
     Product.findById(id).exec((err, product) => {
         if(err || !product) {
@@ -64,6 +56,28 @@ exports.readProduct = (req, res) => {
     return res.json(req.product);
 };
 
+exports.readAllProducts = (req, res) => {
+    Product.find({}, (err, products) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find products.'});
+        }
+        res.json(products);
+    });
+};
+
+exports.readProductsByQuery = (req, res) => {
+    let sort = req.query.sort ? req.query.sort : '_id';
+    let order = req.query.order ? req.query.order : 'asc';
+    let limit = req.query.limit ? parseInt(req.query.limit) : 3;
+
+    Product.find().sort([[sort, order]]).limit(limit).exec((err, products) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find products.'});
+        }
+        res.json(products);
+    });
+};
+
 exports.updateProduct = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -100,26 +114,4 @@ exports.deleteProduct = (req, res) => {
             return res.json(`Product: "${product.name}" has been deleted.`);
         }
     );
-};
-
-exports.readAllProducts = (req, res) => {
-    Product.find({}, (err, products) => {
-        if(err) {
-            return res.status(400).json({error: 'Could not find products.'});
-        }
-        res.json(products);
-    });
-};
-
-exports.readProductsByQuery = (req, res) => {
-    let sort = req.query.sort ? req.query.sort : '_id';
-    let order = req.query.order ? req.query.order : 'asc';
-    let limit = req.query.limit ? parseInt(req.query.limit) : 3;
-
-    Product.find().sort([[sort, order]]).limit(limit).exec((err, products) => {
-        if(err) {
-            return res.status(400).json({error: 'Could not find products.'});
-        }
-        res.json(products);
-    });
 };
