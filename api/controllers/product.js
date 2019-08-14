@@ -116,7 +116,7 @@ exports.readProductsByQuery = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let limit = req.query.limit ? parseInt(req.query.limit) : 3;
 
-    Product.find().select('-image').sort([[sort, order]]).limit(limit).exec((err, products) => {
+    Product.find().sort([[sort, order]]).limit(limit).exec((err, products) => {
         if(err) {
             return res.status(400).json({error: 'Could not find products.'});
         }
