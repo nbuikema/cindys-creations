@@ -5,9 +5,9 @@ const {userById, readUser, updateUser, deleteUser} = require('../controllers/use
 const {isSignedIn, isAuth} = require('../controllers/auth');
 
 // createUser = auth-signup/signin/signout
-router.get('/user/:userId', isSignedIn, isAuth, readUser);
-router.put('/user/:userId', isSignedIn, isAuth, updateUser);
-router.delete('/user/:userId', isSignedIn, isAuth, deleteUser);
+router.get('/user/read/:userId', isSignedIn, isAuth, readUser);
+router.put('/user/update/:userId', isSignedIn, isAuth, updateUser);
+router.delete('/user/delete/:userId', isSignedIn, isAuth, deleteUser);
 
 router.param('userId', userById);
 

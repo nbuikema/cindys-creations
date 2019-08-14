@@ -23,9 +23,6 @@ const productSchema = new mongoose.Schema(
             type: Number,
             trim: true,
             required: true
-        },
-        quantity: {
-            type: Number
         }
     }, {timestamps: true}
 );
