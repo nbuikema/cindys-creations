@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import {signout} from '../api';
 
 const Navbar = ({history}) => (
     <div>
@@ -34,6 +35,11 @@ const Navbar = ({history}) => (
                             <Link className='nav-link' to='/signin'>
                                 Sign In
                             </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {})}>
+                                Sign Out
+                            </span>
                         </li>
                     </ul>
                 </div>
