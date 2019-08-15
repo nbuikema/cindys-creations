@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {signin, authenticate} from '../api';
 
 import Navbar from './Navbar';
@@ -36,11 +37,11 @@ const Signin = () => {
         </div>
     );
 
-    const showSuccess = () => (
-        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            You have been successfully signed in!
-        </div>
-    );
+    const redirectSuccess = () => {
+        if(success) {
+            return <Redirect to='/' />;
+        }
+    };
 
     const signinForm = () => (
         <form>
@@ -61,7 +62,7 @@ const Signin = () => {
             <Navbar />
             <div className='container'>
                 {showError()}
-                {showSuccess()}
+                {redirectSuccess()}
                 {signinForm()}
             </div>
         </div>
