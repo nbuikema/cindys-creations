@@ -40,10 +40,19 @@ const Navbar = ({history}) => (
                         </ul>
                     )} {isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
-                            <li className='nav-item'>
-                                <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
-                                    Sign Out
-                                </span>
+                            <li className='nav-item dropdown'>
+                                <Link className='nav-link dropdown-toggle' to='/' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                    {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name}`}
+                                </Link>
+                                <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                    <Link className='dropdown-item' to='/'>
+                                        Account
+                                    </Link>
+                                    <div className='dropdown-divider'></div>
+                                    <span className='dropdown-item' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
+                                        Sign Out
+                                    </span>
+                                </div>
                             </li>
                         </ul>
                     )}
