@@ -45,7 +45,7 @@ const Navbar = ({history}) => (
                                     {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name}`}
                                 </Link>
                                 <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                    <Link className='dropdown-item' to='/user/account'>
+                                    <Link className='dropdown-item' to={`/${isAuthenticated().user._id}/account`}>
                                         My Account
                                     </Link>
                                     <div className='dropdown-divider'></div>
