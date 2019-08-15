@@ -53,7 +53,7 @@ const Signup = () => {
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            You have successfully signed up! Feel free to <Link to='/signin'>sign in</Link> and update your account.
+            You have successfully signed up! Please <Link to='/signin'>sign in</Link>.
         </div>
     );
 
