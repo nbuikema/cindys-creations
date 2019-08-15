@@ -41,7 +41,7 @@ const Navbar = ({history}) => (
                     )} {isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item'>
-                                <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {})}>
+                                <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
                                     Sign Out
                                 </span>
                             </li>
