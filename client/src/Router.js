@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import UserAccount from './components/UserAccount';
+import UpdateUserAccount from './components/UpdateUserAccount';
 
 const Router = () => {
     return (
@@ -16,6 +17,7 @@ const Router = () => {
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/signin' exact component={Signin} />
                 <PrivateRoute path='/:userId/account' exact component={UserAccount} />
+                <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
             </Switch>
         </BrowserRouter>
     );

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import moment from 'moment';
-import {isAuthenticated, readUser} from '../api';
+import {isAuthenticated, readUser, updateUser, update} from '../api';
 
 import Navbar from './Navbar';
 
@@ -44,31 +44,62 @@ const UserAccount = (props) => {
         init(props.match.params.userId);
     }, []);
 
-    const userInfo = () => (
+    const onChange = valueProp => event => {
+        setValues({...values, [valueProp]: event.target.value, error: ''});
+    };
+
+    const onSubmit = event => {
+        event.preventDefault();
+        setValues({...values, error: ''});
+        updateUser(props.match.params.userId, token, {first_name, last_name, email, address}).then(
+            data => {
+                if(data.error) {
+                    setValues({...values, error: data.error, success: false});
+                } else {
+                    update(data, () => {
+                        setValues({
+                            ...values,
+                            first_name: data.first_name,
+                            last_name: data.last_name,
+                            email: data.email,
+                            address: data.address,
+                            role: data.role,
+                            createdAt: data.createdAt,
+                            updatedAt: data.updatedAt,
+                            error: '',
+                            success: true
+                        });
+                    });
+                }
+            }
+        );
+    };
+
+    const updateUserInfo = () => (
         <div>
             <form>
                 <div className='form-group'>
                     <label for='first_name' className='col-sm-2 col-form-label'>First Name</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='first_name' value={first_name} />
+                        <input onChange={onChange('first_name')} type='text' className='form-control-plaintext' id='first_name' placeholder={first_name} />
                     </div>
                 </div>
                 <div className='form-group'>
                     <label for='last_name' className='col-sm-2 col-form-label'>Last Name</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='last_name' value={last_name} />
+                        <input onChange={onChange('last_name')} type='text' className='form-control-plaintext' id='last_name' placeholder={last_name} />
                     </div>
                 </div>
                 <div className='form-group'>
                     <label for='email' className='col-sm-2 col-form-label'>Email</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='email' value={email} />
+                        <input onChange={onChange('email')} type='text' className='form-control-plaintext' id='email' placeholder={email} />
                     </div>
                 </div>
                 <div className='form-group'>
                     <label for='address' className='col-sm-2 col-form-label'>Address</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='address' value={address} />
+                        <input onChange={onChange('address')} type='text' className='form-control-plaintext' id='address' placeholder={address} />
                     </div>
                 </div>
                 <div className='form-group'>
@@ -89,6 +120,7 @@ const UserAccount = (props) => {
                         <input type='text' readonly className='form-control-plaintext' id='role' value={role === 1 ? 'Admin' : 'Registered User'} />
                     </div>
                 </div>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Update Account</button>
             </form>
         </div>
     );
@@ -97,7 +129,7 @@ const UserAccount = (props) => {
         <div>
             <Navbar />
             <div className='container'>
-                {userInfo()}
+                {updateUserInfo()}
             </div>
         </div>
     );
