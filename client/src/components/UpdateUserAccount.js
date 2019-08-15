@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
 import moment from 'moment';
 import {isAuthenticated, readUser, updateUser, update} from '../api';
 
@@ -33,8 +34,7 @@ const UserAccount = (props) => {
                     role: data.role,
                     createdAt: data.createdAt,
                     updatedAt: data.updatedAt,
-                    error: '',
-                    success: true
+                    error: ''
                 });
             }
         });
@@ -42,6 +42,7 @@ const UserAccount = (props) => {
 
     useEffect(() => {
         init(props.match.params.userId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onChange = valueProp => event => {
@@ -125,10 +126,24 @@ const UserAccount = (props) => {
         </div>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const redirectSuccess = () => {
+        if(success) {
+            return <Redirect to={`/${props.match.params.userId}/account`} />;
+        }
+    };
+
     return (
         <div>
             <Navbar />
             <div className='container'>
+                {showError()}
+                {redirectSuccess()}
                 {updateUserInfo()}
             </div>
         </div>

@@ -31,18 +31,6 @@ const Signin = () => {
         });
     };
 
-    const showError = () => (
-        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
-            {error}
-        </div>
-    );
-
-    const redirectSuccess = () => {
-        if(success) {
-            return <Redirect to='/' />;
-        }
-    };
-
     const signinForm = () => (
         <form>
             <div className='form-group'>
@@ -56,6 +44,18 @@ const Signin = () => {
             <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
         </form>
     );
+
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const redirectSuccess = () => {
+        if(success) {
+            return <Redirect to='/' />;
+        }
+    };
 
     return (
         <div>

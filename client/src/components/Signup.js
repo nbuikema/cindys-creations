@@ -45,18 +45,6 @@ const Signup = () => {
         }
     };
 
-    const showError = () => (
-        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
-            {error}
-        </div>
-    );
-
-    const showSuccess = () => (
-        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            You have successfully signed up! Please <Link to='/signin'>sign in</Link>.
-        </div>
-    );
-
     const signupForm = () => (
         <form>
             <div className='row'>
@@ -87,6 +75,18 @@ const Signup = () => {
             </div>
             <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign Up</button>
         </form>
+    );
+
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            You have successfully signed up! Please <Link to='/signin'>sign in</Link>.
+        </div>
     );
 
     return (

@@ -13,10 +13,9 @@ const UserAccount = (props) => {
         role: '',
         createdAt: '',
         updatedAt: '',
-        error: '',
-        success: false
+        error: ''
     });
-    const {first_name, last_name, email, address, role, createdAt, updatedAt, error, success} = values;
+    const {first_name, last_name, email, address, role, createdAt, updatedAt, error} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -33,8 +32,7 @@ const UserAccount = (props) => {
                     role: data.role,
                     createdAt: data.createdAt,
                     updatedAt: data.updatedAt,
-                    error: '',
-                    success: true
+                    error: ''
                 });
             }
         });
@@ -42,6 +40,7 @@ const UserAccount = (props) => {
 
     useEffect(() => {
         init(props.match.params.userId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const userInfo = () => (
@@ -93,11 +92,18 @@ const UserAccount = (props) => {
         </div>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
     return (
         <div>
             <Navbar />
             <div className='container'>
                 {userInfo()}
+                {showError()}
             </div>
         </div>
     );
