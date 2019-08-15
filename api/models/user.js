@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema(
         order_history: {
             type: Array,
             default: []
-        }
+        },
+        address: String
     }, {timestamps: true}
 );
 

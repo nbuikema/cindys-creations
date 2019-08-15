@@ -45,8 +45,8 @@ const Navbar = ({history}) => (
                                     {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name}`}
                                 </Link>
                                 <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                    <Link className='dropdown-item' to='/'>
-                                        Account
+                                    <Link className='dropdown-item' to='/user/account'>
+                                        My Account
                                     </Link>
                                     <div className='dropdown-divider'></div>
                                     <span className='dropdown-item' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
