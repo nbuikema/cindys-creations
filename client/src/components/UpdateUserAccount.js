@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
-import moment from 'moment';
 import {isAuthenticated, readUser, updateUser, update} from '../api';
 
 import Navbar from './Navbar';
@@ -12,12 +11,11 @@ const UserAccount = (props) => {
         email: '',
         address: '',
         role: '',
-        createdAt: '',
-        updatedAt: '',
+        adminCode: '',
         error: '',
         success: false
     });
-    const {first_name, last_name, email, address, role, createdAt, updatedAt, error, success} = values;
+    const {first_name, last_name, email, address, role, adminCode, error, success} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -32,8 +30,6 @@ const UserAccount = (props) => {
                     email: data.email,
                     address: data.address,
                     role: data.role,
-                    createdAt: data.createdAt,
-                    updatedAt: data.updatedAt,
                     error: ''
                 });
             }
@@ -52,7 +48,7 @@ const UserAccount = (props) => {
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, error: ''});
-        updateUser(props.match.params.userId, token, {first_name, last_name, email, address}).then(
+        updateUser(props.match.params.userId, token, {first_name, last_name, email, address, role}).then(
             data => {
                 if(data.error) {
                     setValues({...values, error: data.error, success: false});
@@ -65,8 +61,6 @@ const UserAccount = (props) => {
                             email: data.email,
                             address: data.address,
                             role: data.role,
-                            createdAt: data.createdAt,
-                            updatedAt: data.updatedAt,
                             error: '',
                             success: true
                         });
@@ -74,6 +68,17 @@ const UserAccount = (props) => {
                 }
             }
         );
+    };
+
+    const checkAdminCode = event => {
+        event.preventDefault();
+        const ADMIN_CODE = process.env.REACT_APP_ADMIN_CODE;
+        if(adminCode === ADMIN_CODE) {
+            setValues({
+                ...values,
+                role: 1
+            });
+        }
     };
 
     const updateUserInfo = () => (
@@ -104,24 +109,23 @@ const UserAccount = (props) => {
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='createdAt' className='col-sm-2 col-form-label'>Signed Up</label>
+                    <label className='col-sm-2 col-form-label'>Access Group</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='createdAt' value={moment(createdAt).fromNow()} />
+                        <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='updatedAt' className='col-sm-2 col-form-label'>Last Updated</label>
+                    <label htmlFor='adminCode' className='col-sm-2 col-form-label'>Admin Code</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='updatedAt' value={moment(updatedAt).fromNow()} />
+                        <div className='input-group'>
+                            <input onChange={onChange('adminCode')} type='text' className='form-control-plaintext' id='adminCode' />
+                            <span className='input-group-btn'>
+                                <button onClick={checkAdminCode} type='submit' className='btn btn-primary'>Check Code</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div className='form-group row'>
-                    <label htmlFor='role' className='col-sm-2 col-form-label'>Access Group</label>
-                    <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='role' value={role === 1 ? 'Admin' : 'Registered User'} />
-                    </div>
-                </div>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Update Account</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
             </form>
         </div>
     );

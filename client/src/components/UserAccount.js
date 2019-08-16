@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import {Link, Redirect} from 'react-router-dom';
 import moment from 'moment';
-import {isAuthenticated, readUser} from '../api';
+import {isAuthenticated, readUser, deleteUser, signout} from '../api';
 
 import Navbar from './Navbar';
 
 const UserAccount = (props) => {
     const [values, setValues] = useState({
+        id: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -13,9 +15,10 @@ const UserAccount = (props) => {
         role: '',
         createdAt: '',
         updatedAt: '',
-        error: ''
+        error: '',
+        deleteSuccess: false
     });
-    const {first_name, last_name, email, address, role, createdAt, updatedAt, error} = values;
+    const {id, first_name, last_name, email, address, role, createdAt, updatedAt, error, deleteSuccess} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -25,6 +28,7 @@ const UserAccount = (props) => {
             } else {
                 setValues({
                     ...values,
+                    id: data._id,
                     first_name: data.first_name,
                     last_name: data.last_name,
                     email: data.email,
@@ -43,52 +47,83 @@ const UserAccount = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const destroy = () => {
+        const confirmDelete = window.confirm('Are you sure you want to delete your account? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteUser(props.match.params.userId, token).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    signout(() => {
+                        setValues({
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            address: '',
+                            role: '',
+                            createdAt: '',
+                            updatedAt: '',
+                            error: '',
+                            deleteSuccess: true
+                        });
+                    });
+                }
+            });
+        }
+    };
+
     const userInfo = () => (
         <div>
             <form>
                 <div className='form-group row'>
-                    <label htmlFor='first_name' className='col-sm-2 col-form-label'>First Name</label>
+                    <label className='col-sm-2 col-form-label'>First Name</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='first_name' value={first_name} />
+                        <span className='form-control-plaintext'>{first_name}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='last_name' className='col-sm-2 col-form-label'>Last Name</label>
+                    <label className='col-sm-2 col-form-label'>Last Name</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='last_name' value={last_name} />
+                    <span className='form-control-plaintext'>{last_name}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='email' className='col-sm-2 col-form-label'>Email</label>
+                    <label className='col-sm-2 col-form-label'>Email</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='email' value={email} />
+                        <span className='form-control-plaintext'>{email}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='address' className='col-sm-2 col-form-label'>Address</label>
+                    <label className='col-sm-2 col-form-label'>Address</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='address' value={address} />
+                        <span className='form-control-plaintext'>{address}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='createdAt' className='col-sm-2 col-form-label'>Signed Up</label>
+                    <label className='col-sm-2 col-form-label'>Signed Up</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='createdAt' value={moment(createdAt).fromNow()} />
+                        <span className='form-control-plaintext'>{moment(createdAt).fromNow()}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='updatedAt' className='col-sm-2 col-form-label'>Last Updated</label>
+                    <label className='col-sm-2 col-form-label'>Last Updated</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='updatedAt' value={moment(updatedAt).fromNow()} />
+                        <span className='form-control-plaintext'>{moment(updatedAt).fromNow()}</span>
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label htmlFor='role' className='col-sm-2 col-form-label'>Access Group</label>
+                    <label className='col-sm-2 col-form-label'>Access Group</label>
                     <div className='col-sm-10'>
-                        <input type='text' readOnly className='form-control-plaintext' id='role' value={role === 1 ? 'Admin' : 'Registered User'} />
+                        <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
                     </div>
                 </div>
             </form>
+            <Link className='btn btn-info' to={`/${id}/account/update`}>
+                Update Account
+            </Link>
+            <span onClick={destroy} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                Delete Account
+            </span>
         </div>
     );
 
@@ -98,12 +133,19 @@ const UserAccount = (props) => {
         </div>
     );
 
+    const redirectDeleteSuccess = () => {
+        if(deleteSuccess) {
+            return <Redirect to='/' />;
+        }
+    };
+
     return (
         <div>
             <Navbar />
             <div className='container'>
                 {userInfo()}
                 {showError()}
+                {redirectDeleteSuccess()}
             </div>
         </div>
     );
