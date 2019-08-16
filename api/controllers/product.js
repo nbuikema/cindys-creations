@@ -53,11 +53,12 @@ exports.createProduct = (req, res) => {
 };
 
 exports.readProduct = (req, res) => {
+    req.product.image = undefined;
     return res.json(req.product);
 };
 
 exports.readAllProducts = (req, res) => {
-    Product.find({}, (err, products) => {
+    Product.find().select('-image').exec((err, products) => {
         if(err) {
             return res.status(400).json({error: 'Could not find products.'});
         }
@@ -70,7 +71,7 @@ exports.readProductsByQuery = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let limit = req.query.limit ? parseInt(req.query.limit) : 3;
 
-    Product.find().sort([[sort, order]]).limit(limit).exec((err, products) => {
+    Product.find().select('-image').sort([[sort, order]]).limit(limit).exec((err, products) => {
         if(err) {
             return res.status(400).json({error: 'Could not find products.'});
         }
