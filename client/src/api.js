@@ -1,3 +1,4 @@
+const jwtDecode = require('jwt-decode');
 const API = process.env.REACT_APP_API_URL;
 
 export const signup = user => {
@@ -50,11 +51,18 @@ export const signout = next => {
 };
 
 export const isAuthenticated = () => {
-    if(typeof window == 'undefined') {
+    if(typeof window === 'undefined') {
         return false;
     }
     if(localStorage.getItem('jwt')) {
-        return JSON.parse(localStorage.getItem('jwt'));
+        const token = localStorage.getItem('jwt');
+        const {exp} = jwtDecode(token);
+        const curTime = Date.now() / 1000;
+        if(exp > curTime) {
+            return JSON.parse(token);
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
