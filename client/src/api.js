@@ -124,3 +124,13 @@ export const deleteUser = (userId, token) => {
         console.log(err)
     });
 };
+
+export const readAllProducts = (userId, token) => {
+    return fetch(`${API}/products/read/all`, {
+        method: 'GET'
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
