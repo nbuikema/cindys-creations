@@ -80,45 +80,45 @@ const UserAccount = (props) => {
         <div>
             <form>
                 <div className='form-group row'>
-                    <label for='first_name' className='col-sm-2 col-form-label'>First Name</label>
+                    <label htmlFor='first_name' className='col-sm-2 col-form-label'>First Name</label>
                     <div className='col-sm-10'>
                         <input onChange={onChange('first_name')} type='text' className='form-control-plaintext' id='first_name' placeholder={first_name} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='last_name' className='col-sm-2 col-form-label'>Last Name</label>
+                    <label htmlFor='last_name' className='col-sm-2 col-form-label'>Last Name</label>
                     <div className='col-sm-10'>
                         <input onChange={onChange('last_name')} type='text' className='form-control-plaintext' id='last_name' placeholder={last_name} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='email' className='col-sm-2 col-form-label'>Email</label>
+                    <label htmlFor='email' className='col-sm-2 col-form-label'>Email</label>
                     <div className='col-sm-10'>
                         <input onChange={onChange('email')} type='text' className='form-control-plaintext' id='email' placeholder={email} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='address' className='col-sm-2 col-form-label'>Address</label>
+                    <label htmlFor='address' className='col-sm-2 col-form-label'>Address</label>
                     <div className='col-sm-10'>
                         <input onChange={onChange('address')} type='text' className='form-control-plaintext' id='address' placeholder={address} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='createdAt' className='col-sm-2 col-form-label'>Signed Up</label>
+                    <label htmlFor='createdAt' className='col-sm-2 col-form-label'>Signed Up</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='createdAt' value={moment(createdAt).fromNow()} />
+                        <input type='text' readOnly className='form-control-plaintext' id='createdAt' value={moment(createdAt).fromNow()} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='updatedAt' className='col-sm-2 col-form-label'>Last Updated</label>
+                    <label htmlFor='updatedAt' className='col-sm-2 col-form-label'>Last Updated</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='updatedAt' value={moment(updatedAt).fromNow()} />
+                        <input type='text' readOnly className='form-control-plaintext' id='updatedAt' value={moment(updatedAt).fromNow()} />
                     </div>
                 </div>
                 <div className='form-group row'>
-                    <label for='role' className='col-sm-2 col-form-label'>Access Group</label>
+                    <label htmlFor='role' className='col-sm-2 col-form-label'>Access Group</label>
                     <div className='col-sm-10'>
-                        <input type='text' readonly className='form-control-plaintext' id='role' value={role === 1 ? 'Admin' : 'Registered User'} />
+                        <input type='text' readOnly className='form-control-plaintext' id='role' value={role === 1 ? 'Admin' : 'Registered User'} />
                     </div>
                 </div>
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Update Account</button>
