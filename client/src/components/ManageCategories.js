@@ -18,7 +18,7 @@ const ManageCategories = () => {
             if(data.error) {
                 setValues({...values, error: data.error});
             } else {
-                setValues({...values, categories: data});
+                setValues({...values, name: '', error: '', categories: data});
             }
         });
     };
