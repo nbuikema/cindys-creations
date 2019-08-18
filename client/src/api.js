@@ -125,12 +125,53 @@ export const deleteUser = (userId, token) => {
     });
 };
 
-export const readAllProducts = (userId, token) => {
+export const readAllProducts = () => {
     return fetch(`${API}/products/read/all`, {
         method: 'GET'
     }).then(response => {
         return response.json();
     }).catch(err => {
         console.log(err)
+    });
+};
+
+export const readAllCategories = () => {
+    return fetch(`${API}/categories/read/all`, {
+        method: 'GET'
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
+
+export const deleteCategory = (categoryId, userId, token) => {
+    return fetch(`${API}/category/delete/${categoryId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+}
+
+export const createCategory = (userId, token, category) => {
+    return fetch(`${API}/category/create/${userId}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(category)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
     });
 };

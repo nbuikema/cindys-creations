@@ -48,6 +48,13 @@ const Navbar = ({history}) => (
                                     <Link className='dropdown-item' to={`/${isAuthenticated().user._id}/account`}>
                                         My Account
                                     </Link>
+                                    {isAuthenticated().user.role === 1 ? (
+                                        <div>
+                                            <Link className='dropdown-item' to='/manage/categories'>
+                                                Manage Categories
+                                            </Link>
+                                        </div>
+                                    ) : ''}
                                     <div className='dropdown-divider'></div>
                                     <span className='dropdown-item' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
                                         Sign Out

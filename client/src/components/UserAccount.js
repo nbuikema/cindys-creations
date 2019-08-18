@@ -143,9 +143,9 @@ const UserAccount = (props) => {
         <div>
             <Navbar />
             <div className='container'>
-                {userInfo()}
                 {showError()}
                 {redirectDeleteSuccess()}
+                {userInfo()}
             </div>
         </div>
     );
