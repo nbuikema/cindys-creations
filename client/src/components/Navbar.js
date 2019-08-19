@@ -53,8 +53,8 @@ const Navbar = ({history}) => (
                                             <Link className='dropdown-item' to='/manage/categories'>
                                                 Manage Categories
                                             </Link>
-                                            <Link className='dropdown-item' to='/product/create'>
-                                                Create Product
+                                            <Link className='dropdown-item' to='/manage/products'>
+                                                Manage Products
                                             </Link>
                                         </div>
                                     ) : ''}
