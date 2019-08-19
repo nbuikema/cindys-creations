@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {isAuthenticated, readUser, updateUser, update} from '../api';
 
-import Navbar from './Navbar';
-
 const UserAccount = (props) => {
     const [values, setValues] = useState({
         first_name: '',
@@ -144,7 +142,6 @@ const UserAccount = (props) => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 {showError()}
                 {redirectSuccess()}

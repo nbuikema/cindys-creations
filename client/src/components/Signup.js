@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup} from '../api';
 
-import Navbar from './Navbar';
-
 const Signup = () => {
     const [values, setValues] = useState({
         first_name: '',
@@ -91,7 +89,6 @@ const Signup = () => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 {showError()}
                 {showSuccess()}

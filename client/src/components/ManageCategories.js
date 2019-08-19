@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {isAuthenticated, readAllCategories, deleteCategory, createCategory} from '../api';
 
-import Navbar from './Navbar';
-
 const ManageCategories = () => {
     const [values, setValues] = useState({
         categories: [],
@@ -74,7 +72,6 @@ const ManageCategories = () => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 {showError()}
                 {newCategoryForm()}

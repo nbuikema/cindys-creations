@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {readAllProducts} from '../api';
 
-import Navbar from './Navbar';
 import ProductCard from './ProductCard';
 
 const Products = () => {
@@ -24,7 +23,6 @@ const Products = () => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 <div className='col-8'>
                     <h2 className='mb-4'>Products</h2>

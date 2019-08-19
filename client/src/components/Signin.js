@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {signin, authenticate} from '../api';
 
-import Navbar from './Navbar';
-
 const Signin = () => {
     const [values, setValues] = useState({
         email: '',
@@ -59,7 +57,6 @@ const Signin = () => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 {showError()}
                 {redirectSuccess()}

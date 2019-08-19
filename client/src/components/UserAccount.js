@@ -3,8 +3,6 @@ import {Link, Redirect} from 'react-router-dom';
 import moment from 'moment';
 import {isAuthenticated, readUser, deleteUser, signout} from '../api';
 
-import Navbar from './Navbar';
-
 const UserAccount = (props) => {
     const [values, setValues] = useState({
         id: '',
@@ -141,7 +139,6 @@ const UserAccount = (props) => {
 
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 {showError()}
                 {redirectDeleteSuccess()}
