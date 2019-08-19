@@ -1,8 +1,7 @@
 import React from 'react';
+const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product}) => {
-    const API = process.env.REACT_APP_API_URL;
-
     return (
         <div className='card'>
             <img src={`${API}/product/image/${product._id}`} alt={product.name} />

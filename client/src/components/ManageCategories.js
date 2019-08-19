@@ -76,7 +76,7 @@ const ManageCategories = () => {
                 {showError()}
                 {newCategoryForm()}
                 <div>
-                    <h2 className='mb-4'>Categories</h2>
+                    <h2>Categories</h2>
                     {categories.map((category, i) => (
                         <div key={i} className='input-group'>
                             <div className='form-control-plaintext' key={i}>{category.name}</div>

@@ -135,6 +135,24 @@ export const readAllProducts = () => {
     });
 };
 
+export const readQueriedProducts = (skip, limit, filters = {}) => {
+    const data = {limit, skip, filters};
+    return fetch(`${API}/products/read/query`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
 export const readAllCategories = () => {
     return fetch(`${API}/categories/read/all`, {
         method: 'GET'
