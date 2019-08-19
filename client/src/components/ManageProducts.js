@@ -104,7 +104,7 @@ const ManageProducts = () => {
     return (
         <div>
             <div className='container'>
-                <h2>Manage Products</h2>
+                <h2>New Product</h2>
                 <Link className='btn btn-primary' to='/product/create'>
                     Create Product
                 </Link>
