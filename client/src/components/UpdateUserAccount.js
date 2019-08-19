@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {isAuthenticated, readUser, updateUser, update} from '../api';
 
-const UserAccount = (props) => {
+const UserAccount = ({match}) => {
     const [values, setValues] = useState({
         first_name: '',
         last_name: '',
@@ -35,7 +35,7 @@ const UserAccount = (props) => {
     };
 
     useEffect(() => {
-        init(props.match.params.userId);
+        init(match.params.userId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -46,7 +46,7 @@ const UserAccount = (props) => {
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, error: ''});
-        updateUser(props.match.params.userId, token, {first_name, last_name, email, address, role}).then(
+        updateUser(match.params.userId, token, {first_name, last_name, email, address, role}).then(
             data => {
                 if(data.error) {
                     setValues({...values, error: data.error, success: false});
@@ -136,7 +136,7 @@ const UserAccount = (props) => {
 
     const redirectSuccess = () => {
         if(success) {
-            return <Redirect to={`/${props.match.params.userId}/account`} />;
+            return <Redirect to={`/${match.params.userId}/account`} />;
         }
     };
 

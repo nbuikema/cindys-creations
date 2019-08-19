@@ -208,3 +208,28 @@ export const createProduct = (userId, token, product) => {
         console.log(err);
     });
 };
+
+export const readProduct = productId => {
+    return fetch(`${API}/product/read/${productId}`, {
+        method: 'GET'
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
+
+export const updateProduct = (userId, token, productId, product) => {
+    return fetch(`${API}/product/update/${productId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: product
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
