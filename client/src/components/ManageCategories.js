@@ -56,11 +56,14 @@ const ManageCategories = () => {
     };
 
     const newCategoryForm = () => (
-        <div className='input-group'>
-            <input onChange={onChange} type='text' className='form-control-plaintext' value={name} />
-            <span className='input-group-btn'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Create Category</button>
-            </span>
+        <div>
+            <h2>New Category</h2>
+            <div className='input-group'>
+                <input onChange={onChange} type='text' className='form-control-plaintext' value={name} />
+                <span className='input-group-btn'>
+                    <button onClick={onSubmit} type='submit' className='btn btn-primary'>Create Category</button>
+                </span>
+            </div>
         </div>
     );
 

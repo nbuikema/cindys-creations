@@ -12,6 +12,7 @@ import Signin from './components/Signin';
 import UserAccount from './components/UserAccount';
 import UpdateUserAccount from './components/UpdateUserAccount';
 import ManageCategories from './components/ManageCategories';
+import CreateProduct from './components/CreateProduct';
 
 const App = () => {
     /*
@@ -38,6 +39,7 @@ const App = () => {
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />
                     <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
+                    <PrivateRoute path='/product/create' exact component={CreateProduct} />
                 </Switch>
             </BrowserRouter>
         </div>
