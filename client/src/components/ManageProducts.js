@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {readAllCategories, readAllProducts, readQueriedProducts} from '../api';
+import {isAuthenticated, readAllCategories, readAllProducts, readQueriedProducts, deleteProduct} from '../api';
 
 import ProductCard from './ProductCard';
 
@@ -18,6 +18,8 @@ const ManageProducts = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    
+    const {user, token} = isAuthenticated();
 
     const initCategories = () => {
         readAllCategories().then(data => {
@@ -75,28 +77,58 @@ const ManageProducts = () => {
         });
     };
 
+    const destroy = productId => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this product? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteProduct(productId, user._id, token).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    initProducts();
+                    loadFilteredResults(myFilters.filters);
+                }
+            });
+        }
+    };
+
     const showProducts = () => (
-        filteredResults && filteredResults.length > 0 ? (
+        selectedCategories && selectedCategories.length > 0 ? (
             <div>
                 <h2>Selected Products</h2>
-                <div className='row'>
-                    {filteredResults.map((product, i) => (
-                        <div key={i} className='col-4'>
-                            <ProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
+                {filteredResults.map((product, i) => (
+                    <div key={i} className='input-group'>
+                        <div className='form-control-plaintext' key={i}>{product.name}</div>
+                        <span className='input-group-btn'>
+                            <div className='btn-group'>
+                                <Link className='btn btn-info' to={`/product/update/${product._id}`}>
+                                    Update Product
+                                </Link>
+                                <span onClick={() => destroy(product._id)} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                                    Delete Product
+                                </span>
+                            </div>
+                        </span>
+                    </div>
+                ))}
             </div>
         ) : (
             <div>
                 <h2>All Products</h2>
-                <div className='row'>
-                    {allProducts.map((product, i) => (
-                        <div key={i} className='col-4'>
-                            <ProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
+                {allProducts.map((product, i) => (
+                    <div key={i} className='input-group'>
+                        <div className='form-control-plaintext' key={i}>{product.name}</div>
+                        <span className='input-group-btn'>
+                            <div className='btn-group'>
+                                <Link className='btn btn-info' to={`/product/update/${product._id}`}>
+                                    Update Product
+                                </Link>
+                                <span onClick={() => destroy(product._id)} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                                    Delete Product
+                                </span>
+                            </div>
+                        </span>
+                    </div>
+                ))}
             </div>
         )
     );

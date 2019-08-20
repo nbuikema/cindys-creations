@@ -122,7 +122,7 @@ const UpdateProduct = ({match}) => {
                     $<input onChange={onChange('price')} type='number' className='form-control' id='price' aria-describedby='price' placeholder={price} />
                 </div>
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Update Product</button>
+            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
         </form>
     );
 

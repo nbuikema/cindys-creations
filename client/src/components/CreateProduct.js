@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
 import {isAuthenticated, readAllCategories, createProduct} from '../api';
 
 const CreateProduct = () => {
@@ -45,7 +46,17 @@ const CreateProduct = () => {
             if(data.error) {
                 setValues({...values, error: data.error});
             } else {
-                console.log(data);
+                setValues({
+                    ...values, 
+                    name: '',
+                    description: '',
+                    category: '',
+                    price: '',
+                    image: '',
+                    error: '',
+                    formData: '',
+                    success: true
+                });
             }
         });
     };
@@ -55,6 +66,12 @@ const CreateProduct = () => {
             {error}
         </div>
     );
+
+    const redirectSuccess = () => {
+        if(success) {
+            return <Redirect to='/manage/products' />;
+        }
+    };
 
     const createProductForm = () => (
         <form>
@@ -94,6 +111,7 @@ const CreateProduct = () => {
     return (
         <div className='container'>
             {showError()}
+            {redirectSuccess()}
             {createProductForm()}
         </div>
     );
