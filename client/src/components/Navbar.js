@@ -28,6 +28,11 @@ const Navbar = ({history}) => (
                     {!isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item'>
+                                <Link className='nav-link' to='/cart'>
+                                    My Cart <sup>{numItemsInCart()}</sup>
+                                </Link>
+                            </li>
+                            <li className='nav-item'>
                                 <Link className='nav-link' to='/signup'>
                                     Sign Up
                                 </Link>
