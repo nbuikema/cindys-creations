@@ -14,7 +14,7 @@ const UpdateProduct = ({match}) => {
         success: false
     });
     const [categories, setCategories] = useState([]);
-    const {name, description, category, price, error, formData, success} = values;
+    const {name, description, price, error, formData, success} = values;
     const {user, token} = isAuthenticated();
 
     const initCategories = () => {

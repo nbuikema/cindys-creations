@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {isAuthenticated} from './api';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -17,17 +16,6 @@ import CreateProduct from './components/CreateProduct';
 import UpdateProduct from './components/UpdateProduct';
 
 const App = () => {
-    /*
-    const [user, setUser] = useState({});
-
-    const init = () => {
-        setUser(isAuthenticated().user);
-    };
-
-    useEffect(() => {
-        init();
-    }, []);*/
-
     return (
         <div>
             <BrowserRouter>
@@ -37,7 +25,6 @@ const App = () => {
                     <Route path='/products' exact component={Products} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
-                    {/* <Route path='/:userId/account' exact render={(props) => <UserAccount {...props} curUser={user} />} /> */}
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />
                     <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />

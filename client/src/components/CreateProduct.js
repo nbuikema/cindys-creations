@@ -14,7 +14,7 @@ const CreateProduct = () => {
         formData: '',
         success: false
     });
-    const {categories, name, description, category, price, error, formData, success} = values;
+    const {categories, name, description, price, error, formData, success} = values;
     const {user, token} = isAuthenticated();
 
     const initCategories = () => {

@@ -1,6 +1,4 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import {isAuthenticated, deleteProduct} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product}) => {

@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {isAuthenticated, readAllCategories, readAllProducts, readQueriedProducts, deleteProduct} from '../api';
 
-import ProductCard from './ProductCard';
-
 const ManageProducts = () => {
     const [myFilters, setMyFilters] = useState({
         filters: {
