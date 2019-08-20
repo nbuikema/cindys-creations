@@ -1,16 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {isAuthenticated} from '../api';
+import {isAuthenticated, deleteProduct} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product}) => {
+    const destroy = () => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this product? This process cannot be undone.');
+        if(confirmDelete) {
+            console.log('working on deleting products...');
+        }
+    };
+
     const showAdminButtons = () => (
         isAuthenticated() && isAuthenticated().user.role === 1 ? (
             <div className='btn-group'>
                 <Link className='btn btn-info' to={`/product/update/${product._id}`}>
                     Update Product
                 </Link>
-                <span className='btn btn-danger' style={{cursor: 'pointer'}}>
+                <span onClick={destroy} className='btn btn-danger' style={{cursor: 'pointer'}}>
                     Delete Product
                 </span>
             </div>

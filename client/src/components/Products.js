@@ -75,7 +75,7 @@ const Products = () => {
     };
 
     const showProducts = () => (
-        filteredResults && filteredResults.length > 0 ? (
+        selectedCategories && selectedCategories.length > 0 ? (
             <div>
                 <h2>Selected Products</h2>
                 <div className='row'>
