@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {addProductToCart} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product, showViewProduct = true}) => {
@@ -8,6 +9,12 @@ const ProductCard = ({product, showViewProduct = true}) => {
             View Product
         </Link>
     );
+
+    const addToCart = () => {
+        addProductToCart(product, () => {
+            console.log(product);
+        });
+    };
 
     return (
         <div className='card'>
@@ -20,9 +27,9 @@ const ProductCard = ({product, showViewProduct = true}) => {
             </div>
             <div className='btn-group'>
                 {showViewProductBtn(showViewProduct)}
-                <span className='btn btn-info' style={{cursor: 'pointer'}}>
+                <button onClick={addToCart} className='btn btn-info'>
                     Add to Cart
-                </span>
+                </button>
             </div>
         </div>
     );
