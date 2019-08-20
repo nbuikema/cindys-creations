@@ -5,6 +5,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Contact from './components/Contact';
 import Products from './components/Products';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
@@ -22,6 +23,7 @@ const App = () => {
             <Navbar />
                 <Switch>
                     <Route path='/' exact component={Home} />
+                    <Route path='/contact' exact component={Contact} />
                     <Route path='/products' exact component={Products} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
