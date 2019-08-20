@@ -21,12 +21,11 @@ const App = () => {
     return (
         <div>
             <BrowserRouter>
-            <Navbar />
+                <Navbar />
                 <Switch>
                     <Route path='/' exact component={Home} />
                     <Route path='/contact' exact component={Contact} />
                     <Route path='/products' exact component={Products} />
-                    <Route path='/product/:productId' exact component={Product} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />
@@ -35,6 +34,7 @@ const App = () => {
                     <PrivateRoute path='/manage/products' exact component={ManageProducts} />
                     <PrivateRoute path='/product/create' exact component={CreateProduct} />
                     <PrivateRoute path='/product/update/:productId' exact component={UpdateProduct} />
+                    <Route path='/product/:productId' exact component={Product} />
                 </Switch>
             </BrowserRouter>
         </div>
