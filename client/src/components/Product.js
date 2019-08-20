@@ -22,6 +22,7 @@ const Product = ({match}) => {
 
     useEffect(() => {
         init(match.params.productId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const showError = () => (
