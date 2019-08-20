@@ -1,9 +1,10 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, Redirect} from 'react-router-dom';
 import {addProductToCart} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product, showViewProduct = true}) => {
+    const [addedToCart, setAddedToCart] = useState(false);
     const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
         <Link className='btn btn-primary' to={`/product/${product._id}`}>
             View Product
@@ -12,12 +13,19 @@ const ProductCard = ({product, showViewProduct = true}) => {
 
     const addToCart = () => {
         addProductToCart(product, () => {
-            console.log(product);
+            setAddedToCart(true);
         });
+    };
+
+    const redirectCart = () => {
+        if(addedToCart) {
+            return <Redirect to='/cart' />;
+        }
     };
 
     return (
         <div className='card'>
+            {redirectCart()}
             {product._id !== undefined ? (
                 <img src={`${API}/product/image/${product._id}`} alt={product.name} />
             ) : ''}

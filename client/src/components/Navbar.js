@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {signout, isAuthenticated} from '../api';
+import {signout, isAuthenticated, numItemsInCart} from '../api';
 
 const Navbar = ({history}) => (
     <div>
@@ -40,6 +40,11 @@ const Navbar = ({history}) => (
                         </ul>
                     )} {isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
+                            <li className='nav-item'>
+                                <Link className='nav-link' to='/cart'>
+                                    My Cart <sup>{numItemsInCart()}</sup>
+                                </Link>
+                            </li>
                             <li className='nav-item dropdown'>
                                 <Link className='nav-link dropdown-toggle' to='/' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                     {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name}`}

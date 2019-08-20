@@ -263,3 +263,12 @@ export const addProductToCart = (item, next) => {
         next();
     }
 };
+
+export const numItemsInCart = () => {
+    if(typeof window !== 'undefined') {
+        if(localStorage.getItem('cart')) {
+            return JSON.parse(localStorage.getItem('cart')).length;
+        }
+    }
+    return 0;
+};
