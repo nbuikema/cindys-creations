@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import Products from './components/Products';
+import Product from './components/Product';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import UserAccount from './components/UserAccount';
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path='/' exact component={Home} />
                     <Route path='/contact' exact component={Contact} />
                     <Route path='/products' exact component={Products} />
+                    <Route path='/product/:productId' exact component={Product} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />

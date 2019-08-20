@@ -30,7 +30,6 @@ const UpdateProduct = ({match}) => {
     const initProduct = productId => {
         readProduct(productId).then(data => {
             if(data.error) {
-                console.log(data.error);
                 setValues({...values, error: data.error});
             } else {
                 setValues({

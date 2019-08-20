@@ -90,7 +90,7 @@ const ManageProducts = () => {
     };
 
     const showProducts = () => (
-        selectedCategories && selectedCategories.length > 0 ? (
+        filteredResults && filteredResults.length > 0 ? (
             <div>
                 <h2>Selected Products</h2>
                 {filteredResults.map((product, i) => (
