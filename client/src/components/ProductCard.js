@@ -1,13 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {isAuthenticated, deleteProduct} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
 const ProductCard = ({product}) => {
-    const destroy = () => {
+    const {user, token} = isAuthenticated();
+
+    const destroy = productId => {
         const confirmDelete = window.confirm('Are you sure you want to delete this product? This process cannot be undone.');
         if(confirmDelete) {
-            console.log('working on deleting products...');
+            deleteProduct(productId, user._id, token).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    console.log('product deleted');
+                }
+            });
         }
     };
 
@@ -17,7 +25,7 @@ const ProductCard = ({product}) => {
                 <Link className='btn btn-info' to={`/product/update/${product._id}`}>
                     Update Product
                 </Link>
-                <span onClick={destroy} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                <span onClick={() => destroy(product._id)} className='btn btn-danger' style={{cursor: 'pointer'}}>
                     Delete Product
                 </span>
             </div>
