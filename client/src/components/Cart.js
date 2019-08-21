@@ -15,7 +15,7 @@ const Cart = () => {
         <div>
             <h2>{`${cart.length} item(s) in your cart`}</h2>
             {cart.map((product, i) => (
-                <ProductCard key={i} product={product} showAddToCart={false} showCartQuantity={true} />
+                <ProductCard key={i} product={product} showAddToCart={false} showCartQuantity={true} showRemoveFromCart={true} />
             ))}
         </div>
     ) : '';
