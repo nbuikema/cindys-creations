@@ -16,6 +16,7 @@ import ManageCategories from './components/ManageCategories';
 import ManageProducts from './components/ManageProducts';
 import CreateProduct from './components/CreateProduct';
 import UpdateProduct from './components/UpdateProduct';
+import Cart from './components/Cart';
 
 const App = () => {
     return (
@@ -35,6 +36,7 @@ const App = () => {
                     <PrivateRoute path='/product/create' exact component={CreateProduct} />
                     <PrivateRoute path='/product/update/:productId' exact component={UpdateProduct} />
                     <Route path='/product/:productId' exact component={Product} />
+                    <Route path='/cart' exact component={Cart} />
                 </Switch>
             </BrowserRouter>
         </div>

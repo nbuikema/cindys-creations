@@ -3,12 +3,19 @@ import {Link, Redirect} from 'react-router-dom';
 import {addProductToCart} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
-const ProductCard = ({product, showViewProduct = true}) => {
+const ProductCard = ({product, showViewProduct = true, showAddToCart = true}) => {
     const [addedToCart, setAddedToCart] = useState(false);
+
     const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
         <Link className='btn btn-primary' to={`/product/${product._id}`}>
             View Product
         </Link>
+    );
+
+    const showAddToCartBtn = (showAddToCart) => showAddToCart && ( 
+        <button onClick={addToCart} className='btn btn-info'>
+            Add to Cart
+        </button>
     );
 
     const addToCart = () => {
@@ -35,9 +42,7 @@ const ProductCard = ({product, showViewProduct = true}) => {
             </div>
             <div className='btn-group'>
                 {showViewProductBtn(showViewProduct)}
-                <button onClick={addToCart} className='btn btn-info'>
-                    Add to Cart
-                </button>
+                {showAddToCartBtn(showAddToCart)}
             </div>
         </div>
     );
