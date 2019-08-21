@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import {addProductToCart, updateQuantity, removeProductFromCart} from '../api';
+import {readCart, addProductToCart, updateQuantity, removeProductFromCart} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
-const ProductCard = ({product, showViewProduct = true, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false}) => {
+const ProductCard = ({product, changeCartSize, cartSize, showViewProduct = true, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false}) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [quantity, setQuantity] = useState(product.count);
 
@@ -45,8 +45,13 @@ const ProductCard = ({product, showViewProduct = true, showAddToCart = true, sho
         </div>
     );
 
+    const onClick = productId => {
+        removeProductFromCart(productId);
+        changeCartSize(readCart().length);
+    };
+
     const showRemoveFromCartBtn = showRemoveFromCart => showRemoveFromCart && (
-        <button onClick={() => removeProductFromCart(product._id)} className='btn btn-danger'>
+        <button onClick={() => onClick(product._id)} className='btn btn-danger'>
             Remove Product
         </button>
     );
