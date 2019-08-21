@@ -1,22 +1,11 @@
 import React, {useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import {addProductToCart} from '../api';
+import {addProductToCart, updateQuantity} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
-const ProductCard = ({product, showViewProduct = true, showAddToCart = true}) => {
+const ProductCard = ({product, showViewProduct = true, showAddToCart = true, showCartQuantity = false}) => {
     const [addedToCart, setAddedToCart] = useState(false);
-
-    const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
-        <Link className='btn btn-primary' to={`/product/${product._id}`}>
-            View Product
-        </Link>
-    );
-
-    const showAddToCartBtn = (showAddToCart) => showAddToCart && ( 
-        <button onClick={addToCart} className='btn btn-info'>
-            Add to Cart
-        </button>
-    );
+    const [quantity, setQuantity] = useState(product.count);
 
     const addToCart = () => {
         addProductToCart(product, () => {
@@ -30,6 +19,32 @@ const ProductCard = ({product, showViewProduct = true, showAddToCart = true}) =>
         }
     };
 
+    const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
+        <Link className='btn btn-primary' to={`/product/${product._id}`}>
+            View Product
+        </Link>
+    );
+
+    const showAddToCartBtn = (showAddToCart) => showAddToCart && ( 
+        <button onClick={addToCart} className='btn btn-info'>
+            Add to Cart
+        </button>
+    );
+
+    const onChange = productId => event => {
+        setQuantity(event.target.value < 1 ? 1 : event.target.value);
+        if (event.target.value >= 1) {
+            updateQuantity(productId, event.target.value);
+        }
+    };
+
+    const showCartQuantityBtn = (showCartQuantity) => showCartQuantity && (
+        <div className='input-group'>
+            <span className='input-group-text'>Adjust Quantity</span>
+            <input className='form-control' type='number' value={quantity} onChange={onChange(product._id)} />
+        </div>
+    );
+
     return (
         <div className='card'>
             {redirectCart()}
@@ -40,10 +55,9 @@ const ProductCard = ({product, showViewProduct = true, showAddToCart = true}) =>
                 <h5 className='card-title'>{product.name}</h5>
                 <p className='card-text'>{product.description}</p>
             </div>
-            <div className='btn-group'>
-                {showViewProductBtn(showViewProduct)}
-                {showAddToCartBtn(showAddToCart)}
-            </div>
+            {showViewProductBtn(showViewProduct)}
+            {showAddToCartBtn(showAddToCart)}
+            {showCartQuantityBtn(showCartQuantity)}
         </div>
     );
 };
