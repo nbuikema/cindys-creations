@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {readCart} from '../api';
 
-import ProductCard from './ProductCard';
-
 const Checkout = () => {
     const [cart, setCart] = useState([]);
 
@@ -37,7 +35,7 @@ const Checkout = () => {
 
     return (
         <div className='container'>
-            <h2>Need to make changes? <Link to='/cart'>Go back to cart.</Link></h2>
+            <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
             <div className='row'>
                 <div className='col-9'>
                     <h2>Total To Be Charged: ${cartTotal()}</h2>
