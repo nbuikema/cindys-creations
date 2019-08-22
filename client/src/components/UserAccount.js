@@ -70,7 +70,7 @@ const UserAccount = (props) => {
         }
     };
 
-    const userInfo = () => (
+    const userInfo = () => id ? (
         <div>
             <form>
                 <div className='form-group row'>
@@ -122,6 +122,10 @@ const UserAccount = (props) => {
             <span onClick={destroy} className='btn btn-danger' style={{cursor: 'pointer'}}>
                 Delete Account
             </span>
+        </div>
+    ) : (
+        <div>
+            LOADING
         </div>
     );
 
