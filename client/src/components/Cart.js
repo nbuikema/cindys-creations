@@ -3,13 +3,16 @@ import {Link} from 'react-router-dom';
 import {readCart} from '../api';
 
 import ProductCard from './ProductCard';
+import Loader from './Loader';
 
 const Cart = () => {
     const [cart, setCart] = useState([]);
     const [cartSize, setCartSize] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     const changeCartSize = () => {
         setCartSize(readCart().length);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -30,10 +33,22 @@ const Cart = () => {
         <h2>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h2>
     ) : '';
 
+    const isLoading = () => loading ? (
+        <div>
+            <Loader />
+        </div>
+    ) : '';
+
     return (
         <div className='container'>
-            {showCart()}
-            {emptyCart()}
+            {loading ? (
+                <Loader />
+            ) : (
+                <div>
+                    {showCart()}
+                    {emptyCart()}
+                </div>
+            )}
         </div>
     );
 };

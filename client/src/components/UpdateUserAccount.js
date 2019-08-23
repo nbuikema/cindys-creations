@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {isAuthenticated, readUser, updateUser, update} from '../api';
 
+import Loader from './Loader';
+
 const UserAccount = ({match}) => {
     const [values, setValues] = useState({
         first_name: '',
@@ -79,7 +81,7 @@ const UserAccount = ({match}) => {
         }
     };
 
-    const updateUserInfo = () => (
+    const updateUserInfo = () => first_name ? (
         <div>
             <form>
                 <div className='form-group row'>
@@ -125,6 +127,10 @@ const UserAccount = ({match}) => {
                 </div>
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
             </form>
+        </div>
+    ) : (
+        <div>
+            <Loader />
         </div>
     );
 

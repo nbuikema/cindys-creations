@@ -7,7 +7,6 @@ import Loader from './Loader';
 
 const UserAccount = (props) => {
     const [values, setValues] = useState({
-        id: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -72,7 +71,7 @@ const UserAccount = (props) => {
         }
     };
 
-    const userInfo = () => id ? (
+    const userInfo = () => first_name ? (
         <div>
             <form>
                 <div className='form-group row'>
