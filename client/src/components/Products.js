@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {readAllCategories, readAllProducts, readQueriedProducts} from '../api';
 
 import ProductCard from './ProductCard';
+import Loader from './Loader';
 
 const Products = () => {
     const [myFilters, setMyFilters] = useState({
@@ -99,22 +100,26 @@ const Products = () => {
     return (
         <div>
             <div className='container'>
-                <div className='row'>
-                    <div className='col-4'>
-                        <h2>Categories</h2>
-                        <ul>
-                        {categories.map((category, i) => (
-                            <li key={i}>
-                                <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
-                                <label>{category.name}</label>
-                            </li>
-                        ))}
-                        </ul>
+                {allProducts.length < 1 || categories.length < 1 ? (
+                    <Loader />
+                ) : (
+                    <div className='row'>
+                        <div className='col-4'>
+                            <h2>Categories</h2>
+                            <ul>
+                                {categories.map((category, i) => (
+                                    <li key={i}>
+                                        <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
+                                        <label>{category.name}</label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='col-8'>
+                            {showProducts()}
+                        </div>
                     </div>
-                    <div className='col-8'>
-                        {showProducts()}
-                    </div>
-                </div>
+                )}
             </div>
         </div>
     );
