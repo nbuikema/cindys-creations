@@ -18,29 +18,25 @@ const Products = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
 
-    const initCategories = () => {
+    const init = () => {
         readAllCategories().then(data => {
             if(data.error) {
                 setError(data.error);
             } else {
                 setCategories(data);
+                readAllProducts().then(data => {
+                    if(data.error) {
+                        setError(data.error);
+                    } else {
+                        setAllProducts(data);
+                    }
+                });
             }
         });
     };
 
-    const initProducts = () => {
-        readAllProducts().then(data => {
-            if(data.error) {
-                setError(data.error);
-            } else {
-                setAllProducts(data);
-            }
-        });
-    }
-
     useEffect(() => {
-        initCategories();
-        initProducts();
+        init();
     }, []);
 
     const handleToggle = c => () => {
