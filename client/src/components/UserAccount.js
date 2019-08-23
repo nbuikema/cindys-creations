@@ -3,6 +3,8 @@ import {Link, Redirect} from 'react-router-dom';
 import moment from 'moment';
 import {isAuthenticated, readUser, deleteUser, signout} from '../api';
 
+import Loader from './Loader';
+
 const UserAccount = (props) => {
     const [values, setValues] = useState({
         id: '',
@@ -125,7 +127,7 @@ const UserAccount = (props) => {
         </div>
     ) : (
         <div>
-            LOADING
+            <Loader />
         </div>
     );
 
