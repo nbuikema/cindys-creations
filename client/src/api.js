@@ -313,3 +313,17 @@ export const removeProductFromCart = productId => {
     }
     return cart;
 };
+
+export const getClientToken = () => {
+    return fetch(`${API}/braintree/token`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
