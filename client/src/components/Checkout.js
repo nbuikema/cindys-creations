@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import DropIn from 'braintree-web-drop-in-react';
 import {Link} from 'react-router-dom';
-import {readCart, getClientToken, processPayment, clearCart} from '../api';
+import {readCart, getClientToken, processPayment, clearCart, isAuthenticated} from '../api';
+
+import Loader from './Loader';
 
 const Checkout = () => {
     const [values, setValues] = useState({
         clientToken: null,
         instance: {},
+        address: '',
         error: '',
         success: false
     });
     const [cart, setCart] = useState([]);
     const [cartSize, setCartSize] = useState(0);
 
-    const {clientToken, error, success} = values;
+    const {clientToken, address, error, success} = values;
 
     const changeCartSize = () => {
         setCartSize(readCart().length);
@@ -22,16 +25,23 @@ const Checkout = () => {
     const getToken = () => {
         getClientToken().then(data => {
             if(data.error) {
-                setValues({...values, error: data.erorr});
+                setValues({error: data.erorr});
             } else {
                 setValues({...values, clientToken: data.clientToken});
             }
-        })
+        });
+    };
+
+    const initAddress = () => {
+        if(isAuthenticated()) {
+            setValues({...values, address: isAuthenticated().user.address});
+        }
     };
 
     useEffect(() => {
         setCart(readCart());
         getToken();
+        initAddress();
         changeCartSize();
     }, [cartSize]);
 
@@ -80,6 +90,32 @@ const Checkout = () => {
         })
     };
 
+    const onChange = event => {
+        setValues({...values, address: event.target.value, error: ''});
+    };
+
+    const showDeliveryAuth = () => address !== 'undefined' ? (
+        <div>
+            <form>
+                <div className='form-group'>
+                    <label htmlFor='address'>Address</label>
+                    <input onChange={onChange} type='address' className='form-control' id='address' aria-describedby='address' value={address} />
+                </div>
+            </form>
+        </div>
+    ) : '';
+
+    const showDeliveryNoAuth = () => (
+        <div>
+            <form>
+                <div className='form-group'>
+                    <label htmlFor='address'>Address</label>
+                    <input onChange={onChange} type='address' className='form-control' id='address' aria-describedby='address' />
+                </div>
+            </form>
+        </div>
+    );
+
     const showDropIn = () => (
         <div>
             {clientToken !== null && cart.length > 0 ? (
@@ -105,20 +141,46 @@ const Checkout = () => {
 
     return (
         <div className='container'>
-            <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
-            <div className='row'>
-                <div className='col-9'>
-                    <h2>Total To Be Charged: ${cartTotal()}</h2>
-                    {showError()}
-                    {showSuccess()}
-                    {showDropIn()}
+            {console.log(address)}
+            {isAuthenticated() ? (
+                address && clientToken ? (
+                    <div>
+                        <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
+                        <div className='row'>
+                            <div className='col-9'>
+                                <h2>Total To Be Charged: ${cartTotal()}</h2>
+                                {showError()}
+                                {showSuccess()}
+                                {showDeliveryAuth()}
+                                {showDropIn()}
+                            </div>
+                            <div className='col-3'>
+                                {showCart()}
+                                {emptyCart()}
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <Loader />
+                )
+            ) : (
+                <div>
+                    <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
+                    <div className='row'>
+                        <div className='col-9'>
+                            <h2>Total To Be Charged: ${cartTotal()}</h2>
+                            {showError()}
+                            {showSuccess()}
+                            {showDeliveryNoAuth()}
+                            {showDropIn()}
+                        </div>
+                        <div className='col-3'>
+                            {showCart()}
+                            {emptyCart()}
+                        </div>
+                    </div>
                 </div>
-                <div className='col-3'>
-                    {showCart()}
-                    {emptyCart()}
-                </div>
-            </div>
-            
+            )}
         </div>
     );
 };
