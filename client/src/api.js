@@ -40,7 +40,6 @@ export const authenticate = (data, next) => {
 
 export const signout = next => {
     if(typeof window !== 'undefined') {
-        localStorage.removeItem('cart');
         localStorage.removeItem('jwt');
         next();
         return fetch(`${API}/auth/signout`, {
@@ -326,4 +325,26 @@ export const getClientToken = () => {
     }).catch(err => {
         console.log(err)
     });
+};
+
+export const processPayment = paymentData => {
+    return fetch(`${API}/braintree/payment`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(paymentData)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
+
+export const clearCart = (next) => {
+    if(typeof window !== 'undefined') {
+        localStorage.removeItem('cart');
+        next();
+    }
 };
