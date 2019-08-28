@@ -34,7 +34,6 @@ const ManageOrders = () => {
                 <div key={i}>
                     <div className='form-control-plaintext'>Order #{order._id}</div>
                     <ul>
-                        {console.log(order)}
                         <li>Created {moment(order.createdAt).fromNow()}</li>
                         <li>Last updated {moment(order.updatedAt).fromNow()}</li>
                         <li>Status: {order.status}</li>
@@ -54,12 +53,13 @@ const ManageOrders = () => {
                                             <li>ID: {product._id}</li>
                                             <li>Name: {product.name}</li>
                                             <li>Quantity: {product.count}</li>
-                                            <li>Price: ${product.price}</li>
+                                            <li>Price: ${product.price} per unit</li>
                                         </ul>
                                     </li>
                                 ))}
                             </ul>
                         </li>
+                        <li>Total Charged: ${order.total_price}</li>
                     </ul>
                     <hr />
                 </div>

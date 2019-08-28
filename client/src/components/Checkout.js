@@ -83,7 +83,7 @@ const Checkout = () => {
                 const order = {
                     products: cart,
                     transaction_id: response.transaction.id,
-                    amount: response.transaction.amount,
+                    total_price: response.transaction.amount,
                     address: address,
                     user: isAuthenticated().user ? isAuthenticated().user : undefined
                 };
