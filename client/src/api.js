@@ -348,3 +348,18 @@ export const clearCart = (next) => {
         next();
     }
 };
+
+export const createOrder = (order) => {
+    return fetch(`${API}/order/create`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

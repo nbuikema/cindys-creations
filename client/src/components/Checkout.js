@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import DropIn from 'braintree-web-drop-in-react';
 import {Link} from 'react-router-dom';
-import {readCart, getClientToken, processPayment, clearCart, isAuthenticated} from '../api';
+import {readCart, getClientToken, processPayment, clearCart, isAuthenticated, createOrder} from '../api';
 
 import Loader from './Loader';
 
@@ -80,9 +80,18 @@ const Checkout = () => {
                 amount: cartTotal()
             };
             processPayment(paymentData).then(response => {
-                setValues({...values, success: response.success});
-                clearCart(() => {
-                    changeCartSize();
+                const order = {
+                    products: cart,
+                    transaction_id: response.transaction.id,
+                    amount: response.transaction.amount,
+                    address: address,
+                    user: isAuthenticated().user ? isAuthenticated().user : undefined
+                };
+                createOrder({order: order}).then(res => {
+                    setValues({...values, address: '', success: response.success});
+                    clearCart(() => {
+                        changeCartSize();
+                    });
                 });
             }).catch(error => {
                 console.log(error);

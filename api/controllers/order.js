@@ -1,7 +1,11 @@
-exports.helloWorldAuth = (req, res) => {
-    res.send('hello world order routes authorized user');
-};
+const {Order, CartItem} = require('../models/order');
 
-exports.helloWorldAdmin = (req, res) => {
-    res.send('hello world order routes admin');
+exports.createOrder = (req, res) => {
+    const order = new Order(req.body.order);
+    order.save((error, data) => {
+        if(error) {
+            res.status(400).json({error: 'Could not create order.'});
+        }
+        res.json(data);
+    });
 };
