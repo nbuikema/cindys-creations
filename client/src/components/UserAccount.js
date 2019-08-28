@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import moment from 'moment';
-import {isAuthenticated, readUser, deleteUser, signout} from '../api';
+import {isAuthenticated, readUser, deleteUser, signout, readOrderHistory} from '../api';
 
 import Loader from './Loader';
 
@@ -14,28 +14,36 @@ const UserAccount = (props) => {
         role: '',
         createdAt: '',
         updatedAt: '',
+        orderHistory: [],
         error: '',
         deleteSuccess: false
     });
-    const {id, first_name, last_name, email, address, role, createdAt, updatedAt, error, deleteSuccess} = values;
+    const {id, first_name, last_name, email, address, role, createdAt, updatedAt, orderHistory, error, deleteSuccess} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
-        readUser(userId, token).then(data => {
-            if(data.error) {
+        readUser(userId, token).then(userData => {
+            if(userData.error) {
                 setValues({...values, error: 'Could not get the requested user account.'});
             } else {
-                setValues({
-                    ...values,
-                    id: data._id,
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    email: data.email,
-                    address: data.address,
-                    role: data.role,
-                    createdAt: data.createdAt,
-                    updatedAt: data.updatedAt,
-                    error: ''
+                readOrderHistory(userId, token).then(orderData => {
+                    if(orderData.error) {
+                        setValues({...values, error: 'Could not get the requested user order history.'});
+                    } else {
+                        setValues({
+                            ...values,
+                            id: userData._id,
+                            first_name: userData.first_name,
+                            last_name: userData.last_name,
+                            email: userData.email,
+                            address: userData.address,
+                            role: userData.role,
+                            createdAt: userData.createdAt,
+                            updatedAt: userData.updatedAt,
+                            orderHistory: orderData,
+                            error: ''
+                        });
+                    }
                 });
             }
         });
@@ -148,6 +156,34 @@ const UserAccount = (props) => {
                 {showError()}
                 {redirectDeleteSuccess()}
                 {userInfo()}
+                <h2>Order History</h2>
+                {orderHistory.map((order, i) => (
+                <div key={i}>
+                    <div className='form-control-plaintext'>Order #{order._id}</div>
+                    <ul>
+                        <li>Status: {order.status}</li>
+                        <li>Created {moment(order.createdAt).fromNow()}</li>
+                        <li>Last updated {moment(order.updatedAt).fromNow()}</li>
+                        <li>Address: {order.address}</li>
+                        <li>Products: 
+                            <ul>
+                                {order.products.map((product, i) => (
+                                    <li key={i}>
+                                        <ul>
+                                            <li>ID: {product._id}</li>
+                                            <li>Name: {product.name}</li>
+                                            <li>Quantity: {product.count}</li>
+                                            <li>Price: ${product.price} per unit</li>
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                        <li>Total Charged: ${order.total_price}</li>
+                    </ul>
+                    <hr />
+                </div>
+            ))}
             </div>
         </div>
     );
