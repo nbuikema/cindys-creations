@@ -45,6 +45,7 @@ const Checkout = () => {
         getToken();
         initAddress();
         changeCartSize();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cartSize]);
 
     const cartTotal = () => {
@@ -153,7 +154,7 @@ const Checkout = () => {
     return (
         <div className='container'>
             {isAuthenticated() ? (
-                address && clientToken || success ? (
+                (address && clientToken) || success ? (
                     <div>
                         <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
                         <div className='row'>
