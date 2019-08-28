@@ -33,8 +33,10 @@ const Checkout = () => {
     };
 
     const initAddress = () => {
-        if(isAuthenticated()) {
+        if(isAuthenticated() && isAuthenticated().user.address !== '') {
             setValues({...values, address: isAuthenticated().user.address});
+        } else {
+            setValues({...values, address: 'a'});
         }
     };
 
@@ -141,7 +143,6 @@ const Checkout = () => {
 
     return (
         <div className='container'>
-            {console.log(address)}
             {isAuthenticated() ? (
                 address && clientToken ? (
                     <div>
