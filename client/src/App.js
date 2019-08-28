@@ -14,6 +14,7 @@ import UserAccount from './components/UserAccount';
 import UpdateUserAccount from './components/UpdateUserAccount';
 import ManageCategories from './components/ManageCategories';
 import ManageProducts from './components/ManageProducts';
+import ManageOrders from './components/ManageOrders';
 import CreateProduct from './components/CreateProduct';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
@@ -36,6 +37,7 @@ const App = () => {
                     <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
                     <PrivateRoute path='/manage/products' exact component={ManageProducts} />
+                    <PrivateRoute path='/manage/orders' exact component={ManageOrders} />
                     <PrivateRoute path='/product/create' exact component={CreateProduct} />
                     <PrivateRoute path='/product/update/:productId' exact component={UpdateProduct} />
                     <Route path='/product/:productId' exact component={Product} />

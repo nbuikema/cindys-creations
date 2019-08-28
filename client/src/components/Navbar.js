@@ -66,6 +66,9 @@ const Navbar = ({history}) => (
                                             <Link className='dropdown-item' to='/manage/products'>
                                                 Manage Products
                                             </Link>
+                                            <Link className='dropdown-item' to='/manage/orders'>
+                                                Manage Orders
+                                            </Link>
                                         </div>
                                     ) : ''}
                                     <div className='dropdown-divider'></div>
