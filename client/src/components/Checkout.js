@@ -153,7 +153,7 @@ const Checkout = () => {
     return (
         <div className='container'>
             {isAuthenticated() ? (
-                address && clientToken ? (
+                address && clientToken || success ? (
                     <div>
                         <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
                         <div className='row'>
