@@ -50,9 +50,9 @@ const ManageOrders = () => {
     };
 
     const showStatus = order => (
-        <div>
-            Status: {order.status}
-            <select className='form-control' onChange={onChange(order._id)}>
+        <div className='row'>
+            <div className='col-sm-2'>Status: {order.status}</div>
+            <select className='col-sm-10' onChange={onChange(order._id)}>
                 <option>Update Status</option>
                 {statusValues.map((status, i) => (
                     <option key={i} value={status}>{status}</option>
@@ -71,14 +71,18 @@ const ManageOrders = () => {
                         <li>{showStatus(order)}</li>
                         <li>Created {moment(order.createdAt).fromNow()}</li>
                         <li>Last updated {moment(order.updatedAt).fromNow()}</li>
-                        <li>Address: {order.address}</li>
-                        <li>User: {order.user ? (
-                            <ul>
-                                <li>ID: {order.user._id}</li>
+                        {order.user ? (
+                            <div>
                                 <li>Name: {order.user.first_name} {order.user.last_name}</li>
-                                <li>Email: {order.user.email}</li>
-                            </ul>
-                        ) : 'Unregistered User'}</li>
+                                <li>Email: {order.email}</li>
+                            </div>
+                        ) : (
+                            <div>
+                                <li>Name: Unregistered User</li>
+                                <li>Email: {order.email}</li>
+                            </div>
+                        )}
+                        <li>Address: {order.address}, {order.city}, {order.state}, {order.zip}</li>
                         <li>Products: 
                             <ul>
                                 {order.products.map((product, i) => (

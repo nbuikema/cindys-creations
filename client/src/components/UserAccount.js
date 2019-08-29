@@ -199,13 +199,13 @@ const UserAccount = (props) => {
                         <li>Status: {order.status}</li>
                         <li>Created {moment(order.createdAt).fromNow()}</li>
                         <li>Last updated {moment(order.updatedAt).fromNow()}</li>
-                        <li>Address: {order.address}</li>
+                        <li>Email: {order.email}</li>
+                        <li>Address: {order.address}, {order.city}, {order.state}, {order.zip}</li>
                         <li>Products: 
                             <ul>
                                 {order.products.map((product, i) => (
                                     <li key={i}>
                                         <ul>
-                                            <li>ID: {product._id}</li>
                                             <li>Name: {product.name}</li>
                                             <li>Quantity: {product.count}</li>
                                             <li>Price: ${product.price} per unit</li>
