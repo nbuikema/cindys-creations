@@ -1,13 +1,44 @@
+const sgMail = require('@sendgrid/mail');
 const {Order, CartItem} = require('../models/order');
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 exports.createOrder = (req, res) => {
     const order = new Order(req.body.order);
+    console.log(order);
+    /*let emailData;
+    if(order.user) {
+        emailData = {
+            to: 'devnickbusiness@gmail.com',
+            from: 'noreply@cindyscreations.com',
+            subject: `A new order has been placed`,
+            html: `
+            <p>Customer name: ${order.user.first_name} ${order.user.last_name}</p>
+            <p>Total products: ${order.products.length}</p>
+            <p>Total cost: ${order.total_price}</p>
+            <p>Login to dashboard to view more details.</p>
+        `
+        };
+    } else {
+        emailData = {
+            to: 'devnickbusiness@gmail.com',
+            from: 'noreply@cindyscreations.com',
+            subject: `A new order has been placed`,
+            html: `
+            <p>Customer name: Unregistered User</p>
+            <p>Total products: ${order.products.length}</p>
+            <p>Total cost: ${order.total_price}</p>
+            <p>Login to dashboard to view more details.</p>
+        `
+        };
+    }
     order.save((error, data) => {
         if(error) {
             return res.status(400).json({error: 'Could not create order.'});
         }
+        sgMail.send(emailData);
         res.json(data);
-    });
+    });*/
 };
 
 exports.readAllOrders = (req, res) => {
