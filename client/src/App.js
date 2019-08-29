@@ -34,12 +34,12 @@ const App = () => {
                     <Route path='/products' exact component={Products} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
-                    <PrivateRoute path='/:userId/account' exact component={UserAccount} />
-                    <PrivateRoute path='/:userId/orders' exact component={UserOrders} />
-                    <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
                     <PrivateRoute path='/manage/products' exact component={ManageProducts} />
                     <PrivateRoute path='/manage/orders' exact component={ManageOrders} />
+                    <PrivateRoute path='/:userId/account' exact component={UserAccount} />
+                    <PrivateRoute path='/:userId/orders' exact component={UserOrders} />
+                    <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/product/create' exact component={CreateProduct} />
                     <PrivateRoute path='/product/update/:productId' exact component={UpdateProduct} />
                     <Route path='/product/:productId' exact component={Product} />
