@@ -11,6 +11,9 @@ const UserAccount = (props) => {
         last_name: '',
         email: '',
         address: '',
+        city: '',
+        state: '',
+        zip: '',
         role: '',
         createdAt: '',
         updatedAt: '',
@@ -18,7 +21,7 @@ const UserAccount = (props) => {
         error: '',
         deleteSuccess: false
     });
-    const {id, first_name, last_name, email, address, role, createdAt, updatedAt, orderHistory, error, deleteSuccess} = values;
+    const {id, first_name, last_name, email, address, city, state, zip, role, createdAt, updatedAt, orderHistory, error, deleteSuccess} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -37,6 +40,9 @@ const UserAccount = (props) => {
                             last_name: userData.last_name,
                             email: userData.email,
                             address: userData.address,
+                            city: userData.city,
+                            state: userData.state,
+                            zip: userData.zip,
                             role: userData.role,
                             createdAt: userData.createdAt,
                             updatedAt: userData.updatedAt,
@@ -67,6 +73,9 @@ const UserAccount = (props) => {
                             last_name: '',
                             email: '',
                             address: '',
+                            city: '',
+                            state: '',
+                            zip: '',
                             role: '',
                             createdAt: '',
                             updatedAt: '',
@@ -82,46 +91,72 @@ const UserAccount = (props) => {
     const userInfo = () => first_name ? (
         <div>
             <form>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>First Name</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{first_name}</span>
+                <div className='row'>
+                    <div className='col'>
+                        <h2>User Information</h2>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>First Name</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{first_name}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Last Name</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{last_name}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Email</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{email}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Access Group</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Signed Up</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{moment(createdAt).fromNow()}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Last Updated</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{moment(updatedAt).fromNow()}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Last Name</label>
-                    <div className='col-sm-10'>
-                    <span className='form-control-plaintext'>{last_name}</span>
-                    </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Email</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{email}</span>
-                    </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Address</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{address}</span>
-                    </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Signed Up</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{moment(createdAt).fromNow()}</span>
-                    </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Last Updated</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{moment(updatedAt).fromNow()}</span>
-                    </div>
-                </div>
-                <div className='form-group row'>
-                    <label className='col-sm-2 col-form-label'>Access Group</label>
-                    <div className='col-sm-10'>
-                        <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
+                    <div className='col'>
+                        <h2>Delivery Information</h2>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Address</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{address}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>City</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{city}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>State</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{state}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Zip Code</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{zip}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

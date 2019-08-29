@@ -206,7 +206,7 @@ const UserAccount = ({match}) => {
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='zip' className='col-sm-3 col-form-label'>Zip</label>
+                            <label htmlFor='zip' className='col-sm-3 col-form-label'>Zip Code</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('zip')} type='text' className='form-control-plaintext' id='zip' placeholder={zip} />
                             </div>
