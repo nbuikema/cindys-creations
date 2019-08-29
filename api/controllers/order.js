@@ -20,8 +20,8 @@ exports.createOrder = (req, res) => {
                 subject: `A new order has been placed`,
                 html: `
                     <p>Customer name: ${user.first_name} ${user.last_name}</p>
-                    <p>Customer email: ${user.email}</p>
-                    <p>Deliver address: ${order.address}</p>
+                    <p>Customer email: ${order.email}</p>
+                    <p>Delivery address: ${order.address}, ${order.city}, ${order.state}, ${order.zip}</p>
                     <p>Total products: ${order.products.length}</p>
                     <p>Total cost: $${order.total_price}</p>
                     <p>Please login to view the full details of this order.</p>
@@ -34,12 +34,12 @@ exports.createOrder = (req, res) => {
             from: 'noreply@cindyscreations.com',
             subject: `A new order has been placed`,
             html: `
-                <p>Customer name: Unregistered User</p>
-                <p>Customer email: Unregistered User</p>
-                <p>Deliver address: ${order.address}</p>
-                <p>Total products: ${order.products.length}</p>
-                <p>Total cost: $${order.total_price}</p>
-                <p>Please login to view the full details of this order.</p>
+            <p>Customer name: Unregistered User</p>
+            <p>Customer email: ${order.email}</p>
+            <p>Delivery address: ${order.address}, ${order.city}, ${order.state}, ${order.zip}</p>
+            <p>Total products: ${order.products.length}</p>
+            <p>Total cost: $${order.total_price}</p>
+            <p>Please login to view the full details of this order.</p>
             `
         };
     }
