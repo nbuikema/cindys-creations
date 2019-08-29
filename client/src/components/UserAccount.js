@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import moment from 'moment';
-import {isAuthenticated, readUser, deleteUser, signout, readOrderHistory} from '../api';
+import {isAuthenticated, readUser, deleteUser, signout} from '../api';
 
 import Loader from './Loader';
 
@@ -17,11 +17,10 @@ const UserAccount = (props) => {
         role: '',
         createdAt: '',
         updatedAt: '',
-        orderHistory: [],
         error: '',
         deleteSuccess: false
     });
-    const {id, first_name, last_name, email, address, city, state, zip, role, createdAt, updatedAt, orderHistory, error, deleteSuccess} = values;
+    const {id, first_name, last_name, email, address, city, state, zip, role, createdAt, updatedAt, error, deleteSuccess} = values;
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -29,27 +28,20 @@ const UserAccount = (props) => {
             if(userData.error) {
                 setValues({...values, error: 'Could not get the requested user account.'});
             } else {
-                readOrderHistory(userId, token).then(orderData => {
-                    if(orderData.error) {
-                        setValues({...values, error: 'Could not get the requested user order history.'});
-                    } else {
-                        setValues({
-                            ...values,
-                            id: userData._id,
-                            first_name: userData.first_name,
-                            last_name: userData.last_name,
-                            email: userData.email,
-                            address: userData.address,
-                            city: userData.city,
-                            state: userData.state,
-                            zip: userData.zip,
-                            role: userData.role,
-                            createdAt: userData.createdAt,
-                            updatedAt: userData.updatedAt,
-                            orderHistory: orderData,
-                            error: ''
-                        });
-                    }
+                setValues({
+                    ...values,
+                    id: userData._id,
+                    first_name: userData.first_name,
+                    last_name: userData.last_name,
+                    email: userData.email,
+                    address: userData.address,
+                    city: userData.city,
+                    state: userData.state,
+                    zip: userData.zip,
+                    role: userData.role,
+                    createdAt: userData.createdAt,
+                    updatedAt: userData.updatedAt,
+                    error: ''
                 });
             }
         });
@@ -191,34 +183,6 @@ const UserAccount = (props) => {
                 {showError()}
                 {redirectDeleteSuccess()}
                 {userInfo()}
-                <h2>Order History</h2>
-                {orderHistory.map((order, i) => (
-                <div key={i}>
-                    <div className='form-control-plaintext'>Order #{order._id}</div>
-                    <ul>
-                        <li>Status: {order.status}</li>
-                        <li>Created {moment(order.createdAt).fromNow()}</li>
-                        <li>Last updated {moment(order.updatedAt).fromNow()}</li>
-                        <li>Email: {order.email}</li>
-                        <li>Address: {order.address}, {order.city}, {order.state}, {order.zip}</li>
-                        <li>Products: 
-                            <ul>
-                                {order.products.map((product, i) => (
-                                    <li key={i}>
-                                        <ul>
-                                            <li>Name: {product.name}</li>
-                                            <li>Quantity: {product.count}</li>
-                                            <li>Price: ${product.price} per unit</li>
-                                        </ul>
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>Total Charged: ${order.total_price}</li>
-                    </ul>
-                    <hr />
-                </div>
-            ))}
             </div>
         </div>
     );

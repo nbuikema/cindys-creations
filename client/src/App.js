@@ -11,6 +11,7 @@ import Product from './components/Product';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import UserAccount from './components/UserAccount';
+import UserOrders from './components/UserOrders';
 import UpdateUserAccount from './components/UpdateUserAccount';
 import ManageCategories from './components/ManageCategories';
 import ManageProducts from './components/ManageProducts';
@@ -34,6 +35,7 @@ const App = () => {
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />
+                    <PrivateRoute path='/:userId/orders' exact component={UserOrders} />
                     <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
                     <PrivateRoute path='/manage/products' exact component={ManageProducts} />

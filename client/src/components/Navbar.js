@@ -58,6 +58,9 @@ const Navbar = ({history}) => (
                                     <Link className='dropdown-item' to={`/${isAuthenticated().user._id}/account`}>
                                         My Account
                                     </Link>
+                                    <Link className='dropdown-item' to={`/${isAuthenticated().user._id}/orders`}>
+                                        My Orders
+                                    </Link>
                                     {isAuthenticated().user.role === 1 ? (
                                         <div>
                                             <Link className='dropdown-item' to='/manage/categories'>
