@@ -85,8 +85,7 @@ const Checkout = () => {
     const onClick = () => {
         if(email.length > 0 && address.length > 0 && city.length > 0 && state.length > 0 && zip.length > 0) {
             let nonce;
-            let getNonce = values.instance.requestPaymentMethod().then(data => {
-                console.log(data);
+            values.instance.requestPaymentMethod().then(data => {
                 nonce = data.nonce;
                 const paymentData = {
                     paymentMethodNonce: nonce,
@@ -251,7 +250,7 @@ const Checkout = () => {
     return (
         <div className='container'>
             {isAuthenticated() ? (
-                clientToken && email || success ? (
+                (clientToken && email) || success ? (
                     <div>
                         <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
                         <div className='row'>

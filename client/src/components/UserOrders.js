@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import moment from 'moment';
-import {isAuthenticated, readUser, readOrderHistory} from '../api';
+import {isAuthenticated, readOrderHistory} from '../api';
 
 const UserOrders = (props) => {
     const [values, setValues] = useState({

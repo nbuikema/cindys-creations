@@ -33,12 +33,6 @@ const Cart = () => {
         <h2>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h2>
     ) : '';
 
-    const isLoading = () => loading ? (
-        <div>
-            <Loader />
-        </div>
-    ) : '';
-
     return (
         <div className='container'>
             {loading ? (
