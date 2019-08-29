@@ -18,13 +18,33 @@ const CartItem = mongoose.model('CartItem', CartItemSchema);
 const OrderSchema = new mongoose.Schema(
     {
         transaction_id: {},
+        email: {
+            type: String,
+            trim: true,
+            required: true
+        },
         user: {
             type: ObjectId,
             ref: 'User'
         },
         products: [CartItemSchema],
         total_price: Number,
-        address: String,
+        address: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        zip: {
+            type: String,
+            required: true
+        }, 
         status: {
             type: String,
             enum: ['Received', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
