@@ -83,33 +83,54 @@ const Checkout = () => {
     ) : '';
 
     const onClick = () => {
-        let nonce;
-        let getNonce = values.instance.requestPaymentMethod().then(data => {
-            nonce = data.nonce;
-            const paymentData = {
-                paymentMethodNonce: nonce,
-                amount: cartTotal()
-            };
-            processPayment(paymentData).then(response => {
-                const order = {
-                    products: cart,
-                    transaction_id: response.transaction.id,
-                    total_price: response.transaction.amount,
-                    address: address,
-                    user: isAuthenticated().user ? isAuthenticated().user : undefined
+        if(email.length > 0 && address.length > 0 && city.length > 0 && state.length > 0 && zip.length > 0) {
+            let nonce;
+            let getNonce = values.instance.requestPaymentMethod().then(data => {
+                console.log(data);
+                nonce = data.nonce;
+                const paymentData = {
+                    paymentMethodNonce: nonce,
+                    amount: cartTotal()
                 };
-                createOrder({order: order}).then(res => {
-                    setValues({...values, address: '', success: response.success});
-                    clearCart(() => {
-                        changeCartSize();
+                processPayment(paymentData).then(response => {
+                    const order = {
+                        products: cart,
+                        transaction_id: response.transaction.id,
+                        total_price: response.transaction.amount,
+                        email: email,
+                        address: address,
+                        city: city,
+                        state: state,
+                        zip: zip,
+                        user: isAuthenticated().user ? isAuthenticated().user : undefined
+                    };
+                    createOrder({order: order}).then(res => {
+                        if(res.error) {
+                            setValues({...values, error: res.error});
+                        } else {
+                            setValues({
+                                ...values, 
+                                email: '',
+                                address: '', 
+                                city: '',
+                                state: '',
+                                zip: '',
+                                success: response.success
+                            });
+                            clearCart(() => {
+                                changeCartSize();
+                            });
+                        }
                     });
+                }).catch(error => {
+                    setValues({...values, error: error.message});
                 });
             }).catch(error => {
-                console.log(error);
+                setValues({...values, error: error.message});
             });
-        }).catch(error => {
-            setValues({...values, error: error.message});
-        })
+        } else {
+            setValues({...values, error: 'All fields are required.'});
+        }
     };
 
     const onChange = valueProp => event => {
@@ -121,23 +142,23 @@ const Checkout = () => {
             <form>
                 <div className='form-group'>
                     <label htmlFor='email'>Email</label>
-                    <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
+                    <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' required />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='address'>Address</label>
-                    <input onChange={onChange('address')} value={address} type='text' className='form-control' id='address' aria-describedby='address' />
+                    <input onChange={onChange('address')} value={address} type='text' className='form-control' id='address' aria-describedby='address' required />
                 </div>
                 <div className='row'>
                     <div className='col'>
                         <div className='form-group'>
                             <label htmlFor='city'>City</label>
-                            <input onChange={onChange('city')} value={city} type='text' className='form-control' id='city' aria-describedby='city' />
+                            <input onChange={onChange('city')} value={city} type='text' className='form-control' id='city' aria-describedby='city' required />
                         </div>
                     </div>
                     <div className='col'>
                         <div className='form-group'>
                             <label htmlFor='state'>State</label>
-                            <select onChange={onChange('state')} value={state} className='form-control'>
+                            <select onChange={onChange('state')} value={state} className='form-control' required>
                                 <option>Select One</option>
                                 <option value='Alabama'>Alabama</option>
                                 <option value='Alaska'>Alaska</option>
@@ -196,7 +217,7 @@ const Checkout = () => {
                     <div className='col'>
                         <div className='form-group'>
                             <label htmlFor='zip'>Zip Code</label>
-                            <input onChange={onChange('zip')} value={zip} type='text' className='form-control' id='zip' aria-describedby='zip' />
+                            <input onChange={onChange('zip')} value={zip} type='text' className='form-control' id='zip' aria-describedby='zip' required />
                         </div>
                     </div>
                 </div>
