@@ -38,12 +38,14 @@ const Checkout = () => {
 
     const initUser = () => {
         const {user} = isAuthenticated();
-        console.log(user)
         if(isAuthenticated()) {
             setValues({
                 ...values,
                 email: user.email,
-                address: user.address
+                address: user.address,
+                city: user.city,
+                state: user.state,
+                zip: user.zip
             });
         }
     };
