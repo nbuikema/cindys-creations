@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const {image, productById, createProduct, readProduct, updateProduct, deleteProduct, readAllProducts, readProductsByQuery} = require('../controllers/product');

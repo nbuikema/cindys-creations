@@ -25,6 +25,9 @@ export const signin = user => {
         },
         body: JSON.stringify(user)
     }).then(response => {
+        if(typeof window !== 'undefined') {
+            sessionStorage.removeItem('cart');
+        }
         return response.json();
     }).catch(err => {
         console.log(err);
@@ -41,6 +44,7 @@ export const authenticate = (data, next) => {
 export const signout = next => {
     if(typeof window !== 'undefined') {
         localStorage.removeItem('jwt');
+        localStorage.removeItem('cart');
         next();
         return fetch(`${API}/auth/signout`, {
             method: 'GET'
@@ -252,22 +256,40 @@ export const deleteProduct = (productId, userId, token) => {
 export const addProductToCart = (item, next) => {
     let cart = [];
     if(typeof window !== 'undefined') {
-        if(localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'));
+        if(isAuthenticated()) {
+            if(localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
+            }
+            cart.push({...item, count: 1});
+            cart = Array.from(new Set(cart.map(product => product._id))).map(id => {
+                return cart.find(product => product._id === id);
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            next();
+        } else {
+            if(sessionStorage.getItem('cart')) {
+                cart = JSON.parse(sessionStorage.getItem('cart'));
+            }
+            cart.push({...item, count: 1});
+            cart = Array.from(new Set(cart.map(product => product._id))).map(id => {
+                return cart.find(product => product._id === id);
+            });
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+            next();
         }
-        cart.push({...item, count: 1});
-        cart = Array.from(new Set(cart.map(product => product._id))).map(id => {
-            return cart.find(product => product._id === id);
-        });
-        localStorage.setItem('cart', JSON.stringify(cart));
-        next();
     }
 };
 
 export const numItemsInCart = () => {
     if(typeof window !== 'undefined') {
-        if(localStorage.getItem('cart')) {
-            return JSON.parse(localStorage.getItem('cart')).length;
+        if(isAuthenticated()) {
+            if(localStorage.getItem('cart')) {
+                return JSON.parse(localStorage.getItem('cart')).length;
+            }
+        } else {
+            if(sessionStorage.getItem('cart')) {
+                return JSON.parse(sessionStorage.getItem('cart')).length;
+            }
         }
     }
     return 0;
@@ -275,8 +297,14 @@ export const numItemsInCart = () => {
 
 export const readCart = () => {
     if(typeof window !== 'undefined') {
-        if(localStorage.getItem('cart')) {
-            return JSON.parse(localStorage.getItem('cart'));
+        if(isAuthenticated()) {
+            if(localStorage.getItem('cart')) {
+                return JSON.parse(localStorage.getItem('cart'));
+            }
+        } else {
+            if(sessionStorage.getItem('cart')) {
+                return JSON.parse(sessionStorage.getItem('cart'));
+            }
         }
     }
     return [];
@@ -285,30 +313,54 @@ export const readCart = () => {
 export const updateQuantity = (productId, count) => {
     let cart = [];
     if(typeof window !== 'undefined') {
-        if (localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'));
-        }
-        cart.forEach((product, i) => {
-            if(product._id === productId) {
-                cart[i].count = count;
+        if(isAuthenticated()) {
+            if(localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
             }
-        });
-        localStorage.setItem('cart', JSON.stringify(cart));
+            cart.forEach((product, i) => {
+                if(product._id === productId) {
+                    cart[i].count = count;
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            if(sessionStorage.getItem('cart')) {
+                cart = JSON.parse(sessionStorage.getItem('cart'));
+            }
+            cart.forEach((product, i) => {
+                if(product._id === productId) {
+                    cart[i].count = count;
+                }
+            });
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+        }
     }
 };
 
 export const removeProductFromCart = productId => {
     let cart = [];
     if(typeof window !== 'undefined') {
-        if(localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'));
-        }
-        cart.forEach((product, i) => {
-            if(product._id === productId) {
-                cart.splice(i, 1);
+        if(isAuthenticated()) {
+            if(localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
             }
-        });
-        localStorage.setItem('cart', JSON.stringify(cart));
+            cart.forEach((product, i) => {
+                if(product._id === productId) {
+                    cart.splice(i, 1);
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            if(sessionStorage.getItem('cart')) {
+                cart = JSON.parse(sessionStorage.getItem('cart'));
+            }
+            cart.forEach((product, i) => {
+                if(product._id === productId) {
+                    cart.splice(i, 1);
+                }
+            });
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+        }
     }
     return cart;
 };
@@ -344,7 +396,12 @@ export const processPayment = paymentData => {
 
 export const clearCart = (next) => {
     if(typeof window !== 'undefined') {
-        localStorage.removeItem('cart');
+        if(isAuthenticated()) {
+            localStorage.removeItem('cart');
+        }
+        else {
+            sessionStorage.removeItem('cart');
+        }
         next();
     }
 };

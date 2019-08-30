@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const expressValidator = require("express-validator");
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const expressValidator = require('express-validator');
 require('dotenv').config();
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/product');

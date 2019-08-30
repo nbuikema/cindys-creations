@@ -63,6 +63,7 @@ const Navbar = ({history}) => (
                                     </Link>
                                     {isAuthenticated().user.role === 1 ? (
                                         <div>
+                                            <div className='dropdown-divider'></div>
                                             <Link className='dropdown-item' to='/manage/categories'>
                                                 Manage Categories
                                             </Link>
