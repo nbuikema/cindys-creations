@@ -139,8 +139,8 @@ export const readAllProducts = () => {
     });
 };
 
-export const readQueriedProducts = (skip, limit, filters = {}) => {
-    const data = {limit, skip, filters};
+export const readQueriedProducts = (filters = {}) => {
+    const data = {filters};
     return fetch(`${API}/products/read/query`, {
         method: 'POST',
         headers: {

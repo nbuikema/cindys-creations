@@ -69,11 +69,9 @@ exports.readAllProducts = (req, res) => {
 exports.readProductsByQuery = (req, res) => {
     let sort = req.query.sort ? req.query.sort : '_id';
     let order = req.query.order ? req.query.order : 'asc';
-    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
-    let skip = parseInt(req.body.skip);
     let findArgs = req.body.filters;
 
-    Product.find(findArgs).select('-image').sort([[sort, order]]).skip(skip).limit(limit).exec((err, products) => {
+    Product.find(findArgs).select('-image').sort([[sort, order]]).exec((err, products) => {
         if(err) {
             return res.status(400).json({error: 'Could not find products.'});
         }

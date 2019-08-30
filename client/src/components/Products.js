@@ -5,19 +5,16 @@ import ProductCard from './ProductCard';
 import Loader from './Loader';
 
 const Products = () => {
-    const [myFilters, setMyFilters] = useState({
+    const [userFilters, setUserFilters] = useState({
         filters: {
             category: []
         }
     });
     const [categories, setCategories] = useState([]);
-    const [error, setError] = useState(false);
-    const [limit, setLimit] = useState(6);
-    const [skip, setSkip] = useState(0);
-    const [size, setSize] = useState(0);
     const [allProducts, setAllProducts] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [error, setError] = useState(false);
 
     const init = () => {
         readAllCategories().then(data => {
@@ -53,20 +50,18 @@ const Products = () => {
     };
 
     const handleFilters = (filters, filterBy) => {
-        const newFilters = {...myFilters};
+        const newFilters = {...userFilters};
         newFilters.filters[filterBy] = filters;
-        setMyFilters(newFilters);
-        loadFilteredResults(myFilters.filters);
+        setUserFilters(newFilters);
+        loadFilteredResults(userFilters.filters);
     };
 
     const loadFilteredResults = newFilters => {
-        readQueriedProducts(skip, limit, newFilters).then(data => {
-            if (data.error) {
+        readQueriedProducts(newFilters).then(data => {
+            if(data.error) {
                 setError(data.error);
             } else {
                 setFilteredResults(data);
-                setSize(data.size);
-                setSkip(0);
             }
         });
     };
