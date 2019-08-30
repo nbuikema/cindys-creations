@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const sgMail = require('@sendgrid/mail');
 const {Order, CartItem} = require('../models/order');
 const User = require('../models/user');
@@ -86,4 +87,20 @@ exports.orderById = (req, res, next, id) => {
         req.order = order;
         next();
     });
+};
+
+exports.ordersByEmail = (req, res, next, query) => {
+    Order.find(
+        {'email': {$regex: `.*${query}.*`, $options: 'i'}}
+    ).exec((err, orders) => {
+        if(err || !orders) {
+            return res.status(400).json({error: 'No orders found.'});
+        }
+        req.orders = orders;
+        next();
+    });
+};
+
+exports.readOrdersByEmail = (req, res) => {
+    return res.json(req.orders);
 };

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {isAuthenticated, readAllOrders, readOrderStatusValues, updateOrderStatus} from '../api';
+import {isAuthenticated, readAllOrders, readOrderStatusValues, updateOrderStatus, readOrdersByEmail} from '../api';
 import moment from 'moment';
 
 const ManageOrders = () => {
@@ -31,6 +31,7 @@ const ManageOrders = () => {
     useEffect(() => {
         initOrders();
         initStatusValues();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const showNumberOfOrders = () => (
@@ -61,8 +62,25 @@ const ManageOrders = () => {
         </div>
     );
 
+    const onSearchChange = event => {
+        if(event.target.value.length === 0) {
+            initOrders();
+        } else {
+            readOrdersByEmail(event.target.value).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    setOrders(data);
+                }
+            });
+        }
+    };
+
     return (
         <div className='container'>
+            <div className='form-group'>
+                <input onChange={onSearchChange} type='text' className='form-control' id='searchOrders' aria-describedby='searchOrders' placeholder='Search orders by email...' />
+            </div>
             {showNumberOfOrders()}
             {orders.map((order, i) => (
                 <div key={i}>
