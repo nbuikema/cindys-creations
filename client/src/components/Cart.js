@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {readCart} from '../api';
+import {readCart, clearCart} from '../api';
 
 import ProductCard from './ProductCard';
 import Loader from './Loader';
@@ -20,9 +20,20 @@ const Cart = () => {
         changeCartSize();
     }, [cartSize]);
 
+    const onClick = () => {
+        clearCart(() => {
+            changeCartSize();
+        });
+    };
+
     const showCart = () => cart.length > 0 ? (
         <div>
             <h2>{`You have ${cart.length} item(s) in your cart.`}<br /><Link to='/checkout'>Checkout</Link> or <Link to='/products'>Continue Shopping</Link></h2>
+            <h2>Need to start over?
+                <span onClick={onClick} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                    Empty Cart
+                </span>
+            </h2>
             {cart.map((product, i) => (
                 <ProductCard key={i} product={product} changeCartSize={changeCartSize} cartSize={cartSize} showAddToCart={false} showCartQuantity={true} showRemoveFromCart={true} />
             ))}
