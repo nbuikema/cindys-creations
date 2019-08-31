@@ -92,7 +92,7 @@ exports.orderById = (req, res, next, id) => {
 exports.ordersByEmail = (req, res, next, query) => {
     Order.find(
         {'email': {$regex: `.*${query}.*`, $options: 'i'}}
-    ).exec((err, orders) => {
+    ).populate('user', 'email first_name last_name address').sort('-created').exec((err, orders) => {
         if(err || !orders) {
             return res.status(400).json({error: 'No orders found.'});
         }

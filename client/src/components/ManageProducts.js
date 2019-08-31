@@ -10,9 +10,6 @@ const ManageProducts = () => {
     });
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(false);
-    const [limit, setLimit] = useState(6);
-    const [skip, setSkip] = useState(0);
-    const [size, setSize] = useState(0);
     const [allProducts, setAllProducts] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -64,13 +61,11 @@ const ManageProducts = () => {
     };
 
     const loadFilteredResults = newFilters => {
-        readQueriedProducts(skip, limit, newFilters).then(data => {
+        readQueriedProducts(newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
                 setFilteredResults(data);
-                setSize(data.size);
-                setSkip(0);
             }
         });
     };
