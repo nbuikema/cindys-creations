@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {isAuthenticated, readAllCategories, deleteCategory, createCategory} from '../api';
 
+import Loader from './Loader';
+
 const ManageCategories = () => {
     const [values, setValues] = useState({
         categories: [],
@@ -8,6 +10,7 @@ const ManageCategories = () => {
         error: ''
     });
     const {categories, name, error} = values;
+    const [loading, setLoading] = useState(true);
 
     const {user, token} = isAuthenticated();
 
@@ -17,6 +20,7 @@ const ManageCategories = () => {
                 setValues({...values, error: data.error});
             } else {
                 setValues({...values, name: '', error: '', categories: data});
+                setLoading(false);
             }
         });
     };
@@ -74,22 +78,26 @@ const ManageCategories = () => {
     );
 
     return (
-        <div>
-            <div className='container'>
-                {showError()}
-                {newCategoryForm()}
+        <div className='container'>
+            {loading ? (
+                <Loader />
+            ) : (
                 <div>
-                    <h2>Categories</h2>
-                    {categories.map((category, i) => (
-                        <div key={i} className='input-group'>
-                            <div className='form-control-plaintext' key={i}>{category.name}</div>
-                            <span className='input-group-btn'>
-                                <button onClick={() => destroy(category._id)} type='submit' className='btn btn-danger'>Delete Category</button>
-                            </span>
-                        </div>
-                    ))}
+                    {showError()}
+                    {newCategoryForm()}
+                    <div>
+                        <h2>Categories</h2>
+                        {categories.map((category, i) => (
+                            <div key={i} className='input-group'>
+                                <div className='form-control-plaintext' key={i}>{category.name}</div>
+                                <span className='input-group-btn'>
+                                    <button onClick={() => destroy(category._id)} type='submit' className='btn btn-danger'>Delete Category</button>
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

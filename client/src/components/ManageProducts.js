@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {isAuthenticated, readAllCategories, readAllProducts, readQueriedProducts, deleteProduct} from '../api';
 
+import Loader from './Loader';
+
 const ManageProducts = () => {
     const [myFilters, setMyFilters] = useState({
         filters: {
@@ -10,6 +12,7 @@ const ManageProducts = () => {
     });
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [allProducts, setAllProducts] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -32,6 +35,7 @@ const ManageProducts = () => {
                 setError(data.error);
             } else {
                 setAllProducts(data);
+                setLoading(false);
             }
         });
     }
@@ -127,29 +131,33 @@ const ManageProducts = () => {
     );
 
     return (
-        <div>
-            <div className='container'>
-                <h2>New Product</h2>
-                <Link className='btn btn-primary' to='/product/create'>
-                    Create Product
-                </Link>
-                <div className='row'>
-                    <div className='col-4'>
-                        <h2>Categories</h2>
-                        <ul>
-                        {categories.map((category, i) => (
-                            <li key={i}>
-                                <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
-                                <label>{category.name}</label>
-                            </li>
-                        ))}
-                        </ul>
-                    </div>
-                    <div className='col-8'>
-                        {showProducts()}
+        <div className='container'>
+            {loading ? (
+                <Loader />
+            ) : (
+                <div>
+                    <h2>New Product</h2>
+                    <Link className='btn btn-primary' to='/product/create'>
+                        Create Product
+                    </Link>
+                    <div className='row'>
+                        <div className='col-4'>
+                            <h2>Categories</h2>
+                            <ul>
+                            {categories.map((category, i) => (
+                                <li key={i}>
+                                    <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
+                                    <label>{category.name}</label>
+                                </li>
+                            ))}
+                            </ul>
+                        </div>
+                        <div className='col-8'>
+                            {showProducts()}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
