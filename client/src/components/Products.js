@@ -15,6 +15,7 @@ const Products = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const init = () => {
         readAllCategories().then(data => {
@@ -27,6 +28,7 @@ const Products = () => {
                         setError(data.error);
                     } else {
                         setAllProducts(data);
+                        setLoading(false);
                     }
                 });
             }
@@ -95,7 +97,7 @@ const Products = () => {
     return (
         <div>
             <div className='container'>
-                {allProducts.length < 1 || categories.length < 1 ? (
+                {loading ? (
                     <Loader />
                 ) : (
                     <div className='row'>
