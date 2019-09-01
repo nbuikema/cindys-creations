@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const {Order} = require('../models/order');
 
@@ -18,6 +19,9 @@ exports.readUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
+    if(req.body.password) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+    }
     User.findOneAndUpdate(
         {_id: req.profile._id},
         {$set: req.body},

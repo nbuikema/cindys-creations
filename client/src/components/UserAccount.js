@@ -90,6 +90,12 @@ const UserAccount = (props) => {
                     <div className='col'>
                         <h2>User Information</h2>
                         <div className='form-group row'>
+                            <label className='col-sm-3 col-form-label'>Email</label>
+                            <div className='col-sm-9'>
+                                <span className='form-control-plaintext'>{email}</span>
+                            </div>
+                        </div>
+                        <div className='form-group row'>
                             <label className='col-sm-3 col-form-label'>First Name</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{first_name}</span>
@@ -99,12 +105,6 @@ const UserAccount = (props) => {
                             <label className='col-sm-3 col-form-label'>Last Name</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{last_name}</span>
-                            </div>
-                        </div>
-                        <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Email</label>
-                            <div className='col-sm-9'>
-                                <span className='form-control-plaintext'>{email}</span>
                             </div>
                         </div>
                         <div className='form-group row'>

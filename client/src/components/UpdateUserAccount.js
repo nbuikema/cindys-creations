@@ -9,6 +9,8 @@ const UserAccount = ({match}) => {
         first_name: '',
         last_name: '',
         email: '',
+        updatePassword: '',
+        confirmPassword: '',
         address: '',
         city: '',
         state: '',
@@ -18,7 +20,7 @@ const UserAccount = ({match}) => {
         error: '',
         success: false
     });
-    const {first_name, last_name, email, address, city, state, zip, role, adminCode, error, success} = values;
+    const {first_name, last_name, email, updatePassword, confirmPassword, address, city, state, zip, role, adminCode, error, success} = values;
     const [loading, setLoading] = useState(true);
     
     const {token} = isAuthenticated();
@@ -55,9 +57,17 @@ const UserAccount = ({match}) => {
     };
 
     const onSubmit = event => {
+        let password;
         event.preventDefault();
         setValues({...values, error: ''});
-        updateUser(match.params.userId, token, {first_name, last_name, email, address, city, state, zip, role}).then(
+        if(updatePassword || confirmPassword) {
+            if(updatePassword !== confirmPassword) {
+                return setValues({...values, error: 'Passwords must match.'});
+            } else {
+                password = updatePassword;
+            }
+        }
+        updateUser(match.params.userId, token, {first_name, last_name, email, password, address, city, state, zip, role}).then(
             data => {
                 if(data.error) {
                     setValues({...values, error: data.error, success: false});
@@ -100,6 +110,24 @@ const UserAccount = ({match}) => {
                     <div className='col'>
                         <h2>User Information</h2>
                         <div className='form-group row'>
+                            <label htmlFor='email' className='col-sm-3 col-form-label'>Email</label>
+                            <div className='col-sm-9'>
+                                <input onChange={onChange('email')} type='text' className='form-control-plaintext' id='email' placeholder={email} />
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label htmlFor='updatePassword' className='col-sm-3 col-form-label'>Password</label>
+                            <div className='col-sm-9'>
+                                <input onChange={onChange('updatePassword')} type='text' className='form-control-plaintext' id='updatePassword' placeholder='*************' />
+                            </div>
+                        </div>
+                        <div className='form-group row'>
+                            <label htmlFor='confirmPassword' className='col-sm-3 col-form-label'>Confirm Password</label>
+                            <div className='col-sm-9'>
+                                <input onChange={onChange('confirmPassword')} type='text' className='form-control-plaintext' id='confirmPassword' placeholder='*************' />
+                            </div>
+                        </div>
+                        <div className='form-group row'>
                             <label htmlFor='first_name' className='col-sm-3 col-form-label'>First Name</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('first_name')} type='text' className='form-control-plaintext' id='first_name' placeholder={first_name} />
@@ -109,12 +137,6 @@ const UserAccount = ({match}) => {
                             <label htmlFor='last_name' className='col-sm-3 col-form-label'>Last Name</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('last_name')} type='text' className='form-control-plaintext' id='last_name' placeholder={last_name} />
-                            </div>
-                        </div>
-                        <div className='form-group row'>
-                            <label htmlFor='email' className='col-sm-3 col-form-label'>Email</label>
-                            <div className='col-sm-9'>
-                                <input onChange={onChange('email')} type='text' className='form-control-plaintext' id='email' placeholder={email} />
                             </div>
                         </div>
                         <div className='form-group row'>
