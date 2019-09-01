@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const bcrypt = require('bcrypt');
+const crs = require('crypto-random-string');
+const sgMail = require('@sendgrid/mail');
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
@@ -81,4 +83,28 @@ exports.isAdmin = (req, res, next) => {
         return res.status(403).json({error: 'You must be an admin to do that.'});
     }
     next();
+};
+
+exports.forgotPassword = (req, res) => {
+    const tempPassword = crs({length: 20});
+    req.body.password = bcrypt.hashSync(tempPassword, 10);
+    User.findOneAndUpdate(
+        {email: req.body.email},
+        {$set: req.body},
+        {new: true},
+        (err, user) => {
+            if(err) {
+                return res.status(400).json({error: 'You are not authorized to do that.'});
+            }
+            const emailData = {
+                to: req.body.email,
+                from: 'noreply@cindyscreations.com',
+                subject: `Password Reset Instructions`,
+                html: `<p>You have recently requested a new password. To reset your password, sign in with the temporary password ${tempPassword} and visit Update Account to change your password.</p>`
+            };
+            sgMail.send(emailData);
+            user.password = undefined;
+            return res.json(user);
+        }
+    );
 };
