@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
-import {Redirect, Link} from 'react-router-dom';
-import {signin, authenticate} from '../api';
+import {forgotPassword} from '../api';
 
-const Signin = () => {
+const ForgotPassword = () => {
     const [values, setValues] = useState({
         email: '',
-        password: '',
         error: '',
         success: false
     });
-    const {email, password, error, success} = values;
+    const {email, error, success} = values;
 
     const onChange = valueProp => event => {
         setValues({...values, [valueProp]: event.target.value, error: ''});
@@ -18,13 +16,11 @@ const Signin = () => {
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, error: ''});
-        signin({email, password}).then(data => {
+        forgotPassword(email).then(data => {
             if(data.error) {
-                setValues({...values, error: data.error, success: false});
+                setValues({...values, error: data.error});
             } else {
-                authenticate(data, () => {
-                    setValues({...values, success: true});
-                });
+                setValues({...values, success: true});
             }
         });
     };
@@ -35,14 +31,7 @@ const Signin = () => {
                 <label htmlFor='email'>Email Address</label>
                 <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
             </div>
-            <div className='form-group'>
-                <label htmlFor='password'>Password</label>
-                <input onChange={onChange('password')} value={password} type='password' className='form-control' id='password' />
-            </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
-            <Link className='btn btn-warning' to={`/password/forgot`}>
-                Forgot Password
-            </Link>
+            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Reset Password</button>
         </form>
     );
 
@@ -52,21 +41,21 @@ const Signin = () => {
         </div>
     );
 
-    const redirectSuccess = () => {
-        if(success) {
-            return <Redirect to='/' />;
-        }
-    };
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            You will receive an email shortly with instructions for resetting your password.
+        </div>
+    );
 
     return (
         <div>
             <div className='container'>
                 {showError()}
-                {redirectSuccess()}
+                {showSuccess()}
                 {signinForm()}
             </div>
         </div>
     );
 };
 
-export default Signin;
+export default ForgotPassword;

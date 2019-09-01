@@ -10,6 +10,7 @@ import Products from './components/Products';
 import Product from './components/Product';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import ForgotPassword from './components/ForgotPassword';
 import UserAccount from './components/UserAccount';
 import UserOrders from './components/UserOrders';
 import UpdateUserAccount from './components/UpdateUserAccount';
@@ -34,6 +35,7 @@ const App = () => {
                     <Route path='/products' exact component={Products} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
+                    <Route path='/password/forgot' exact component={ForgotPassword} />
                     <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
                     <PrivateRoute path='/manage/products' exact component={ManageProducts} />
                     <PrivateRoute path='/manage/orders' exact component={ManageOrders} />
