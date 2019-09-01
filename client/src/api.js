@@ -495,3 +495,17 @@ export const readOrdersByEmail = (orderEmail) => {
         console.log(err)
     });
 };
+
+export const readProductsByName = (productName) => {
+    return fetch(`${API}/products/read/name/${productName}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

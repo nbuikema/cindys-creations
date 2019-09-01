@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {readAllCategories, readAllProducts, readQueriedProducts} from '../api';
+import {readAllCategories, readProductsByName, readAllProducts, readQueriedProducts} from '../api';
 
 import ProductCard from './ProductCard';
 import Loader from './Loader';
@@ -12,31 +12,35 @@ const Products = () => {
     });
     const [categories, setCategories] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
-    const [filteredResults, setFilteredResults] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [searching, setSearching] = useState(false);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const init = () => {
+    const initCategories = () => {
         readAllCategories().then(data => {
             if(data.error) {
                 setError(data.error);
             } else {
                 setCategories(data);
-                readAllProducts().then(data => {
-                    if(data.error) {
-                        setError(data.error);
-                    } else {
-                        setAllProducts(data);
-                        setLoading(false);
-                    }
-                });
+            }
+        });
+    };
+
+    const initProducts = () => {
+        readAllProducts().then(data => {
+            if(data.error) {
+                setError(data.error);
+            } else {
+                setAllProducts(data);
+                setLoading(false);
             }
         });
     };
 
     useEffect(() => {
-        init();
+        initCategories();
+        initProducts();
     }, []);
 
     const handleToggle = c => () => {
@@ -55,7 +59,11 @@ const Products = () => {
         const newFilters = {...userFilters};
         newFilters.filters[filterBy] = filters;
         setUserFilters(newFilters);
-        loadFilteredResults(userFilters.filters);
+        if(newFilters.filters.category.length === 0) {
+            initProducts();
+        } else {
+            loadFilteredResults(userFilters.filters);
+        }
     };
 
     const loadFilteredResults = newFilters => {
@@ -63,36 +71,43 @@ const Products = () => {
             if(data.error) {
                 setError(data.error);
             } else {
-                setFilteredResults(data);
+                setAllProducts(data);
             }
         });
     };
 
     const showProducts = () => (
-        filteredResults && filteredResults.length > 0 ? (
-            <div>
-                <h2>Selected Products</h2>
-                <div className='row'>
-                    {filteredResults.map((product, i) => (
-                        <div key={i} className='col-4'>
-                            <ProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
+        <div>
+            {selectedCategories.length > 0 || searching ? (
+                <h2>Showing Found Products</h2>
+            ) : (
+                <h2>Showing All Products</h2>
+            )}
+            <div className='row'>
+                {allProducts.map((product, i) => (
+                    <div key={i} className='col-4'>
+                        <ProductCard product={product} />
+                    </div>
+                ))}
             </div>
-        ) : (
-            <div>
-                <h2>All Products</h2>
-                <div className='row'>
-                    {allProducts.map((product, i) => (
-                        <div key={i} className='col-4'>
-                            <ProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
+        </div>
     );
+
+    const onSearchChange = event => {
+        if(event.target.value.length === 0) {
+            setSearching(false);
+            initProducts();
+        } else {
+            readProductsByName(event.target.value).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    setSearching(true);
+                    setAllProducts(data);
+                }
+            });
+        }
+    };
 
     return (
         <div>
@@ -113,6 +128,9 @@ const Products = () => {
                             </ul>
                         </div>
                         <div className='col-8'>
+                        <div className='form-group'>
+                            <input onChange={onSearchChange} type='text' className='form-control' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products by name...' />
+                        </div>
                             {showProducts()}
                         </div>
                     </div>

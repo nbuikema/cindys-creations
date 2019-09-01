@@ -124,3 +124,19 @@ exports.image = (req, res, next) => {
     }
     next();
 };
+
+exports.productsByName = (req, res, next, query) => {
+    Product.find(
+        {'name': {$regex: `.*${query}.*`, $options: 'i'}}
+    ).select('-image').exec((err, products) => {
+        if(err || !products) {
+            return res.status(400).json({error: 'No products found.'});
+        }
+        req.products = products;
+        next();
+    });
+};
+
+exports.readProductsByName = (req, res) => {
+    return res.json(req.products);
+};
