@@ -1,15 +1,16 @@
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
     const user = new User(req.body);
     user.save((err, user) => {
         if(err) {
             return res.status(400).json({error: 'Could not signup new user.'});
         }
-        user.salt = undefined;
-        user.hashed_password = undefined;
+        user.password = undefined;
         res.json({user: user});
     });
 };
@@ -36,7 +37,7 @@ exports.signin = (req, res) => {
         if(err || !user) {
             return res.status(400).json({error: 'Could not signin user.'});
         }
-        if(!user.authenticate(password)) {
+        if(!bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({error: 'Email and Password do not match.'});
         }
         const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '60m'});
