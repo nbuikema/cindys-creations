@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {isAuthenticated, readAllCategories, readProduct, updateProduct} from '../api';
 
+import Loader from './Loader';
+
 const UpdateProduct = ({match}) => {
     const [values, setValues] = useState({
         name: '',
@@ -15,6 +17,8 @@ const UpdateProduct = ({match}) => {
     });
     const [categories, setCategories] = useState([]);
     const {name, description, price, error, formData, success} = values;
+    const [loading, setLoading] = useState(true);
+    
     const {user, token} = isAuthenticated();
 
     const initCategories = () => {
@@ -40,6 +44,7 @@ const UpdateProduct = ({match}) => {
                     category: data.category._id,
                     formData: new FormData()
                 });
+                setLoading(false);
             }
         });
     };
@@ -129,7 +134,13 @@ const UpdateProduct = ({match}) => {
         <div className='container'>
             {showError()}
             {redirectSuccess()}
-            {updateProductForm()}
+            {loading ? (
+                <Loader />
+            ) : (
+                <div>
+                    {updateProductForm()}
+                </div>
+            )}
         </div>
     );
 };
