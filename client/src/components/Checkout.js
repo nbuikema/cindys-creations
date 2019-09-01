@@ -19,6 +19,7 @@ const Checkout = () => {
     });
     const [cart, setCart] = useState([]);
     const [cartSize, setCartSize] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     const {clientToken, email, address, city, state, zip, error, success} = values;
 
@@ -32,6 +33,7 @@ const Checkout = () => {
                 setValues({error: data.erorr});
             } else {
                 setValues({...values, clientToken: data.clientToken});
+                setLoading(false);
             }
         });
     };
@@ -125,7 +127,7 @@ const Checkout = () => {
                     setValues({...values, error: error.message});
                 });
             }).catch(error => {
-                setValues({...values, error: error.message});
+                console.log(error.message);
             });
         } else {
             setValues({...values, error: 'All fields are required.'});
@@ -243,56 +245,39 @@ const Checkout = () => {
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            Your purchase was successful.
+            Your purchase was successful. You will receive a confirmation email shortly.
         </div>
     );
 
     return (
         <div className='container'>
-            {isAuthenticated() ? (
-                (clientToken && email) || success ? (
-                    <div>
-                        <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
-                        <div className='row'>
-                            <div className='col-9'>
-                                <h2>Total To Be Charged: ${cartTotal()}</h2>
-                                {showError()}
-                                {showSuccess()}
-                                {showDelivery()}
-                                {showDropIn()}
-                            </div>
-                            <div className='col-3'>
-                                {showCart()}
-                                {emptyCart()}
-                            </div>
+            {loading ? (
+                <Loader />
+            ) : (
+                <div>
+                    <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
+                    <div className='row'>
+                        <div className='col-9'>
+                            <h2>Total To Be Charged: ${cartTotal()}</h2>
+                            {showError()}
+                            {success ? (
+                                <div>
+                                    {showSuccess()}
+                                </div>
+                            ) : (
+                                <div>
+                                    {showDelivery()}
+                                    {showDropIn()}
+                                </div>
+                            )}
+                        </div>
+                        <div className='col-3'>
+                            {showCart()}
+                            {emptyCart()}
                         </div>
                     </div>
-                    ) : (
-                        <Loader />
-                    )
-                ) : (
-                clientToken || success ? (
-                    <div>
-                        <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
-                        <div className='row'>
-                            <div className='col-9'>
-                                <h2>Total To Be Charged: ${cartTotal()}</h2>
-                                {showError()}
-                                {showSuccess()}
-                                {showDelivery()}
-                                {showDropIn()}
-                            </div>
-                            <div className='col-3'>
-                                {showCart()}
-                                {emptyCart()}
-                            </div>
-                        </div>
-                    </div>
-                    ) : (
-                        <Loader />
-                    )
-                )
-            }
+                </div>
+            )}
         </div>
     );
 };
