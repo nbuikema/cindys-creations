@@ -62,7 +62,7 @@ const Checkout = () => {
 
     const cartTotal = () => {
         return cart.reduce((currentValue, nextValue) => {
-            return currentValue + nextValue.count * nextValue.price;
+            return (currentValue + nextValue.count * nextValue.price).toFixed(2);
         }, 0);
     };
 
