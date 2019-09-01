@@ -19,6 +19,8 @@ const UserAccount = ({match}) => {
         success: false
     });
     const {first_name, last_name, email, address, city, state, zip, role, adminCode, error, success} = values;
+    const [loading, setLoading] = useState(true);
+    
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -38,6 +40,7 @@ const UserAccount = ({match}) => {
                     role: data.role,
                     error: ''
                 });
+                setLoading(false);
             }
         });
     };
@@ -90,7 +93,7 @@ const UserAccount = ({match}) => {
         }
     };
 
-    const updateUserInfo = () => email ? (
+    const updateUserInfo = () => (
         <div>
             <form>
                 <div className='row'>
@@ -216,10 +219,6 @@ const UserAccount = ({match}) => {
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
             </form>
         </div>
-    ) : (
-        <div>
-            <Loader />
-        </div>
     );
 
     const showError = () => (
@@ -239,7 +238,13 @@ const UserAccount = ({match}) => {
             <div className='container'>
                 {showError()}
                 {redirectSuccess()}
-                {updateUserInfo()}
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div>
+                        {updateUserInfo()}
+                    </div>
+                )}
             </div>
         </div>
     );

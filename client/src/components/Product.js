@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {readProduct} from '../api';
 
 import ProductCard from './ProductCard';
+import Loader from './Loader';
 
 const Product = ({match}) => {
     const [values, setValues] = useState({
@@ -9,6 +10,7 @@ const Product = ({match}) => {
         error: ''
     });
     const {product, error} = values;
+    const [loading, setLoading] = useState(true);
 
     const init = productId => {
         readProduct(productId).then(data => {
@@ -16,6 +18,7 @@ const Product = ({match}) => {
                 setValues({...values, error: data.error});
             } else {
                 setValues({...values, product: data});
+                setLoading(false);
             }
         });
     };
@@ -34,7 +37,11 @@ const Product = ({match}) => {
     return (
         <div className='container'>
             {showError()}
-            <ProductCard product={product} showViewProduct={false} />
+            {loading ? (
+                <Loader />
+            ) : (
+                <ProductCard product={product} showViewProduct={false} />
+            )}
         </div>
     );
 };

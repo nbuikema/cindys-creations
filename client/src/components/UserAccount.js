@@ -21,6 +21,8 @@ const UserAccount = (props) => {
         deleteSuccess: false
     });
     const {id, first_name, last_name, email, address, city, state, zip, role, createdAt, updatedAt, error, deleteSuccess} = values;
+    const [loading, setLoading] = useState(true);
+    
     const {token} = isAuthenticated();
 
     const init = userId => {
@@ -43,6 +45,7 @@ const UserAccount = (props) => {
                     updatedAt: userData.updatedAt,
                     error: ''
                 });
+                setLoading(false);
             }
         });
     };
@@ -80,7 +83,7 @@ const UserAccount = (props) => {
         }
     };
 
-    const userInfo = () => first_name ? (
+    const userInfo = () => (
         <div>
             <form>
                 <div className='row'>
@@ -159,10 +162,6 @@ const UserAccount = (props) => {
                 Delete Account
             </span>
         </div>
-    ) : (
-        <div>
-            <Loader />
-        </div>
     );
 
     const showError = () => (
@@ -182,7 +181,13 @@ const UserAccount = (props) => {
             <div className='container'>
                 {showError()}
                 {redirectDeleteSuccess()}
-                {userInfo()}
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div>
+                        {userInfo()}
+                    </div>
+                )}
             </div>
         </div>
     );
