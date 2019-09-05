@@ -11,6 +11,12 @@ label {
     font-size: 1.2rem;
 }
 
+.bg-light,
+.card {
+    background-color: transparent!important;
+    border: none;
+}
+
 .btn-primary {
     background-color: #FFFFFF;
     border: 3px solid #8C43FF;
@@ -42,4 +48,36 @@ label {
     background-color: #000000;
     color: #FFC107;
     border: 3px solid #000000;
+}
+
+.btn-info {
+    background-color: #8C43FF;
+    border: 3px solid #8C43FF;
+    border-radius: 290486px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 15px;
+}
+
+.btn-info:hover {
+    background-color: #FFFFFF;
+    color: #8C43FF;
+    border: 3px solid #8C43FF;
+}
+
+.btn-secondary {
+    background-color: #2FA535;
+    border: 3px solid #2FA535;
+    border-radius: 290486px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 15px;
+}
+
+.btn-secondary:hover {
+    background-color: #FFFFFF;
+    color: #2FA535;
+    border: 3px solid #2FA535;
 }

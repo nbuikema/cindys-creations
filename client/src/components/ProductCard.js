@@ -20,13 +20,13 @@ const ProductCard = ({product, changeCartSize, cartSize, showViewProduct = true,
     };
 
     const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
-        <Link className='btn btn-primary' to={`/product/${product._id}`}>
+        <Link className='btn btn-info mx-4' to={`/product/${product._id}`}>
             View Product
         </Link>
     );
 
     const showAddToCartBtn = (showAddToCart) => showAddToCart && ( 
-        <button onClick={addToCart} className='btn btn-info'>
+        <button onClick={addToCart} className='btn btn-secondary mx-4 my-2'>
             Add to Cart
         </button>
     );

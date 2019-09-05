@@ -83,9 +83,9 @@ const Products = () => {
             ) : (
                 <h2>Showing All Products</h2>
             )}
-            <div className='row'>
+            <div className='row products'>
                 {allProducts.map((product, i) => (
-                    <div key={i} className='col-xs-12 col-sm-6 col-lg-4'>
+                    <div key={i} className='col-xs-12 col-sm-6 col-lg-4 mb-3'>
                         <ProductCard product={product} />
                     </div>
                 ))}
@@ -115,7 +115,7 @@ const Products = () => {
                 {loading ? (
                     <Loader />
                 ) : (
-                    <div className='row'>
+                    <div className='row mt-3'>
                         <div className='col-sm-12 col-md-3'>
                             <a data-toggle='collapse' href='#collapseFilters' role='button' aria-expanded='false' aria-controls='collapseFilters'>
                                 <h2>Toggle Search Filters</h2>
@@ -139,7 +139,7 @@ const Products = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-sm-12 col-md-9'>
+                        <div className='col-sm-12 col-md-9 mt-3'>
                             {showProducts()}
                         </div>
                     </div>
