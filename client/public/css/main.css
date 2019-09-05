@@ -1,0 +1,45 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-color: #8C43FF77;
+    background-image: url("../imgs/background.png");
+}
+
+label {
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background-color: #FFFFFF;
+    border: 3px solid #8C43FF;
+    border-radius: 290486px;
+    color: #8C43FF;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 6px 18px;
+}
+
+.btn-primary:hover {
+    background-color: #8C43FF;
+    color: #FFFFFF;
+    border: 3px solid #8C43FF;
+}
+
+.btn-warning {
+    background-color: #FFC107;
+    border: 3px solid #FFC107;
+    border-radius: 290486px;
+    color: #000000;
+    font-weight: 400;
+    font-size: .8rem;
+    padding: 4px 12px;
+    margin-top: 20px;
+}
+
+.btn-warning:hover {
+    background-color: #000000;
+    color: #FFC107;
+    border: 3px solid #000000;
+}

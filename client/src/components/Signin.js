@@ -30,7 +30,7 @@ const Signin = () => {
     };
 
     const signinForm = () => (
-        <form>
+        <form className='mt-3'>
             <div className='form-group'>
                 <label htmlFor='email'>Email Address</label>
                 <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
@@ -39,10 +39,14 @@ const Signin = () => {
                 <label htmlFor='password'>Password</label>
                 <input onChange={onChange('password')} value={password} type='password' className='form-control' id='password' />
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
-            <Link className='btn btn-warning' to={`/password/forgot`}>
-                Forgot Password
-            </Link>
+            <div className='text-center'>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
+            </div>
+            <div className='text-center'>
+                <Link className='btn btn-warning' to={`/password/forgot`}>
+                    Forgot Password?
+                </Link>
+            </div>
         </form>
     );
 
@@ -61,6 +65,8 @@ const Signin = () => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center mt-3'>Welcome Back!</h1>
+                <h5 className='text-center'>Don't have an account? <Link to='/signup'>Sign Up Now</Link></h5>
                 {showError()}
                 {redirectSuccess()}
                 {signinForm()}

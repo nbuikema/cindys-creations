@@ -44,15 +44,15 @@ const Signup = () => {
     };
 
     const signupForm = () => (
-        <form>
+        <form className='mt-3'>
             <div className='row'>
-                <div className='col'>
+                <div className='col-sm-12 col-md-6'>
                     <div className='form-group'>
                         <label htmlFor='first_name'>First Name</label>
                         <input onChange={onChange('first_name')} value={first_name} type='text' className='form-control' id='first_name' aria-describedby='firstName' />
                     </div>
                 </div>
-                <div className='col'>
+                <div className='col-sm-12 col-md-6'>
                     <div className='form-group'>
                         <label htmlFor='last_name'>Last Name</label>
                         <input onChange={onChange('last_name')} value={last_name} type='text' className='form-control' id='last_name' aria-describedby='lastName' />
@@ -71,7 +71,9 @@ const Signup = () => {
                 <label htmlFor='confirm_password'>Confirm Password</label>
                 <input onChange={onChange('confirm_password')} value={confirm_password} type='password' className='form-control' id='confirm_password' />
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign Up</button>
+            <div className='text-center'>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign Up</button>
+            </div>
         </form>
     );
 
@@ -90,6 +92,8 @@ const Signup = () => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center mt-3'>Create Account</h1>
+                <h5 className='text-center'>Already have an account? <Link to='/signin'>Sign In Now</Link></h5>
                 {showError()}
                 {showSuccess()}
                 {signupForm()}

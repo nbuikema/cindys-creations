@@ -31,7 +31,9 @@ const ForgotPassword = () => {
                 <label htmlFor='email'>Email Address</label>
                 <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Reset Password</button>
+            <div className='text-center'>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Reset Password</button>
+            </div>
         </form>
     );
 
@@ -50,6 +52,7 @@ const ForgotPassword = () => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center mt-3'>Reset Password</h1>
                 {showError()}
                 {showSuccess()}
                 {signinForm()}

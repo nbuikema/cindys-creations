@@ -93,8 +93,8 @@ exports.forgotPassword = (req, res) => {
         {$set: req.body},
         {new: true},
         (err, user) => {
-            if(err) {
-                return res.status(400).json({error: 'You are not authorized to do that.'});
+            if(err || !user) {
+                return res.status(400).json({error: 'User not found.'});
             }
             const emailData = {
                 to: req.body.email,
