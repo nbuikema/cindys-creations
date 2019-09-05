@@ -85,7 +85,7 @@ const Products = () => {
             )}
             <div className='row'>
                 {allProducts.map((product, i) => (
-                    <div key={i} className='col-4'>
+                    <div key={i} className='col-xs-12 col-sm-6 col-lg-4'>
                         <ProductCard product={product} />
                     </div>
                 ))}
@@ -116,21 +116,30 @@ const Products = () => {
                     <Loader />
                 ) : (
                     <div className='row'>
-                        <div className='col-4'>
-                            <h2>Categories</h2>
-                            <ul>
-                                {categories.map((category, i) => (
-                                    <li key={i}>
-                                        <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
-                                        <label>{category.name}</label>
-                                    </li>
-                                ))}
-                            </ul>
+                        <div className='col-sm-12 col-md-3'>
+                            <a data-toggle='collapse' href='#collapseFilters' role='button' aria-expanded='false' aria-controls='collapseFilters'>
+                                <h2>Toggle Search Filters</h2>
+                            </a>
+                            <div className='collapse' id='collapseFilters'>
+                                <h2>Filter By</h2>
+                                <div className='ml-4'>
+                                    <h4>Name</h4>
+                                    <div className='form-group'>
+                                        <input onChange={onSearchChange} type='text' className='form-control' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
+                                    </div>
+                                    <h4>Category</h4>
+                                    <ul>
+                                        {categories.map((category, i) => (
+                                            <li key={i}>
+                                                <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
+                                                <label>{category.name}</label>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div className='col-8'>
-                        <div className='form-group'>
-                            <input onChange={onSearchChange} type='text' className='form-control' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products by name...' />
-                        </div>
+                        <div className='col-sm-12 col-md-9'>
                             {showProducts()}
                         </div>
                     </div>
