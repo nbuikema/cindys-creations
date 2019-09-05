@@ -40,7 +40,14 @@ const Product = ({match}) => {
             {loading ? (
                 <Loader />
             ) : (
-                <ProductCard product={product} showViewProduct={false} />
+                <div className='row'>
+                    <div className='col-sm-12 col-md-6 mt-3'>
+                        <ProductCard product={product} isClickable={false} />
+                    </div>
+                    <div className='col-sm-12 col-md-6 mt-3'>
+                        <h2 className='text-center'>Check Out These Other Products</h2>
+                    </div>
+                </div>
             )}
         </div>
     );

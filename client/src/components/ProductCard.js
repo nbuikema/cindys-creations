@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import moment from 'moment';
 import {Link, Redirect} from 'react-router-dom';
 import {readCart, addProductToCart, updateQuantity, removeProductFromCart} from '../api';
 const API = process.env.REACT_APP_API_URL;
 
-const ProductCard = ({product, changeCartSize, cartSize, showViewProduct = true, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false}) => {
+const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false, isClickable = true}) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [quantity, setQuantity] = useState(product.count);
 
@@ -19,14 +20,8 @@ const ProductCard = ({product, changeCartSize, cartSize, showViewProduct = true,
         }
     };
 
-    const showViewProductBtn = (showViewProduct) => showViewProduct && ( 
-        <Link className='btn btn-info mx-4' to={`/product/${product._id}`}>
-            View Product
-        </Link>
-    );
-
     const showAddToCartBtn = (showAddToCart) => showAddToCart && ( 
-        <button onClick={addToCart} className='btn btn-secondary mx-4 my-2'>
+        <button onClick={addToCart} className='btn btn-secondary mx-4'>
             Add to Cart
         </button>
     );
@@ -56,20 +51,42 @@ const ProductCard = ({product, changeCartSize, cartSize, showViewProduct = true,
         </button>
     );
 
-    return (
+    return isClickable ? (
+        <div>
+            <Link className='card text-center' to={`/product/${product._id}`}>
+                {redirectCart()}
+                {product._id !== undefined ? (
+                    <img src={`${API}/product/image/${product._id}`} alt={product.name} />
+                ) : null}
+                <div className='card-body'>
+                    <h5 className='card-title'>{product.name}</h5>
+                    <p className='card-text'>${product.price}</p>
+                </div>
+            </Link>
+            <div className='text-center'>
+                {showAddToCartBtn(showAddToCart)}
+                {showCartQuantityBtn(showCartQuantity)}
+                {showRemoveFromCartBtn(showRemoveFromCart)}
+            </div>
+        </div>
+    ) : (
         <div className='card'>
             {redirectCart()}
+            <h2 className='card-title text-center'>{product.name}</h2>
             {product._id !== undefined ? (
                 <img src={`${API}/product/image/${product._id}`} alt={product.name} />
             ) : null}
             <div className='card-body'>
-                <h5 className='card-title'>{product.name}</h5>
+                <p className='card-text'>${product.price}</p>
                 <p className='card-text'>{product.description}</p>
+                <p className='card-text'>Added {moment(product.createdAt).format('MMMM Do, YYYY')}</p>
+                <p className='card-text'>Last Updated {moment(product.updatedAt).format('MMMM Do, YYYY')}</p>
             </div>
-            {showViewProductBtn(showViewProduct)}
-            {showAddToCartBtn(showAddToCart)}
-            {showCartQuantityBtn(showCartQuantity)}
-            {showRemoveFromCartBtn(showRemoveFromCart)}
+            <div className='text-center'>
+                {showAddToCartBtn(showAddToCart)}
+                {showCartQuantityBtn(showCartQuantity)}
+                {showRemoveFromCartBtn(showRemoveFromCart)}
+            </div>
         </div>
     );
 };
