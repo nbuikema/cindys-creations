@@ -29,7 +29,7 @@ const Cart = () => {
     const showCart = () => cart.length > 0 ? (
         <div>
             <h2>{`You have ${cart.length} item(s) in your cart.`}<br /><Link to='/checkout'>Checkout</Link> or <Link to='/products'>Continue Shopping</Link></h2>
-            <h2>Need to start over?
+            <h2>Start Over?
                 <span onClick={onClick} className='btn btn-danger' style={{cursor: 'pointer'}}>
                     Empty Cart
                 </span>

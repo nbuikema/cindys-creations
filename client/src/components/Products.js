@@ -122,24 +122,27 @@ const Products = () => {
                             </a>
                             <div className='collapse d-lg-block' id='collapseFilters'>
                                 <h2>Filter By</h2>
-                                <div className='ml-4'>
-                                    <h4>Name</h4>
+                                <div className='ml-3'>
+                                    <h3>Name</h3>
                                     <div className='form-group'>
-                                        <input onChange={onSearchChange} type='text' className='form-control' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
+                                        <input onChange={onSearchChange} type='text' className='form-control ml-3' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
                                     </div>
-                                    <h4>Category</h4>
-                                    <ul>
+                                    <h3>Category</h3>
+                                    <ul className='list-group'>
                                         {categories.map((category, i) => (
-                                            <li key={i}>
-                                                <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='form-check-input' />
-                                                <label>{category.name}</label>
+                                            <li className='list-group-item ml-3' key={i}>
+                                                <span><h5 className='d-inline text-down'>{category.name}</h5></span>
+                                                <label className='switch'>
+                                                    <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='primary' />
+                                                    <span className='slider'></span>
+                                                </label>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-12 col-lg-9 mt-3'>
+                        <div className='col-md-12 col-lg-9'>
                             {showProducts()}
                         </div>
                     </div>
