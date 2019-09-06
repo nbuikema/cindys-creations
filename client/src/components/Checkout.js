@@ -61,9 +61,11 @@ const Checkout = () => {
     }, [cartSize]);
 
     const cartTotal = () => {
-        return cart.reduce((currentValue, nextValue) => {
-            return (currentValue + nextValue.count * nextValue.price).toFixed(2);
-        }, 0);
+        let price = 0;
+        cart.forEach(product => {
+            price += (product.count * product.price);
+        });
+        return parseFloat(Math.round((price) * 100) / 100).toFixed(2);
     };
 
     const showCart = () => cart.length > 0 ? (

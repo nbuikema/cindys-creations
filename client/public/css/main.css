@@ -82,6 +82,38 @@ label {
     border: 3px solid #2FA535;
 }
 
+.btn-danger {
+    background-color: #FFFFFF;
+    border: 3px solid #DC3545;
+    border-radius: 290486px;
+    color: #DC3545;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 15px;
+}
+
+.btn-danger:hover {
+    background-color: #DC3545;
+    color: #FFFFFF;
+    border: 3px solid #DC3545;
+}
+
+.btn-danger-inverse {
+    background-color: #DC3545;
+    border: 3px solid #DC3545;
+    border-radius: 290486px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 15px;
+}
+
+.btn-danger-inverse:hover {
+    background-color: #FFFFFF;
+    color: #DC3545;
+    border: 3px solid #DC3545;
+}
+
 .card, .card:hover {
     color: black;
     text-decoration: none;
@@ -148,4 +180,32 @@ input:checked + .slider:before {
 .text-down {
     position: relative;
     top: 2px;
+}
+
+.quantity {
+    max-width: 79px;
+    max-height: 42px;
+    border-radius: 290486px;
+    border: 3px solid #8C43FF;
+    color: #8C43FF;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 5px 15px;
+}
+
+.quantity-tag {
+    border-top-left-radius: 290486px;
+    border-bottom-left-radius: 290486px;
+    background-color: #8C43FF;
+    border: 3px solid #8C43FF;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 5px 15px;
+    max-width: 90px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
 }

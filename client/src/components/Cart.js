@@ -30,13 +30,17 @@ const Cart = () => {
         <div>
             <h2>{`You have ${cart.length} item(s) in your cart.`}<br /><Link to='/checkout'>Checkout</Link> or <Link to='/products'>Continue Shopping</Link></h2>
             <h2>Start Over?
-                <span onClick={onClick} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                <span onClick={onClick} className='btn btn-danger-inverse' style={{cursor: 'pointer'}}>
                     Empty Cart
                 </span>
             </h2>
-            {cart.map((product, i) => (
-                <ProductCard key={i} product={product} changeCartSize={changeCartSize} cartSize={cartSize} showAddToCart={false} showCartQuantity={true} showRemoveFromCart={true} />
-            ))}
+            <div className='row'>
+                {cart.map((product, i) => (
+                    <div key={i} className='col-xs-12 col-sm-6 col-md-4 col-xl-3 mb-4'>
+                        <ProductCard key={i} product={product} changeCartSize={changeCartSize} cartSize={cartSize} showAddToCart={false} showCartQuantity={true} showRemoveFromCart={true} />
+                    </div>
+                ))}
+            </div>
         </div>
     ) : '';
 

@@ -34,9 +34,9 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
     };
 
     const showCartQuantityBtn = (showCartQuantity) => showCartQuantity && (
-        <div className='input-group'>
-            <span className='input-group-text'>Adjust Quantity</span>
-            <input className='form-control' type='number' value={quantity} onChange={onChange(product._id)} />
+        <div className='input-group justify-content-center'>
+            <span className='input-group-text quantity-tag'>Quantity</span>
+            <input className='form-control quantity' type='number' value={quantity} onChange={onChange(product._id)} />
         </div>
     );
 
@@ -46,7 +46,7 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
     };
 
     const showRemoveFromCartBtn = showRemoveFromCart => showRemoveFromCart && (
-        <button onClick={() => onClick(product._id)} className='btn btn-danger'>
+        <button onClick={() => onClick(product._id)} className='btn btn-danger mt-2'>
             Remove Product
         </button>
     );
