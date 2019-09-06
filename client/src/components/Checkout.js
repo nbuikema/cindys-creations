@@ -70,15 +70,18 @@ const Checkout = () => {
 
     const showCart = () => cart.length > 0 ? (
         <div>
-            <h2>Order Summary</h2>
-            {cart.map((product, i) => (
-                <div key={i}>
-                    <hr />
-                    <p>{product.name}</p>
-                    <p>Quantity: {product.count}</p>
-                    <p>${product.price} each</p>
-                </div>
-            ))}
+            <h2 className='text-center'>Order Summary</h2>
+            <h5 className='text-center'>Need to make changes?<br /><Link to='/cart'>Go back to cart</Link></h5>
+            <div className='row'>
+                {cart.map((product, i) => (
+                    <div className='col-6 col-md-12' key={i}>
+                        <hr />
+                        <p>{product.name}</p>
+                        <p>Quantity: {product.count}</p>
+                        <p>${product.price} each</p>
+                    </div>
+                ))}
+            </div>
         </div>
     ) : '';
 
@@ -232,7 +235,8 @@ const Checkout = () => {
         <div>
             {clientToken !== null && cart.length > 0 ? (
                 <div>
-                    <DropIn options={{authorization: clientToken}} onInstance={instance => (values.instance = instance)} />
+                    <h5>Total To Be Charged: ${cartTotal()}</h5>
+                    <DropIn className='mt-0' options={{authorization: clientToken}} onInstance={instance => (values.instance = instance)} />
                     <button onClick={onClick} className='btn btn-success btn-block'>Confirm Purchase</button>
                 </div>
             ) : ''}
@@ -257,10 +261,9 @@ const Checkout = () => {
                 <Loader />
             ) : (
                 <div>
-                    <h2>Need to make changes? <Link to='/cart'>Go back to cart</Link></h2>
+                    <h1 className='text-center'>Checkout</h1>
                     <div className='row'>
-                        <div className='col-9'>
-                            <h2>Total To Be Charged: ${cartTotal()}</h2>
+                        <div className='col-sm-12 col-md-9 order-2 order-md-1'>
                             {showError()}
                             {success ? (
                                 <div>
@@ -268,14 +271,21 @@ const Checkout = () => {
                                 </div>
                             ) : (
                                 <div>
+                                    <h2>Shipping</h2>
                                     {showDelivery()}
+                                    <h2>Payment</h2>
                                     {showDropIn()}
                                 </div>
                             )}
                         </div>
-                        <div className='col-3'>
-                            {showCart()}
-                            {emptyCart()}
+                        <div className='col-sm-12 col-md-3 order-1 order-md-2'>
+                            <a className='d-md-none' data-toggle='collapse' href='#collapseOrder' role='button' aria-expanded='false' aria-controls='collapseOrder'>
+                                <h2>Toggle Order Summary</h2>
+                            </a>
+                            <div className='collapse d-md-block' id='collapseOrder'>
+                                {showCart()}
+                                {emptyCart()}
+                            </div>
                         </div>
                     </div>
                 </div>

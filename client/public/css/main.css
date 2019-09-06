@@ -82,33 +82,65 @@ label {
     border: 3px solid #2FA535;
 }
 
-.btn-danger {
+.btn-danger-inverse {
     background-color: #FFFFFF;
     border: 3px solid #DC3545;
     border-radius: 290486px;
     color: #DC3545;
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 3px 9px;
+}
+
+.btn-danger-inverse:hover {
+    background-color: #DC3545;
+    color: #FFFFFF;
+    border: 3px solid #DC3545;
+}
+
+.btn-success {
+    background-color: #2FA535;
+    border: 3px solid #2FA535;
+    border-radius: 290486px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 6px 18px;
+}
+
+.btn-success:hover {
+    background-color: #FFFFFF;
+    color: #2FA535;
+    border: 3px solid #2FA535;
+}
+
+.btn-primary-inverse {
+    background-color: #8C43FF;
+    border: 3px solid #8C43FF;
+    border-radius: 290486px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 6px 18px;
+}
+
+.btn-primary-inverse:hover {
+    background-color: #FFFFFF;
+    color: #8C43FF;
+    border: 3px solid #8C43FF;
+}
+
+.btn-danger {
+    background-color: #DC3545;
+    border: 3px solid #DC3545;
+    border-radius: 290486px;
+    color: #FFFFFF;
     font-weight: 500;
     font-size: 1.1rem;
     padding: 5px 15px;
 }
 
 .btn-danger:hover {
-    background-color: #DC3545;
-    color: #FFFFFF;
-    border: 3px solid #DC3545;
-}
-
-.btn-danger-inverse {
-    background-color: #DC3545;
-    border: 3px solid #DC3545;
-    border-radius: 290486px;
-    color: #FFFFFF;
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 5px 15px;
-}
-
-.btn-danger-inverse:hover {
     background-color: #FFFFFF;
     color: #DC3545;
     border: 3px solid #DC3545;
@@ -208,4 +240,8 @@ input:checked + .slider:before {
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {
     opacity: 1;
+}
+
+.braintree-placeholder {
+    display: none;
 }
