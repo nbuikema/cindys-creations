@@ -117,10 +117,10 @@ const Products = () => {
                 ) : (
                     <div className='row mt-3'>
                         <div className='col-md-12 col-lg-3'>
-                            <a data-toggle='collapse' href='#collapseFilters' role='button' aria-expanded='false' aria-controls='collapseFilters'>
+                            <a className='d-lg-none' data-toggle='collapse' href='#collapseFilters' role='button' aria-expanded='false' aria-controls='collapseFilters'>
                                 <h2>Toggle Search Filters</h2>
                             </a>
-                            <div className='collapse' id='collapseFilters'>
+                            <div className='collapse d-lg-block' id='collapseFilters'>
                                 <h2>Filter By</h2>
                                 <div className='ml-4'>
                                     <h4>Name</h4>
