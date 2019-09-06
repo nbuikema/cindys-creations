@@ -40,7 +40,7 @@ const Signin = () => {
                 <input onChange={onChange('password')} value={password} type='password' className='form-control' id='password' />
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Sign In</button>
             </div>
             <div className='text-center'>
                 <Link className='btn btn-warning' to={`/password/forgot`}>

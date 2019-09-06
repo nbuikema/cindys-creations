@@ -112,6 +112,7 @@ const Products = () => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center'>My Creations</h1>
                 {loading ? (
                     <Loader />
                 ) : (

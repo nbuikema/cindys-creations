@@ -104,77 +104,60 @@ const UserAccount = ({match}) => {
     };
 
     const updateUserInfo = () => (
-        <div>
+        <div className='mt-3'>
             <form>
                 <div className='row'>
                     <div className='col'>
                         <h2>User Information</h2>
                         <div className='form-group row'>
-                            <label htmlFor='email' className='col-sm-3 col-form-label'>Email</label>
+                            <label htmlFor='email' className='col-sm-3 col-form-label font-weight-bold'>Email</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('email')} type='text' className='form-control-plaintext' id='email' placeholder={email} />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='updatePassword' className='col-sm-3 col-form-label'>Password</label>
+                            <label htmlFor='updatePassword' className='col-sm-3 col-form-label font-weight-bold'>Password</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('updatePassword')} type='text' className='form-control-plaintext' id='updatePassword' placeholder='*************' />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='confirmPassword' className='col-sm-3 col-form-label'>Confirm Password</label>
+                            <label htmlFor='confirmPassword' className='col-sm-3 col-form-label font-weight-bold'>Confirm Password</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('confirmPassword')} type='text' className='form-control-plaintext' id='confirmPassword' placeholder='*************' />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='first_name' className='col-sm-3 col-form-label'>First Name</label>
+                            <label htmlFor='first_name' className='col-sm-3 col-form-label font-weight-bold'>First Name</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('first_name')} type='text' className='form-control-plaintext' id='first_name' placeholder={first_name} />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='last_name' className='col-sm-3 col-form-label'>Last Name</label>
+                            <label htmlFor='last_name' className='col-sm-3 col-form-label font-weight-bold'>Last Name</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('last_name')} type='text' className='form-control-plaintext' id='last_name' placeholder={last_name} />
-                            </div>
-                        </div>
-                        <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Access Group</label>
-                            <div className='col-sm-9'>
-                                <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
-                            </div>
-                        </div>
-                        <div className='form-group row'>
-                            <label htmlFor='adminCode' className='col-sm-3 col-form-label'>Admin Code</label>
-                            <div className='col-sm-9'>
-                                <div className='input-group'>
-                                    <input onChange={onChange('adminCode')} type='text' className='form-control-plaintext' id='adminCode' />
-                                    <span className='input-group-btn'>
-                                        <button onClick={checkAdminCode} type='submit' className='btn btn-primary'>Check Code</button>
-                                    </span>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div className='col'>
                         <h2>Delivery Information</h2>
                         <div className='form-group row'>
-                            <label htmlFor='address' className='col-sm-3 col-form-label'>Address</label>
+                            <label htmlFor='address' className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('address')} type='text' className='form-control-plaintext' id='address' placeholder={address} />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='city' className='col-sm-3 col-form-label'>City</label>
+                            <label htmlFor='city' className='col-sm-3 col-form-label font-weight-bold'>City</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('city')} type='text' className='form-control-plaintext' id='city' placeholder={city} />
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='state' className='col-sm-3 col-form-label'>State</label>
+                            <label htmlFor='state' className='col-sm-3 col-form-label font-weight-bold'>State</label>
                             <div className='col-sm-9'>
-                                <select onChange={onChange('state')} value={state} className='form-control-plaintext'>
+                                <select onChange={onChange('state')} value={state} className='form-control-plaintext state-dropdown'>
                                     <option>Select One</option>
                                     <option value='Alabama'>Alabama</option>
                                     <option value='Alaska'>Alaska</option>
@@ -231,7 +214,7 @@ const UserAccount = ({match}) => {
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label htmlFor='zip' className='col-sm-3 col-form-label'>Zip Code</label>
+                            <label htmlFor='zip' className='col-sm-3 col-form-label font-weight-bold'>Zip Code</label>
                             <div className='col-sm-9'>
                                 <input onChange={onChange('zip')} type='text' className='form-control-plaintext' id='zip' placeholder={zip} />
                             </div>
@@ -264,6 +247,7 @@ const UserAccount = ({match}) => {
                     <Loader />
                 ) : (
                     <div>
+                        <h1 className='text-center'>Update Account</h1>
                         {updateUserInfo()}
                     </div>
                 )}

@@ -84,70 +84,70 @@ const UserAccount = (props) => {
     };
 
     const userInfo = () => (
-        <div>
+        <div className='mt-3'>
             <form>
                 <div className='row'>
                     <div className='col'>
                         <h2>User Information</h2>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Email</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Email</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{email}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>First Name</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>First Name</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{first_name}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Last Name</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Last Name</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{last_name}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Access Group</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Access Group</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{role === 1 ? 'Admin' : 'Registered User'}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Signed Up</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Signed Up</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{moment(createdAt).fromNow()}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Last Updated</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Last Updated</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{moment(updatedAt).fromNow()}</span>
                             </div>
                         </div>
                     </div>
                     <div className='col'>
-                        <h2>Delivery Information</h2>
+                        <h2>Shipping Information</h2>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Address</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{address}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>City</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>City</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{city}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>State</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>State</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{state}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-3 col-form-label'>Zip Code</label>
+                            <label className='col-sm-3 col-form-label font-weight-bold'>Zip Code</label>
                             <div className='col-sm-9'>
                                 <span className='form-control-plaintext'>{zip}</span>
                             </div>
@@ -155,12 +155,12 @@ const UserAccount = (props) => {
                     </div>
                 </div>
             </form>
-            <Link className='btn btn-info' to={`/${id}/account/update`}>
+            <Link className='btn btn-primary-inverse' to={`/${id}/account/update`}>
                 Update Account
             </Link>
-            <span onClick={destroy} className='btn btn-danger' style={{cursor: 'pointer'}}>
+            <div onClick={destroy} className='btn btn-danger-inverse mt-1 float-right' style={{cursor: 'pointer'}}>
                 Delete Account
-            </span>
+            </div>
         </div>
     );
 
@@ -179,6 +179,7 @@ const UserAccount = (props) => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center'>Welcome, {first_name}!</h1>
                 {showError()}
                 {redirectDeleteSuccess()}
                 {loading ? (

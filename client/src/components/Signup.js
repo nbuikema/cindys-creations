@@ -72,7 +72,7 @@ const Signup = () => {
                 <input onChange={onChange('confirm_password')} value={confirm_password} type='password' className='form-control' id='confirm_password' />
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign Up</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Sign Up</button>
             </div>
         </form>
     );

@@ -30,7 +30,7 @@ const Cart = () => {
         <div>
             <div className='d-md-none'>
                 <h1 className='text-center'>My Cart</h1>
-                <h5 className='text-center'>{`There are ${cart.length} item(s) in your cart.`}</h5>
+                <h5 className='text-center'>{`${cart.length} item(s) in your cart`}</h5>
                 <div className='row'>
                     <div className='col-6'>
                         <h2>
@@ -58,7 +58,7 @@ const Cart = () => {
                     </div>
                     <div className='col-sm-12 col-md-6 order-1 order-md-2'>
                         <h1 className='text-center'>My Cart</h1>
-                        <h5 className='text-center'>{`There are ${cart.length} item(s) in your cart.`}</h5>
+                        <h5 className='text-center'>{`${cart.length} item(s) in your cart`}</h5>
                     </div>
                     <div className='col-sm-6 col-md-3 my-auto order-3 order-md-2'>
                         <h5 className='float-right'>
@@ -83,7 +83,10 @@ const Cart = () => {
     ) : '';
 
     const emptyCart = () => cart.length === 0 ? (
-        <h2>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h2>
+        <div>
+            <h1 className='text-center'>My Cart</h1>
+            <h5 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h5>
+        </div>
     ) : '';
 
     return (
