@@ -67,18 +67,18 @@ label {
 }
 
 .btn-secondary {
-    background-color: #2FA535;
+    background-color: #FFFFFF;
     border: 3px solid #2FA535;
     border-radius: 290486px;
-    color: #FFFFFF;
+    color: #2FA535;
     font-weight: 500;
     font-size: 1.1rem;
     padding: 5px 15px;
 }
 
 .btn-secondary:hover {
-    background-color: #FFFFFF;
-    color: #2FA535;
+    background-color: #2FA535;
+    color: #FFFFFF;
     border: 3px solid #2FA535;
 }
 
