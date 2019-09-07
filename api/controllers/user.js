@@ -80,7 +80,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
 };
 
 exports.readUserOrderHistory = (req, res) => {
-    Order.find({user: req.profile._id}).sort('-created').exec((err, orders) => {
+    Order.find({user: req.profile._id}).sort('-createdAt').exec((err, orders) => {
         if(err) {
             return res.status(400).json({error: 'Could not get user order history.'});
         }
