@@ -257,11 +257,11 @@ const Checkout = () => {
 
     return (
         <div className='container'>
+            <h1 className='text-center'>Checkout</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <div>
-                    <h1 className='text-center'>Checkout</h1>
                     <div className='row'>
                         <div className='col-sm-12 col-md-9 order-2 order-md-1'>
                             {showError()}
