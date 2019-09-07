@@ -158,7 +158,7 @@ const UserAccount = ({match}) => {
                             <label htmlFor='state' className='col-sm-3 col-form-label font-weight-bold'>State</label>
                             <div className='col-sm-9'>
                                 <select onChange={onChange('state')} value={state} className='form-control-plaintext state-dropdown'>
-                                    <option>Select One</option>
+                                    <option value=''>Select One</option>
                                     <option value='Alabama'>Alabama</option>
                                     <option value='Alaska'>Alaska</option>
                                     <option value='Arizona'>Arizona</option>

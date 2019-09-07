@@ -132,12 +132,13 @@ const ManageProducts = () => {
 
     return (
         <div className='container'>
+            <h1 className='text-center'>Manage Products</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <div>
                     <h2>New Product</h2>
-                    <Link className='btn btn-primary' to='/product/create'>
+                    <Link className='btn btn-primary-inverse' to='/product/create'>
                         Create Product
                     </Link>
                     <div className='row'>

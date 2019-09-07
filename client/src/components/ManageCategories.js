@@ -63,9 +63,9 @@ const ManageCategories = () => {
         <div>
             <h2>New Category</h2>
             <div className='input-group'>
-                <input onChange={onChange} type='text' className='form-control-plaintext' value={name} />
+                <input onChange={onChange} type='text' className='form-control mr-3' value={name} />
                 <span className='input-group-btn'>
-                    <button onClick={onSubmit} type='submit' className='btn btn-primary'>Create Category</button>
+                    <button onClick={onSubmit} type='submit' className='btn btn-info'>Create Category</button>
                 </span>
             </div>
         </div>
@@ -79,6 +79,7 @@ const ManageCategories = () => {
 
     return (
         <div className='container'>
+            <h1 className='text-center'>Manage Categories</h1>
             {loading ? (
                 <Loader />
             ) : (
@@ -88,7 +89,7 @@ const ManageCategories = () => {
                     <div>
                         <h2>Categories</h2>
                         {categories.map((category, i) => (
-                            <div key={i} className='input-group'>
+                            <div key={i} className='input-group mb-2'>
                                 <div className='form-control-plaintext' key={i}>{category.name}</div>
                                 <span className='input-group-btn'>
                                     <button onClick={() => destroy(category._id)} type='submit' className='btn btn-danger'>Delete Category</button>
