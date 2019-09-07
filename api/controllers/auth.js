@@ -100,7 +100,12 @@ exports.forgotPassword = (req, res) => {
                 to: req.body.email,
                 from: 'noreply@cindyscreations.com',
                 subject: `Password Reset Instructions`,
-                html: `<p>You have recently requested a new password. To reset your password, sign in with the temporary password ${tempPassword} and visit Update Account to change your password.</p>`
+                html: `
+                    <p>You have recently requested a new password.</p>
+                    <p>To reset your password, sign in with the temporary password</p>
+                    <p><strong>${tempPassword}</strong></p>
+                    <p>and visit Update Account to change your password.</p>
+                `
             };
             sgMail.send(emailData);
             user.password = undefined;

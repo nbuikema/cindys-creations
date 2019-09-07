@@ -25,7 +25,6 @@ exports.createOrder = (req, res) => {
                     <p>Delivery address: ${order.address}, ${order.city}, ${order.state}, ${order.zip}</p>
                     <p>Total products: ${order.products.length}</p>
                     <p>Total cost: $${order.total_price}</p>
-                    <p>Please login to view the full details of this order.</p>
                 `
             };
         });
@@ -40,7 +39,6 @@ exports.createOrder = (req, res) => {
             <p>Delivery address: ${order.address}, ${order.city}, ${order.state}, ${order.zip}</p>
             <p>Total products: ${order.products.length}</p>
             <p>Total cost: $${order.total_price}</p>
-            <p>Please login to view the full details of this order.</p>
             `
         };
     }
