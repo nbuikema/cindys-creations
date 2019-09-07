@@ -6,10 +6,10 @@
     width: 100vw;
     height: 5px;
     background-color: #8C43FF;
-    animation: fill 1s linear infinite;
+    animation: fill 2s linear infinite;
 }
 
 @keyframes fill {
     0% { right: 100%; }
-    100% { right: 0; }
+    100% { right: -100%; }
 }
