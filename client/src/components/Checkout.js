@@ -85,10 +85,6 @@ const Checkout = () => {
         </div>
     ) : '';
 
-    const emptyCart = () => cart.length === 0 ? (
-        <h2>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h2>
-    ) : '';
-
     const onClick = () => {
         if(email.length > 0 && address.length > 0 && city.length > 0 && state.length > 0 && zip.length > 0) {
             let nonce;
@@ -258,36 +254,41 @@ const Checkout = () => {
     return (
         <div className='container'>
             <h1 className='text-center'>Checkout</h1>
-            {loading ? (
-                <Loader />
+            {cart.length === 0 ? (
+                <h5 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h5>
             ) : (
                 <div>
-                    <div className='row'>
-                        <div className='col-sm-12 col-md-9 order-2 order-md-1'>
-                            {showError()}
-                            {success ? (
-                                <div>
-                                    {showSuccess()}
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <div>
+                            <div className='row'>
+                                <div className='col-sm-12 col-md-9 order-2 order-md-1'>
+                                    {showError()}
+                                    {success ? (
+                                        <div>
+                                            {showSuccess()}
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <h2>Shipping</h2>
+                                            {showDelivery()}
+                                            <h2>Payment</h2>
+                                            {showDropIn()}
+                                        </div>
+                                    )}
                                 </div>
-                            ) : (
-                                <div>
-                                    <h2>Shipping</h2>
-                                    {showDelivery()}
-                                    <h2>Payment</h2>
-                                    {showDropIn()}
+                                <div className='col-sm-12 col-md-3 order-1 order-md-2'>
+                                    <a className='d-md-none' data-toggle='collapse' href='#collapseOrder' role='button' aria-expanded='false' aria-controls='collapseOrder'>
+                                        <h2>Toggle Order Summary</h2>
+                                    </a>
+                                    <div className='collapse d-md-block' id='collapseOrder'>
+                                        {showCart()}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                        <div className='col-sm-12 col-md-3 order-1 order-md-2'>
-                            <a className='d-md-none' data-toggle='collapse' href='#collapseOrder' role='button' aria-expanded='false' aria-controls='collapseOrder'>
-                                <h2>Toggle Order Summary</h2>
-                            </a>
-                            <div className='collapse d-md-block' id='collapseOrder'>
-                                {showCart()}
-                                {emptyCart()}
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             )}
         </div>
