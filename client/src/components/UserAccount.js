@@ -88,7 +88,7 @@ const UserAccount = (props) => {
             <form>
                 <div className='row'>
                     <div className='col'>
-                        <h2>User Information</h2>
+                        <h2>User Info</h2>
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Email</label>
                             <div className='col-sm-9'>
@@ -127,7 +127,7 @@ const UserAccount = (props) => {
                         </div>
                     </div>
                     <div className='col'>
-                        <h2>Shipping Information</h2>
+                        <h2>Shipping Info</h2>
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
@@ -180,6 +180,9 @@ const UserAccount = (props) => {
         <div>
             <div className='container'>
                 <h1 className='text-center'>Welcome, {first_name}!</h1>
+                {!address || !city || !state || !zip ? (
+                    <h5 className='text-center'>Want faster checkout? <Link to={`/${id}/account/update`}>Add Shipping Info</Link></h5>
+                ) : null}
                 {showError()}
                 {redirectDeleteSuccess()}
                 {loading ? (

@@ -108,7 +108,7 @@ const UserAccount = ({match}) => {
             <form>
                 <div className='row'>
                     <div className='col'>
-                        <h2>User Information</h2>
+                        <h2>User Info</h2>
                         <div className='form-group row'>
                             <label htmlFor='email' className='col-sm-3 col-form-label font-weight-bold'>Email</label>
                             <div className='col-sm-9'>
@@ -141,7 +141,7 @@ const UserAccount = ({match}) => {
                         </div>
                     </div>
                     <div className='col'>
-                        <h2>Delivery Information</h2>
+                        <h2>Delivery Info</h2>
                         <div className='form-group row'>
                             <label htmlFor='address' className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
