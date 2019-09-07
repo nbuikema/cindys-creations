@@ -229,13 +229,13 @@ const UserAccount = ({match}) => {
     return (
         <div>
             <div className='container'>
+                <h1 className='text-center'>Update Account</h1>
                 {showError()}
                 {redirectSuccess()}
                 {loading ? (
                     <Loader />
                 ) : (
                     <div>
-                        <h1 className='text-center'>Update Account</h1>
                         {updateUserInfo()}
                     </div>
                 )}

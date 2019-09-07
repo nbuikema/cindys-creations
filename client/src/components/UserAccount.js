@@ -179,16 +179,16 @@ const UserAccount = (props) => {
     return (
         <div>
             <div className='container'>
-                <h1 className='text-center'>Welcome, {first_name}!</h1>
-                {!address || !city || !state || !zip ? (
-                    <h5 className='text-center'>Want faster checkout? <Link to={`/${id}/account/update`}>Add Shipping Info</Link></h5>
-                ) : null}
+                <h1 className='text-center'>My Account</h1>
                 {showError()}
                 {redirectDeleteSuccess()}
                 {loading ? (
                     <Loader />
                 ) : (
                     <div>
+                        {!address || !city || !state || !zip ? (
+                            <h5 className='text-center'>Want faster checkout? <Link to={`/${id}/account/update`}>Add Shipping Info</Link></h5>
+                        ) : null}
                         {userInfo()}
                     </div>
                 )}
