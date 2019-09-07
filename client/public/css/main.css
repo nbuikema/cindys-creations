@@ -249,3 +249,7 @@ input[type=number]::-webkit-outer-spin-button {
 .state-dropdown {
     height: 100%;
 }
+
+hr {
+    border-top: 2px solid black;
+}

@@ -42,36 +42,76 @@ const UserOrders = (props) => {
 
     return (
         <div className='container'>
+            <h1 className='text-center mb-3'>Order History</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <div>
                     {showError()}
-                    <h2>Order History</h2>
                     {orderHistory.map((order, i) => (
                     <div key={i}>
-                        <div className='form-control-plaintext'>Order #{order._id}</div>
-                        <ul>
-                            <li>Status: {order.status}</li>
-                            <li>Created {moment(order.createdAt).fromNow()}</li>
-                            <li>Last updated {moment(order.updatedAt).fromNow()}</li>
-                            <li>Email: {order.email}</li>
-                            <li>Address: {order.address}, {order.city}, {order.state}, {order.zip}</li>
-                            <li>Products: 
-                                <ul>
-                                    {order.products.map((product, i) => (
-                                        <li key={i}>
-                                            <ul>
-                                                <li>Name: {product.name}</li>
-                                                <li>Quantity: {product.count}</li>
-                                                <li>Price: ${product.price} per unit</li>
-                                            </ul>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                            <li>Total Charged: ${order.total_price}</li>
-                        </ul>
+                        <div className='row mb-3'>
+                            <div className='col-sm-12 col-md-6'>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Order #</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{order._id}</span>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Status</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{order.status}</span>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Placed</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{moment(order.createdAt).fromNow()} ({moment(order.createdAt).format('MMMM Do, YYYY')})</span>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Last Updated</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{moment(order.updatedAt).fromNow()} ({moment(order.updatedAt).format('MMMM Do, YYYY')})</span>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Email</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{order.email}</span>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Address</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>{order.address}, {order.city}, {order.state}, {order.zip}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-sm-12 col-md-6'>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Products Ordered</label>
+                                    <div className='col-sm-9'>
+                                        <div className='form-control-plaintext'>
+                                            {order.products.map((product, i) => (
+                                                <div className='mb-3' key={i}>
+                                                    <div>Name: {product.name}</div>
+                                                    <div>Quantity: {product.count}</div>
+                                                    <div>Price: ${parseFloat(Math.round((product.price) * 100) / 100).toFixed(2)} per unit</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                    <label className='col-sm-3 col-form-label font-weight-bold'>Total Charged</label>
+                                    <div className='col-sm-9'>
+                                        <span className='form-control-plaintext'>${parseFloat(Math.round((order.total_price) * 100) / 100).toFixed(2)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <hr />
                     </div>
                     ))}

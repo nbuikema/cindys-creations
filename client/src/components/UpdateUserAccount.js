@@ -16,11 +16,10 @@ const UserAccount = ({match}) => {
         state: '',
         zip: '',
         role: '',
-        adminCode: '',
         error: '',
         success: false
     });
-    const {first_name, last_name, email, updatePassword, confirmPassword, address, city, state, zip, role, adminCode, error, success} = values;
+    const {first_name, last_name, email, updatePassword, confirmPassword, address, city, state, zip, role, error, success} = values;
     const [loading, setLoading] = useState(true);
     
     const {token} = isAuthenticated();
@@ -90,17 +89,6 @@ const UserAccount = ({match}) => {
                 }
             }
         );
-    };
-
-    const checkAdminCode = event => {
-        event.preventDefault();
-        const ADMIN_CODE = process.env.REACT_APP_ADMIN_CODE;
-        if(adminCode === ADMIN_CODE) {
-            setValues({
-                ...values,
-                role: 1
-            });
-        }
     };
 
     const updateUserInfo = () => (
