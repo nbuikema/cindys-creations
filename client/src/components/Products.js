@@ -66,6 +66,7 @@ const Products = () => {
         } else {
             loadFilteredResults(userFilters.filters);
         }
+        console.log(userFilters);
     };
 
     const loadFilteredResults = newFilters => {
@@ -116,7 +117,7 @@ const Products = () => {
                     console.log(data.error);
                 } else {
                     const clearFilters = {...userFilters};
-                    clearFilters.filters = [];
+                    clearFilters.filters.category = [];
                     setUserFilters(clearFilters);
                     toggleFiltersOff();
                     setSearchTerm(search);
