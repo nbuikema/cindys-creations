@@ -81,7 +81,7 @@ const Products = () => {
 
     const showProducts = () => (
         <div>
-            {selectedCategories.length > 0 || searching ? (
+            {selectedCategories.length > 0 || searchTerm.length != 0 ? (
                 <h2>Showing Found Products</h2>
             ) : (
                 <h2>Showing All Products</h2>
@@ -119,6 +119,7 @@ const Products = () => {
                     const clearFilters = {...userFilters};
                     clearFilters.filters.category = [];
                     setUserFilters(clearFilters);
+                    setSelectedCategories([]);
                     toggleFiltersOff();
                     setSearchTerm(search);
                     setSearching(true);
