@@ -2,6 +2,12 @@ import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {signout, isAuthenticated, numItemsInCart} from '../api';
 
+const isActive = (history, path) => {
+    if(history.location.pathname === path) {
+        return {borderBottom: '2px solid #FFFFFF'};
+    }
+}
+
 const Navbar = ({history}) => (
     <div className='sticky-top'>
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
@@ -19,17 +25,17 @@ const Navbar = ({history}) => (
                 <div className='collapse navbar-collapse' id='navbarToggler'>
                     <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/products'>
+                            <Link className='nav-link' to='/products' style={isActive(history, '/products')}>
                                 Products
                             </Link>
                         </li>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/contact'>
+                            <Link className='nav-link' to='/contact' style={isActive(history, '/contact')}>
                                 Contact
                             </Link>
                         </li>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/about'>
+                            <Link className='nav-link' to='/about' style={isActive(history, '/about')}>
                                 About
                             </Link>
                         </li>
@@ -38,17 +44,17 @@ const Navbar = ({history}) => (
                     {!isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                <Link className='nav-link' to='/cart'>
+                                <Link className='nav-link' to='/cart' style={isActive(history, '/cart')}>
                                     My Cart <sup>{numItemsInCart()}</sup>
                                 </Link>
                             </li>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                <Link className='nav-link' to='/signup'>
+                                <Link className='nav-link' to='/signup' style={isActive(history, '/signup')}>
                                     Sign Up
                                 </Link>
                             </li>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                <Link className='nav-link' to='/signin'>
+                                <Link className='nav-link' to='/signin' style={isActive(history, '/signin')}>
                                     Sign In
                                 </Link>
                             </li>
@@ -56,7 +62,7 @@ const Navbar = ({history}) => (
                     )} {isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                <Link className='nav-link' to='/cart'>
+                                <Link className='nav-link' to='/cart' style={isActive(history, '/cart')}>
                                     My Cart <sup>{numItemsInCart()}</sup>
                                 </Link>
                             </li>
