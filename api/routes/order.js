@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {orderById, createOrder, readAllOrders, ordersByEmail, readOrdersByEmail, readOrderStatusValues, updateOrderStatus} = require('../controllers/order');
+const {orderById, createOrder, readAllOrders, ordersByEmail, readOrdersByEmail, readOrderStatusValues, updateOrderStatus, deleteOrder} = require('../controllers/order');
 const {isSignedIn, isAuth, isAdmin} = require('../controllers/auth');
 const {userById, addOrderToUserHistory} = require('../controllers/user');
 

@@ -541,3 +541,18 @@ export const contact = (data) => {
             console.log(err);
         });
 };
+
+export const deleteOrder = (orderId, userId, token) => {
+    return fetch(`${API}/order/delete/${orderId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
