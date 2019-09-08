@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {isAuthenticated, readAllOrders, readOrderStatusValues, updateOrderStatus, readOrdersByEmail} from '../api';
+import {isAuthenticated, readAllOrders, readOrderStatusValues, updateOrderStatus, readOrdersByEmail, deleteOrder} from '../api';
 import moment from 'moment';
 
 import Loader from './Loader';
@@ -74,6 +74,19 @@ const ManageOrders = () => {
                     console.log(data.error);
                 } else {
                     setOrders(data);
+                }
+            });
+        }
+    };
+
+    const destroy = orderId => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this order? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteOrder(orderId, user._id, token).then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                } else {
+                    initOrders();
                 }
             });
         }
@@ -155,6 +168,9 @@ const ManageOrders = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div onClick={() => destroy(order._id)} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                            Delete Order
                         </div>
                         <hr />
                     </div>
