@@ -3,7 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {signout, isAuthenticated, numItemsInCart} from '../api';
 
 const Navbar = ({history}) => (
-    <div>
+    <div className='sticky-top'>
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <div className='container'>
                 <ul className='navbar-nav mr-auto mt-lg-0'>

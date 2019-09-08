@@ -66,7 +66,6 @@ const Products = () => {
         } else {
             loadFilteredResults(userFilters.filters);
         }
-        console.log(userFilters);
     };
 
     const loadFilteredResults = newFilters => {
