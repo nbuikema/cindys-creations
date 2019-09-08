@@ -30,7 +30,7 @@ const Navbar = ({history}) => (
                         </li>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                             <Link className='nav-link' to='/about'>
-                                About Me
+                                About
                             </Link>
                         </li>
                     </ul>
