@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const sgMail = require('@sendgrid/mail');
 const User = require('../models/user');
 const {Order} = require('../models/order');
 
@@ -87,3 +88,17 @@ exports.readUserOrderHistory = (req, res) => {
         res.json(orders);
     });
 };
+
+exports.contact = (req, res) => {
+    const emailData = {
+        to: 'devnickbusiness@gmail.com',
+        from: 'noreply@cindyscreations.com',
+        subject: `New Contact`,
+        html: `
+            <p>Name: ${req.body.name}</p>
+            <p>Email: ${req.body.email}</p>
+            <p>Message: ${req.body.message}</p>
+        `
+    };
+    sgMail.send(emailData);
+}
