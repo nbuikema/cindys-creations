@@ -2,6 +2,29 @@ html {
     overflow-y: scroll;
 }
 
+.home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../imgs/home.jpg");
+    background-size: cover;
+    background-position-x: 30%;
+    background-position-y: 60%;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.home-heading {
+    position: absolute;
+    top: 20vh;
+    text-align: center;
+    width: 100vw;
+    opacity: 1;
+    font-size: 5rem;
+}
+
 body {
     background-color: #8C43FF44;
     background-image: url("../imgs/background.png");
