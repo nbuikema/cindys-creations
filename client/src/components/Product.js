@@ -35,17 +35,15 @@ const Product = ({match}) => {
     );
 
     return (
-        <div className='container'>
+        <div className='container mb-3'>
             {showError()}
             {loading ? (
                 <Loader />
             ) : (
                 <div className='row'>
+                    <div className='col-sm-0 col-md-3'></div>
                     <div className='col-sm-12 col-md-6 mt-3'>
                         <ProductCard product={product} isClickable={false} />
-                    </div>
-                    <div className='col-sm-12 col-md-6 mt-3'>
-                        <h2 className='text-center'>Check Out These Other Products</h2>
                     </div>
                 </div>
             )}

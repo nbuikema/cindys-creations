@@ -72,7 +72,7 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
     ) : (
         <div className='card'>
             {redirectCart()}
-            <h2 className='card-title text-center'>{product.name}</h2>
+            <h1 className='card-title text-center mb-3'>{product.name}</h1>
             {product._id !== undefined ? (
                 <img src={`${API}/product/image/${product._id}`} alt={product.name} />
             ) : null}

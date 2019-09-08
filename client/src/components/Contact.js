@@ -40,7 +40,7 @@ const Contact = () => {
                 <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Get In Touch</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse mb-3'>Get In Touch</button>
             </div>
         </form>
     );

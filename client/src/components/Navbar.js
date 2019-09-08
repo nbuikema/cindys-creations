@@ -4,7 +4,7 @@ import {signout, isAuthenticated, numItemsInCart} from '../api';
 
 const Navbar = ({history}) => (
     <div>
-        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+        <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <div className='container'>
                 <ul className='navbar-nav mr-auto mt-lg-0'>
                     <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
@@ -13,7 +13,7 @@ const Navbar = ({history}) => (
                         </Link>
                     </li>
                 </ul>
-                <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggler' aria-controls='navbarToggler' aria-expanded='false' aria-label='Toggle Navigation'>
+                <button className='navbar-toggler custom-toggler' type='button' data-toggle='collapse' data-target='#navbarToggler' aria-controls='navbarToggler' aria-expanded='false' aria-label='Toggle Navigation'>
                     <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarToggler'>
@@ -34,6 +34,7 @@ const Navbar = ({history}) => (
                             </Link>
                         </li>
                     </ul>
+                    <div className='dropdown-divider'></div>
                     {!isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>

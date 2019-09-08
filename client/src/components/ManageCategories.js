@@ -60,8 +60,8 @@ const ManageCategories = () => {
     };
 
     const newCategoryForm = () => (
-        <div>
-            <h2>New Category</h2>
+        <div className='mt-3'>
+            <h3>New Category</h3>
             <div className='input-group'>
                 <input onChange={onChange} type='text' className='form-control mr-3' value={name} />
                 <span className='input-group-btn'>
@@ -79,15 +79,15 @@ const ManageCategories = () => {
 
     return (
         <div className='container'>
-            <h1 className='text-center'>Manage Categories</h1>
+            <h1 className='text-center mt-3'>Manage Categories</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <div>
                     {showError()}
                     {newCategoryForm()}
-                    <div>
-                        <h2>Categories</h2>
+                    <div className='mt-3'>
+                        <h3>Categories</h3>
                         {categories.map((category, i) => (
                             <div key={i} className='input-group mb-2'>
                                 <div className='form-control-plaintext' key={i}>{category.name}</div>

@@ -81,11 +81,6 @@ const Products = () => {
 
     const showProducts = () => (
         <div>
-            {selectedCategories.length > 0 || searchTerm.length != 0 ? (
-                <h2>Showing Found Products</h2>
-            ) : (
-                <h2>Showing All Products</h2>
-            )}
             <div className='row products'>
                 {allProducts.map((product, i) => (
                     <div key={i} className='col-xs-12 col-sm-6 col-md-4 col-xl-3 mb-4'>
@@ -131,28 +126,33 @@ const Products = () => {
 
     return (
         <div>
-            <div className='container'>
-                <h1 className='text-center'>My Creations</h1>
+            <div className='container mb-3'>
+                <h1 className='text-center mt-3'>My Creations</h1>
+                {selectedCategories.length > 0 || searchTerm.length != 0 ? (
+                    <h4 className={`text-center ${loading ? 'd-none' : ''}`}>Showing Found Products</h4>
+                ) : (
+                    <h4 className={`text-center ${loading ? 'd-none' : ''}`}>Showing All Products</h4>
+                )}
                 {loading ? (
                     <Loader />
                 ) : (
                     <div className='row mt-3'>
                         <div className='col-md-12 col-lg-3'>
                             <a className='d-lg-none' data-toggle='collapse' href='#collapseFilters' role='button' aria-expanded='false' aria-controls='collapseFilters'>
-                                <h2>Toggle Search Filters</h2>
+                                <h4 className='text-center'>Toggle Search Filters</h4>
                             </a>
                             <div className='collapse d-lg-block' id='collapseFilters'>
-                                <h2>Filter By</h2>
+                                <h4>Filter By</h4>
                                 <div className='ml-3'>
-                                    <h3>Name</h3>
-                                    <div className='form-group'>
+                                    <h5>Name</h5>
+                                    <div className='form-group mr-3'>
                                         <input onChange={onSearchChange} value={searchTerm} type='text' className='form-control ml-3' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
                                     </div>
-                                    <h3>Category</h3>
+                                    <h5>Category</h5>
                                     <ul className='list-group'>
                                         {categories.map((category, i) => (
                                             <li className='list-group-item ml-3' key={i}>
-                                                <span><h5 className='d-inline text-down'>{category.name}</h5></span>
+                                                <span><h6 className='d-inline text-down'>{category.name}</h6></span>
                                                 <label className='switch'>
                                                     <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} name='filters' type='checkbox' className='primary' />
                                                     <span className='slider'></span>
@@ -163,7 +163,7 @@ const Products = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-12 col-lg-9'>
+                        <div className='col-md-12 col-lg-9 mt-3'>
                             {showProducts()}
                         </div>
                     </div>

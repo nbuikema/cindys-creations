@@ -129,7 +129,7 @@ const UserAccount = ({match}) => {
                         </div>
                     </div>
                     <div className='col'>
-                        <h2>Delivery Info</h2>
+                        <h2>Shipping Info</h2>
                         <div className='form-group row'>
                             <label htmlFor='address' className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
@@ -209,7 +209,7 @@ const UserAccount = ({match}) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary mb-3'>Save Changes</button>
             </form>
         </div>
     );
@@ -229,7 +229,7 @@ const UserAccount = ({match}) => {
     return (
         <div>
             <div className='container'>
-                <h1 className='text-center'>Update Account</h1>
+                <h1 className='text-center mt-3'>Update Account</h1>
                 {showError()}
                 {redirectSuccess()}
                 {loading ? (

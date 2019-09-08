@@ -3,7 +3,39 @@ html {
 }
 
 .navbar {
-    z-index: 9999;
+    z-index: 9998;
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: #FFFFFF;
+}
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.bg-dark,
+.dropdown-menu {
+    background-color: #8C43FF!important;
+    border: none;
+}
+
+.nav-link,
+.navbar-brand,
+.dropdown-item {
+    color: #FFFFFF!important;
+}
+
+.nav-link {
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.dropdown-item:hover {
+    background-color: #FFFFFF!important;
+    color: #8C43FF!important;
 }
 
 .home {
@@ -22,7 +54,7 @@ html {
 
 .home-heading {
     position: absolute;
-    top: 20vh;
+    top: 12vh;
     text-align: center;
     width: 100vw;
     opacity: 1;
@@ -38,7 +70,6 @@ label {
     font-size: 1.2rem;
 }
 
-.bg-light,
 .card {
     background-color: transparent!important;
     border: none;
@@ -94,18 +125,18 @@ label {
 }
 
 .btn-secondary {
-    background-color: #FFFFFF;
+    background-color: #2FA535;
     border: 3px solid #2FA535;
     border-radius: 290486px;
-    color: #2FA535;
+    color: #FFFFFF;
     font-weight: 500;
     font-size: 1.1rem;
     padding: 5px 15px;
 }
 
 .btn-secondary:hover {
-    background-color: #2FA535;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #2FA535;
     border: 3px solid #2FA535;
 }
 
@@ -186,7 +217,6 @@ label {
 
 .switch {
     position: relative;
-    display: inline-block;
     width: 50px;
     height: 28px;
     float: right;
@@ -243,7 +273,7 @@ input:checked + .slider:before {
 
 .quantity {
     max-width: 79px;
-    max-height: 42px;
+    max-height: 43px;
     border-radius: 290486px;
     border: 3px solid #8C43FF;
     color: #8C43FF;
@@ -283,4 +313,28 @@ hr {
 
 .about-img {
     width: 100%;
+}
+
+.loader {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 5px;
+    background-color: #FFFFFF;
+    animation: fill 2s linear infinite;
+}
+
+@keyframes fill {
+    0% { right: 100%; }
+    100% { right: -100%; }
+}
+
+.about-lg {
+    font-size: 1.6rem;
+}
+
+.about-sm {
+    font-size: 1.3rem;
 }

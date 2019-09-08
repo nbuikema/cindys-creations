@@ -70,15 +70,15 @@ const Checkout = () => {
 
     const showCart = () => cart.length > 0 ? (
         <div>
-            <h2 className='text-center'>Order Summary</h2>
+            <h3 className='text-center'>Order Summary</h3>
             <h5 className='text-center'>Need to make changes?<br /><Link to='/cart'>Go back to cart</Link></h5>
             <div className='row'>
                 {cart.map((product, i) => (
                     <div className='col-6 col-md-12' key={i}>
-                        <hr />
                         <p>{product.name}</p>
                         <p>Quantity: {product.count}</p>
                         <p>${product.price} each</p>
+                        <hr />
                     </div>
                 ))}
             </div>
@@ -151,13 +151,13 @@ const Checkout = () => {
                     <input onChange={onChange('address')} value={address} type='text' className='form-control' id='address' aria-describedby='address' required />
                 </div>
                 <div className='row'>
-                    <div className='col'>
+                    <div className='col-sm-12 col-md-4'>
                         <div className='form-group'>
                             <label htmlFor='city'>City</label>
                             <input onChange={onChange('city')} value={city} type='text' className='form-control' id='city' aria-describedby='city' required />
                         </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-sm-12 col-md-4'>
                         <div className='form-group'>
                             <label htmlFor='state'>State</label>
                             <select onChange={onChange('state')} value={state} className='form-control' required>
@@ -216,7 +216,7 @@ const Checkout = () => {
                             </select>
                         </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-sm-12 col-md-4'>
                         <div className='form-group'>
                             <label htmlFor='zip'>Zip Code</label>
                             <input onChange={onChange('zip')} value={zip} type='text' className='form-control' id='zip' aria-describedby='zip' required />
@@ -233,7 +233,7 @@ const Checkout = () => {
                 <div>
                     <h5>Total To Be Charged: ${cartTotal()}</h5>
                     <DropIn className='mt-0' options={{authorization: clientToken}} onInstance={instance => (values.instance = instance)} />
-                    <button onClick={onClick} className='btn btn-success btn-block'>Confirm Purchase</button>
+                    <button onClick={onClick} className='btn btn-success btn-block mb-3'>Confirm Purchase</button>
                 </div>
             ) : ''}
         </div>
@@ -253,7 +253,7 @@ const Checkout = () => {
 
     return (
         <div className='container'>
-            <h1 className='text-center'>Checkout</h1>
+            <h1 className='text-center mt-3'>Checkout</h1>
             {cart.length === 0 ? (
                 <h5 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h5>
             ) : (
@@ -271,16 +271,16 @@ const Checkout = () => {
                                         </div>
                                     ) : (
                                         <div>
-                                            <h2>Shipping</h2>
+                                            <h3>Shipping</h3>
                                             {showDelivery()}
-                                            <h2>Payment</h2>
+                                            <h3>Payment</h3>
                                             {showDropIn()}
                                         </div>
                                     )}
                                 </div>
                                 <div className='col-sm-12 col-md-3 order-1 order-md-2'>
                                     <a className='d-md-none' data-toggle='collapse' href='#collapseOrder' role='button' aria-expanded='false' aria-controls='collapseOrder'>
-                                        <h2>Toggle Order Summary</h2>
+                                        <h4 className='text-center'>Toggle Order Summary</h4>
                                     </a>
                                     <div className='collapse d-md-block' id='collapseOrder'>
                                         {showCart()}

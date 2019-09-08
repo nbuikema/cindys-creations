@@ -88,7 +88,7 @@ const UserAccount = (props) => {
             <form>
                 <div className='row'>
                     <div className='col'>
-                        <h2>User Info</h2>
+                        <h3>User Info</h3>
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Email</label>
                             <div className='col-sm-9'>
@@ -127,7 +127,7 @@ const UserAccount = (props) => {
                         </div>
                     </div>
                     <div className='col'>
-                        <h2>Shipping Info</h2>
+                        <h3>Shipping Info</h3>
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Address</label>
                             <div className='col-sm-9'>
@@ -155,7 +155,7 @@ const UserAccount = (props) => {
                     </div>
                 </div>
             </form>
-            <Link className='btn btn-primary-inverse' to={`/${id}/account/update`}>
+            <Link className='btn btn-primary-inverse mb-3' to={`/${id}/account/update`}>
                 Update Account
             </Link>
             <div onClick={destroy} className='btn btn-danger-inverse mt-1 float-right' style={{cursor: 'pointer'}}>
@@ -179,7 +179,7 @@ const UserAccount = (props) => {
     return (
         <div>
             <div className='container'>
-                <h1 className='text-center'>My Account</h1>
+                <h1 className='text-center mt-3'>My Account</h1>
                 {showError()}
                 {redirectDeleteSuccess()}
                 {loading ? (
@@ -187,7 +187,7 @@ const UserAccount = (props) => {
                 ) : (
                     <div>
                         {!address || !city || !state || !zip ? (
-                            <h5 className='text-center'>Want faster checkout? <Link to={`/${id}/account/update`}>Add Shipping Info</Link></h5>
+                            <h4 className='text-center'>Want faster checkout? <Link to={`/${id}/account/update`}>Add Shipping Info</Link></h4>
                         ) : null}
                         {userInfo()}
                     </div>

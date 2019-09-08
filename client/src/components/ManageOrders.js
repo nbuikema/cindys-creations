@@ -40,7 +40,7 @@ const ManageOrders = () => {
 
     const showNumberOfOrders = () => (
         <div>
-            <h5 className='text-center'>Current Number of Orders: {orders.length}</h5>
+            <h4 className='text-center'>Current Number of Orders: {orders.length}</h4>
         </div>
     );
 
@@ -81,12 +81,12 @@ const ManageOrders = () => {
 
     return (
         <div className='container'>
-            <h1 className='text-center mb-3'>Manage Orders</h1>
+            <h1 className='text-center mt-3'>Manage Orders</h1>
             {showNumberOfOrders()}
             {loading ? (
                 <Loader />
             ) : (
-                <div>
+                <div className='mt-3'>
                     <div className='form-group'>
                         <h5>Search Orders by Email</h5>
                         <input onChange={onSearchChange} type='text' className='form-control' id='searchOrders' aria-describedby='searchOrders' placeholder='Search orders...' />

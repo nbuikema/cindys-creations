@@ -43,7 +43,7 @@ const Signin = () => {
                 <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Sign In</button>
             </div>
             <div className='text-center'>
-                <Link className='btn btn-warning' to={`/password/forgot`}>
+                <Link className='btn btn-warning mb-3' to={`/password/forgot`}>
                     Forgot Password?
                 </Link>
             </div>
@@ -66,7 +66,7 @@ const Signin = () => {
         <div>
             <div className='container'>
                 <h1 className='text-center mt-3'>Welcome Back!</h1>
-                <h5 className='text-center'>Don't have an account? <Link to='/signup'>Sign Up Now</Link></h5>
+                <h4 className='text-center'>Don't have an account? <Link to='/signup'>Sign Up Now</Link></h4>
                 {showError()}
                 {redirectSuccess()}
                 {signinForm()}

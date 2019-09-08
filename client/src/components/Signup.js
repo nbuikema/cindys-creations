@@ -72,7 +72,7 @@ const Signup = () => {
                 <input onChange={onChange('confirm_password')} value={confirm_password} type='password' className='form-control' id='confirm_password' />
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Sign Up</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse mb-3'>Sign Up</button>
             </div>
         </form>
     );
@@ -93,7 +93,7 @@ const Signup = () => {
         <div>
             <div className='container'>
                 <h1 className='text-center mt-3'>Create Account</h1>
-                <h5 className='text-center'>Already have an account? <Link to='/signin'>Sign In Now</Link></h5>
+                <h4 className='text-center'>Already have an account? <Link to='/signin'>Sign In Now</Link></h4>
                 {showError()}
                 {showSuccess()}
                 {signupForm()}

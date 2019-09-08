@@ -42,7 +42,7 @@ const UserOrders = (props) => {
 
     return (
         <div className='container'>
-            <h1 className='text-center mb-3'>Order History</h1>
+            <h1 className='text-center my-3'>Order History</h1>
             {loading ? (
                 <Loader />
             ) : (

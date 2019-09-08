@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                 <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Reset Password</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary mb-3'>Reset Password</button>
             </div>
         </form>
     );

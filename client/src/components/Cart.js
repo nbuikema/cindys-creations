@@ -29,15 +29,15 @@ const Cart = () => {
     const showCart = () => cart.length > 0 ? (
         <div>
             <div className='d-md-none'>
-                <h1 className='text-center'>My Cart</h1>
-                <h5 className='text-center'>{`${cart.length} item(s) in your cart`}</h5>
+                <h1 className='text-center mt-3'>My Cart</h1>
+                <h4 className='text-center'>{`${cart.length} item(s) in your cart`}</h4>
                 <div className='row'>
-                    <div className='col-6'>
+                    <div className='col-6 mt-3'>
                         <h2>
                             <Link className='btn btn-success' to='/checkout'>Checkout</Link>
                         </h2>
                     </div>
-                    <div className='col-6'>
+                    <div className='col-6 mt-3'>
                         <h5 className='float-right'>
                             <div className='row justify-content-center'>
                                 Start Over?
@@ -57,8 +57,8 @@ const Cart = () => {
                         </h2>
                     </div>
                     <div className='col-sm-12 col-md-6 order-1 order-md-2'>
-                        <h1 className='text-center'>My Cart</h1>
-                        <h5 className='text-center'>{`${cart.length} item(s) in your cart`}</h5>
+                        <h1 className='text-center mt-3'>My Cart</h1>
+                        <h4 className='text-center'>{`${cart.length} item(s) in your cart`}</h4>
                     </div>
                     <div className='col-sm-6 col-md-3 my-auto order-3 order-md-2'>
                         <h5 className='float-right'>
@@ -85,7 +85,7 @@ const Cart = () => {
     const emptyCart = () => cart.length === 0 ? (
         <div>
             <h1 className='text-center'>My Cart</h1>
-            <h5 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h5>
+            <h4 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h4>
         </div>
     ) : '';
 
