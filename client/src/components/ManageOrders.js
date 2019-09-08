@@ -169,7 +169,7 @@ const ManageOrders = () => {
                                 </div>
                             </div>
                         </div>
-                        <div onClick={() => destroy(order._id)} className='btn btn-danger' style={{cursor: 'pointer'}}>
+                        <div onClick={() => destroy(order._id)} className='btn btn-danger-inverse' style={{cursor: 'pointer'}}>
                             Delete Order
                         </div>
                         <hr />
