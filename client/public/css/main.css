@@ -81,12 +81,13 @@ html {
 }
 
 .home-heading {
+    font-family: 'Dancing Script', cursive;
     position: absolute;
     top: 12vh;
     text-align: center;
     width: 100vw;
     opacity: 1;
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 body {
