@@ -1,3 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.hello {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+}
+
+.hello-sm {
+    text-align: center;
+}
+
+.about-lg {
+    font-size: 1.5rem;
+    position: relative;
+    top: -40px;
+}
+
+.about-sm {
+    font-size: 1.2rem;
+    position: relative;
+    top: -20px;
+}
+
 html {
     overflow-y: scroll;
 }
@@ -329,12 +357,4 @@ hr {
 @keyframes fill {
     0% { right: 100%; }
     100% { right: -100%; }
-}
-
-.about-lg {
-    font-size: 1.6rem;
-}
-
-.about-sm {
-    font-size: 1.3rem;
 }

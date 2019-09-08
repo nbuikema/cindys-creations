@@ -128,7 +128,7 @@ const Products = () => {
             <div className='container mb-3'>
                 <h1 className='text-center mt-3'>My Creations</h1>
                 {selectedCategories.length > 0 || searchTerm.length != 0 ? (
-                    <h4 className={`text-center ${loading ? 'd-none' : ''}`}>Showing Found Products</h4>
+                    <h4 className={`text-center ${loading ? 'd-none' : ''}`}>Showing {`${allProducts.length}`} Found Products</h4>
                 ) : (
                     <h4 className={`text-center ${loading ? 'd-none' : ''}`}>Showing All Products</h4>
                 )}
