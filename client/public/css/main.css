@@ -2,6 +2,10 @@ html {
     overflow-y: scroll;
 }
 
+.navbar {
+    z-index: 9999;
+}
+
 .home {
     position: absolute;
     top: 0;

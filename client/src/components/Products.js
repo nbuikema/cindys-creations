@@ -14,6 +14,7 @@ const Products = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searching, setSearching] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -58,6 +59,7 @@ const Products = () => {
     const handleFilters = (filters, filterBy) => {
         const newFilters = {...userFilters};
         newFilters.filters[filterBy] = filters;
+        setSearchTerm('');
         setUserFilters(newFilters);
         if(newFilters.filters.category.length === 0) {
             initProducts();
@@ -93,8 +95,19 @@ const Products = () => {
         </div>
     );
 
+    const toggleFiltersOff = () => {
+        const filtersArray = document.getElementsByName('filters');
+        filtersArray.forEach(filter => {
+            if(filter.checked) {
+                filter.checked = false;
+            }
+        })
+    }
+
     const onSearchChange = event => {
-        if(event.target.value.length === 0) {
+        const search = event.target.value;
+        if(search.length === 0) {
+            setSearchTerm('');
             setSearching(false);
             initProducts();
         } else {
@@ -102,6 +115,11 @@ const Products = () => {
                 if(data.error) {
                     console.log(data.error);
                 } else {
+                    const clearFilters = {...userFilters};
+                    clearFilters.filters = [];
+                    setUserFilters(clearFilters);
+                    toggleFiltersOff();
+                    setSearchTerm(search);
                     setSearching(true);
                     setAllProducts(data);
                 }
@@ -126,7 +144,7 @@ const Products = () => {
                                 <div className='ml-3'>
                                     <h3>Name</h3>
                                     <div className='form-group'>
-                                        <input onChange={onSearchChange} type='text' className='form-control ml-3' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
+                                        <input onChange={onSearchChange} value={searchTerm} type='text' className='form-control ml-3' id='searchProducts' aria-describedby='searchProducts' placeholder='Search products...' />
                                     </div>
                                     <h3>Category</h3>
                                     <ul className='list-group'>
@@ -134,7 +152,7 @@ const Products = () => {
                                             <li className='list-group-item ml-3' key={i}>
                                                 <span><h5 className='d-inline text-down'>{category.name}</h5></span>
                                                 <label className='switch'>
-                                                    <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} type='checkbox' className='primary' />
+                                                    <input onChange={handleToggle(category._id)} value={selectedCategories.indexOf(category._id === -1)} name='filters' type='checkbox' className='primary' />
                                                     <span className='slider'></span>
                                                 </label>
                                             </li>
