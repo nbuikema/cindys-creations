@@ -102,3 +102,15 @@ exports.ordersByEmail = (req, res, next, query) => {
 exports.readOrdersByEmail = (req, res) => {
     return res.json(req.orders);
 };
+
+exports.deleteOrder = (req, res) => {
+    Order.findOneAndDelete(
+        {_id: req.order._id},
+        (err, order) => {
+            if(err) {
+                return res.status(400).json({error: 'You are not authorized to do that.'});
+            }
+            return res.json(`Order: "${order._id}" has been deleted.`);
+        }
+    );
+};

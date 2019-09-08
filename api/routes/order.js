@@ -10,6 +10,7 @@ router.get('/orders/read/all/:userId', isSignedIn, isAuth, isAdmin, readAllOrder
 router.get('/orders/read/email/:orderEmail', readOrdersByEmail);
 router.get('/order/status/values/:userId', isSignedIn, isAuth, isAdmin, readOrderStatusValues);
 router.put('/order/status/update/:orderId/:userId', isSignedIn, isAuth, isAdmin, updateOrderStatus);
+router.delete('/order/delete/:orderId/:userId', isSignedIn, isAuth, isAdmin, deleteOrder);
 
 router.param('userId', userById);
 router.param('orderId', orderById);
