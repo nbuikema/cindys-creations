@@ -255,7 +255,7 @@ const Checkout = () => {
         <div className='container'>
             <h1 className='text-center mt-3'>Checkout</h1>
             {cart.length === 0 ? (
-                <h5 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h5>
+                <h4 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h4>
             ) : (
                 <div>
                     {loading ? (

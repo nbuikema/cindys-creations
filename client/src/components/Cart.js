@@ -84,7 +84,7 @@ const Cart = () => {
 
     const emptyCart = () => cart.length === 0 ? (
         <div>
-            <h1 className='text-center'>My Cart</h1>
+            <h1 className='text-center mt-3'>My Cart</h1>
             <h4 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h4>
         </div>
     ) : '';
