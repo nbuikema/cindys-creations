@@ -253,3 +253,7 @@ input[type=number]::-webkit-outer-spin-button {
 hr {
     border-top: 2px solid black;
 }
+
+.about-img {
+    width: 100%;
+}

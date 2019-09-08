@@ -28,6 +28,11 @@ const Navbar = ({history}) => (
                                 Contact
                             </Link>
                         </li>
+                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                            <Link className='nav-link' to='/about'>
+                                About Me
+                            </Link>
+                        </li>
                     </ul>
                     {!isAuthenticated() && (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
