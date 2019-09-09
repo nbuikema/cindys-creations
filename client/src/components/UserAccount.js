@@ -116,13 +116,13 @@ const UserAccount = (props) => {
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Signed Up</label>
                             <div className='col-sm-9'>
-                                <span className='form-control-plaintext'>{moment(createdAt).fromNow()}</span>
+                                <span className='form-control-plaintext'>{moment(createdAt).format('MMMM Do, YYYY')}</span>
                             </div>
                         </div>
                         <div className='form-group row'>
                             <label className='col-sm-3 col-form-label font-weight-bold'>Last Updated</label>
                             <div className='col-sm-9'>
-                                <span className='form-control-plaintext'>{moment(updatedAt).fromNow()}</span>
+                                <span className='form-control-plaintext'>{moment(updatedAt).format('MMMM Do, YYYY')}</span>
                             </div>
                         </div>
                     </div>
@@ -155,9 +155,11 @@ const UserAccount = (props) => {
                     </div>
                 </div>
             </form>
-            <Link className='btn btn-primary-inverse mb-3' to={`/${id}/account/update`}>
-                Update Account
-            </Link>
+            <div className='text-center'>
+                <Link className='btn btn-primary-inverse mb-3' to={`/${id}/account/update`}>
+                    Update Account
+                </Link>
+            </div>
             <div onClick={destroy} className='btn btn-danger-inverse mt-1 float-right' style={{cursor: 'pointer'}}>
                 Delete Account
             </div>

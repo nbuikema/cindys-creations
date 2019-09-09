@@ -209,7 +209,9 @@ const UserAccount = ({match}) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary mb-3'>Save Changes</button>
+                <div className='text-center'>
+                    <button onClick={onSubmit} type='submit' className='btn btn-primary mb-3'>Save Changes</button>
+                </div>
             </form>
         </div>
     );
