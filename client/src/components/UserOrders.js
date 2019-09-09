@@ -98,7 +98,7 @@ const UserOrders = (props) => {
                                                 <div className='mb-3' key={i}>
                                                     <div>Name: {product.name}</div>
                                                     <div>Quantity: {product.count}</div>
-                                                    <div>Price: ${parseFloat(Math.round((product.price) * 100) / 100).toFixed(2)} per unit</div>
+                                                    <div>Price: ${parseFloat(Math.round((product.price) * 100) / 100).toFixed(2)} each</div>
                                                 </div>
                                             ))}
                                         </div>
