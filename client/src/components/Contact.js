@@ -48,7 +48,7 @@ const Contact = () => {
     return (
         <div className='container'>
             <h1 className='text-center mt-3'>Contact Me</h1>
-            <h5 className='text-center'>cindytailors@gmail.com</h5>
+            <h4 className='text-center'>cindytailors@gmail.com</h4>
             {contactForm()}
         </div>
     );
