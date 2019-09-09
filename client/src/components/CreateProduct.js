@@ -104,12 +104,15 @@ const CreateProduct = () => {
                     $<input onChange={onChange('price')} type='number' className='form-control' id='price' aria-describedby='price' value={price} />
                 </div>
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Create Product</button>
+            <div className='text-center mb-3'>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Create Product</button>
+            </div>
         </form>
     );
 
     return (
         <div className='container'>
+            <h1 className='text-center mt-3'>Create Product</h1>
             {showError()}
             {redirectSuccess()}
             {createProductForm()}

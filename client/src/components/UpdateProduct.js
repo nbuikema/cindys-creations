@@ -126,12 +126,15 @@ const UpdateProduct = ({match}) => {
                     $<input onChange={onChange('price')} type='number' className='form-control' id='price' aria-describedby='price' placeholder={price} />
                 </div>
             </div>
-            <button onClick={onSubmit} type='submit' className='btn btn-primary'>Save Changes</button>
+            <div className='text-center mb-3'>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Save Changes</button>
+            </div>
         </form>
     );
 
     return (
         <div className='container'>
+            <h1 className='text-center mt-3'>Update Product</h1>
             {showError()}
             {redirectSuccess()}
             {loading ? (
