@@ -57,8 +57,18 @@ html {
     border-bottom: 2px solid transparent;
 }
 
-.nav-link:hover {
+.nav-link:after {
+    display: block;
+    content: '';
     border-bottom: 2px solid #FFFFFF;
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    top: 10px;
+}
+
+.nav-link:hover:after {
+    transform: scaleX(1);
 }
 
 .dropdown-item:hover {
