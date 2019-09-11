@@ -118,6 +118,10 @@ html {
     font-size: 6rem;
 }
 
+.hh-lg {
+    font-size: 10rem;
+}
+
 body {
     background-color: #8C43FF44;
     background-image: url("../imgs/background.png");
