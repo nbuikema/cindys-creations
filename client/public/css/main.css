@@ -53,6 +53,12 @@ html {
     color: #FFFFFF!important;
 }
 
+.dropdown-toggle:after {
+    margin-left: 0;
+    vertical-align: 0;
+    border: 0;
+}
+
 .nav-link {
     border-bottom: 2px solid transparent;
 }
@@ -67,7 +73,8 @@ html {
     top: 10px;
 }
 
-.nav-link:hover:after {
+.nav-link:hover:after,
+.dropdown-toggle:hover:after {
     transform: scaleX(1);
 }
 
@@ -368,4 +375,8 @@ hr {
 @keyframes fill {
     0% { right: 100%; }
     100% { right: -100%; }
+}
+
+.dropdown-caret {
+    font-size: 14px;
 }

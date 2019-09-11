@@ -68,7 +68,7 @@ const Navbar = ({history}) => (
                             </li>
                             <li className='nav-item dropdown' data-toggle='collapse' data-target='.navbar-collapse.show'>
                                 <Link className='nav-link dropdown-toggle' to='/' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                                    {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name}`}
+                                    {`${isAuthenticated().user.first_name} ${isAuthenticated().user.last_name} `} <span className='dropdown-caret'>&#9660;</span>
                                 </Link>
                                 <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
                                     <Link className='dropdown-item' to={`/${isAuthenticated().user._id}/account`}>
