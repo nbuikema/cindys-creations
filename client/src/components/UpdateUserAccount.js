@@ -106,13 +106,13 @@ const UserAccount = ({match}) => {
                         <div className='form-group row'>
                             <label htmlFor='updatePassword' className='col-sm-3 col-form-label font-weight-bold'>Password</label>
                             <div className='col-sm-9'>
-                                <input onChange={onChange('updatePassword')} type='text' className='form-control-plaintext' id='updatePassword' placeholder='*************' />
+                                <input onChange={onChange('updatePassword')} type='password' className='form-control-plaintext' id='updatePassword' placeholder='*************' />
                             </div>
                         </div>
                         <div className='form-group row'>
                             <label htmlFor='confirmPassword' className='col-sm-3 col-form-label font-weight-bold'>Confirm Password</label>
                             <div className='col-sm-9'>
-                                <input onChange={onChange('confirmPassword')} type='text' className='form-control-plaintext' id='confirmPassword' placeholder='*************' />
+                                <input onChange={onChange('confirmPassword')} type='password' className='form-control-plaintext' id='confirmPassword' placeholder='*************' />
                             </div>
                         </div>
                         <div className='form-group row'>

@@ -18,7 +18,7 @@ exports.createOrder = (req, res) => {
             emailData = {
                 to: 'creationsfromcindy@gmail.com',
                 from: 'noreply@cindyscreations.com',
-                subject: `A new order has been placed`,
+                subject: `New Order Placed`,
                 html: `
                     <p>Customer name: ${user.first_name} ${user.last_name}</p>
                     <p>Customer email: ${order.email}</p>
@@ -32,7 +32,7 @@ exports.createOrder = (req, res) => {
         emailData = {
             to: 'creationsfromcindy@gmail.com',
             from: 'noreply@cindyscreations.com',
-            subject: `A new order has been placed`,
+            subject: `New Order Placed`,
             html: `
             <p>Customer name: Unregistered User</p>
             <p>Customer email: ${order.email}</p>
