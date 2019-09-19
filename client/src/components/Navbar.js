@@ -45,7 +45,7 @@ const Navbar = ({history}) => (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                                 <Link className='nav-link' to='/cart' style={isActive(history, '/cart')}>
-                                    <i class="fas fa-shopping-cart"></i> <sup>{numItemsInCart()}</sup>
+                                    <i className="fas fa-shopping-cart"></i> <sup>{numItemsInCart()}</sup>
                                 </Link>
                             </li>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
@@ -63,7 +63,7 @@ const Navbar = ({history}) => (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                                 <Link className='nav-link' to='/cart' style={isActive(history, '/cart')}>
-                                    <i class="fas fa-shopping-cart"></i> <sup>{numItemsInCart()}</sup>
+                                    <i className="fas fa-shopping-cart"></i> <sup>{numItemsInCart()}</sup>
                                 </Link>
                             </li>
                             <li className='nav-item dropdown' data-toggle='collapse' data-target='.navbar-collapse.show'>

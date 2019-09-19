@@ -88,6 +88,11 @@ html {
     transform: scaleX(1);
 }
 
+.navbar-dark .navbar-nav .nav-link,
+.dropdown-item {
+    text-align: center;
+}
+
 .dropdown-item:hover {
     background-color: #FFFFFF!important;
     color: #8C43FF!important;
