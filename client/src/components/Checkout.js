@@ -117,7 +117,7 @@ const Checkout = () => {
                                 city: '',
                                 state: '',
                                 zip: '',
-                                success: response.success
+                                success: true
                             });
                             clearCart(() => {
                                 changeCartSize();
@@ -254,30 +254,28 @@ const Checkout = () => {
     return (
         <div className='container'>
             <h1 className='text-center mt-3'>Checkout</h1>
-            {cart.length === 0 ? (
-                <h4 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h4>
+            {loading ? (
+                <Loader />
             ) : (
                 <div>
-                    {loading ? (
-                        <Loader />
+                    {cart.length === 0 && !success ? (
+                        <h4 className='text-center'>Your cart is empty. <Link to='/products'>Continue Shopping</Link></h4>
                     ) : (
                         <div>
                             <div className='row'>
-                                <div className='col-sm-12 col-md-9 order-2 order-md-1'>
-                                    {showError()}
-                                    {success ? (
-                                        <div>
-                                            {showSuccess()}
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            <h3>Shipping</h3>
-                                            {showDelivery()}
-                                            <h3>Payment</h3>
-                                            {showDropIn()}
-                                        </div>
-                                    )}
-                                </div>
+                                {showError()}
+                                {success ? (
+                                    <div className='col-12'>
+                                        {showSuccess()}
+                                    </div>
+                                ) : (
+                                    <div className='col-sm-12 col-md-9 order-2 order-md-1'>
+                                        <h3>Shipping</h3>
+                                        {showDelivery()}
+                                        <h3>Payment</h3>
+                                        {showDropIn()}
+                                    </div>
+                                )}
                                 <div className='col-sm-12 col-md-3 order-1 order-md-2'>
                                     <a className='d-md-none' data-toggle='collapse' href='#collapseOrder' role='button' aria-expanded='false' aria-controls='collapseOrder'>
                                         <h4 className='text-center'>Toggle Order Summary</h4>
