@@ -414,3 +414,13 @@ hr {
         left: -27px;
     }
 }
+
+.navlogo {
+    width: 60px;
+    height: 40px;
+}
+
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}

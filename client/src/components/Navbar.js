@@ -2,6 +2,8 @@ import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {signout, isAuthenticated, numItemsInCart} from '../api';
 
+import logo from '../imgs/logo.png';
+
 const isActive = (history, path) => {
     if(history.location.pathname === path) {
         return {borderBottom: '2px solid #FFFFFF'};
@@ -15,7 +17,7 @@ const Navbar = ({history}) => (
                 <ul className='navbar-nav mr-auto mt-lg-0'>
                     <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                         <Link className='navbar-brand' to='/'>
-                            Cindy's Creations
+                            <img className='navlogo' src={logo} alt='' />
                         </Link>
                     </li>
                 </ul>
