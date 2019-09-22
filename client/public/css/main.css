@@ -444,6 +444,10 @@ hr {
     background: #39d;
 }
 
+.orange-ribbon {
+    background: #e82;
+}
+
 .hide-ribbon {
     overflow-x: hidden;
     overflow-y: hidden;

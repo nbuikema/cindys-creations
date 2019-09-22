@@ -52,13 +52,19 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
         </button>
     );
 
+    const showRibbons = () => {
+        if(moment(product.createdAt).format('MMMM Do, YYYY') > previousDate) {
+            return <div className='corner-ribbon blue-ribbon'>New!</div>;
+        } else if(moment(product.updatedAt).format('MMMM Do, YYYY') > previousDate) {
+            return <div className='corner-ribbon orange-ribbon'>Updated!</div>;
+        }
+    };
+
     return isClickable ? (
         <div className='h-100 hide-ribbon'>
             <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
-                {moment(product.createdAt).format('MMMM Do, YYYY') > previousDate ? (
-                    <div className='corner-ribbon blue-ribbon'>New!</div>
-                ) : null}
+                {showRibbons()}
                 {product._id !== undefined ? (
                     <img src={`${API}/product/image/${product._id}`} alt={product.name} />
                 ) : null}
