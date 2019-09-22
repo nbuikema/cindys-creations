@@ -80,7 +80,7 @@ const Products = () => {
 
     const showProducts = () => (
         <div>
-            <div className='row products'>
+            <div className='row'>
                 {allProducts.map((product, i) => (
                     <div key={i} className='col-xs-12 col-sm-6 col-md-4 col-xl-3 mb-4'>
                         <ProductCard product={product} />

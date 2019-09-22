@@ -52,8 +52,8 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
     );
 
     return isClickable ? (
-        <div>
-            <Link className='card text-center' to={`/product/${product._id}`}>
+        <div className='h-100'>
+            <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
                 {product._id !== undefined ? (
                     <img src={`${API}/product/image/${product._id}`} alt={product.name} />
@@ -62,12 +62,12 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
                     <h5 className='card-title'>{product.name}</h5>
                     <p className='card-text'>${product.price}</p>
                 </div>
+                <div className='text-center'>
+                    {showAddToCartBtn(showAddToCart)}
+                    {showCartQuantityBtn(showCartQuantity)}
+                    {showRemoveFromCartBtn(showRemoveFromCart)}
+                </div>
             </Link>
-            <div className='text-center'>
-                {showAddToCartBtn(showAddToCart)}
-                {showCartQuantityBtn(showCartQuantity)}
-                {showRemoveFromCartBtn(showRemoveFromCart)}
-            </div>
         </div>
     ) : (
         <div className='card'>
