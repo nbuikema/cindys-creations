@@ -52,10 +52,10 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
     );
 
     return isClickable ? (
-        <div className='h-100'>
-            <div className='corner-ribbon'>New</div>
+        <div className='h-100 hide-ribbon'>
             <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
+                <div className='corner-ribbon'>New</div>
                 {product._id !== undefined ? (
                     <img src={`${API}/product/image/${product._id}`} alt={product.name} />
                 ) : null}
