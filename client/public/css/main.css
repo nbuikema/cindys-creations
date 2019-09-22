@@ -426,7 +426,6 @@ hr {
 }
 
 .corner-ribbon{
-    background: #39d;
     width: 150px;
     text-align: center;
     line-height: 40px;
@@ -439,6 +438,10 @@ hr {
     box-shadow: 0 0 3px rgba(0,0,0,.3);
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.blue-ribbon {
+    background: #39d;
 }
 
 .hide-ribbon {

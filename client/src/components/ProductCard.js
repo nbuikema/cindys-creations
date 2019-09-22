@@ -7,6 +7,7 @@ const API = process.env.REACT_APP_API_URL;
 const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false, isClickable = true}) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [quantity, setQuantity] = useState(product.count);
+    const [previousDate] = useState(moment((Date.now() - (30 * 24 * 60 * 60 * 1000))).format('MMMM Do, YYYY'));
 
     const addToCart = () => {
         addProductToCart(product, () => {
@@ -55,7 +56,9 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
         <div className='h-100 hide-ribbon'>
             <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
-                <div className='corner-ribbon'>New</div>
+                {moment(product.createdAt).format('MMMM Do, YYYY') > previousDate ? (
+                    <div className='corner-ribbon blue-ribbon'>New!</div>
+                ) : null}
                 {product._id !== undefined ? (
                     <img src={`${API}/product/image/${product._id}`} alt={product.name} />
                 ) : null}
