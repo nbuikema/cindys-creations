@@ -53,6 +53,7 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
 
     return isClickable ? (
         <div className='h-100'>
+            <div className='corner-ribbon'>New</div>
             <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
                 {product._id !== undefined ? (
