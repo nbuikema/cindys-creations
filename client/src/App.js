@@ -23,7 +23,6 @@ import CreateProduct from './components/CreateProduct';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import Loader from './components/Loader';
 
 const App = () => {
     return (
@@ -31,7 +30,6 @@ const App = () => {
             <BrowserRouter>
                 <Navbar />
                 <Switch>
-                    <Route path='/loader' exact component={Loader} />
                     <Route path='/' exact component={Home} />
                     <Route path='/contact' exact component={Contact} />
                     <Route path='/about' exact component={About} />
