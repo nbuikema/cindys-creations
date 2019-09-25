@@ -7,6 +7,7 @@ const API = process.env.REACT_APP_API_URL;
 const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, showCartQuantity = false, showRemoveFromCart = false, isClickable = true}) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [quantity, setQuantity] = useState(product.count);
+    const [previousDate] = useState(moment((Date.now() - (30 * 24 * 60 * 60 * 1000))).format('MMMM Do, YYYY'));
 
     const addToCart = () => {
         addProductToCart(product, () => {
@@ -51,10 +52,19 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
         </button>
     );
 
+    const showRibbons = () => {
+        if(moment(product.createdAt).format('MMMM Do, YYYY') > previousDate) {
+            return <div className='corner-ribbon blue-ribbon'>New!</div>;
+        } else if(moment(product.updatedAt).format('MMMM Do, YYYY') > previousDate) {
+            return <div className='corner-ribbon orange-ribbon'>Updated!</div>;
+        }
+    };
+
     return isClickable ? (
-        <div>
-            <Link className='card text-center' to={`/product/${product._id}`}>
+        <div className='h-100 hide-ribbon'>
+            <Link className='card text-center h-100' to={`/product/${product._id}`}>
                 {redirectCart()}
+                {showRibbons()}
                 {product._id !== undefined ? (
                     <img src={`${API}/product/image/${product._id}`} alt={product.name} />
                 ) : null}
@@ -62,12 +72,12 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
                     <h5 className='card-title'>{product.name}</h5>
                     <p className='card-text'>${product.price}</p>
                 </div>
+                <div className='text-center'>
+                    {showAddToCartBtn(showAddToCart)}
+                    {showCartQuantityBtn(showCartQuantity)}
+                    {showRemoveFromCartBtn(showRemoveFromCart)}
+                </div>
             </Link>
-            <div className='text-center'>
-                {showAddToCartBtn(showAddToCart)}
-                {showCartQuantityBtn(showCartQuantity)}
-                {showRemoveFromCartBtn(showRemoveFromCart)}
-            </div>
         </div>
     ) : (
         <div className='card'>
