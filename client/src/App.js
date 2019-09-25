@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -38,14 +39,14 @@ const App = () => {
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
                     <Route path='/password/forgot' exact component={ForgotPassword} />
-                    <PrivateRoute path='/manage/categories' exact component={ManageCategories} />
-                    <PrivateRoute path='/manage/products' exact component={ManageProducts} />
-                    <PrivateRoute path='/manage/orders' exact component={ManageOrders} />
+                    <AdminRoute path='/manage/categories' exact component={ManageCategories} />
+                    <AdminRoute path='/manage/products' exact component={ManageProducts} />
+                    <AdminRoute path='/manage/orders' exact component={ManageOrders} />
                     <PrivateRoute path='/:userId/account' exact component={UserAccount} />
                     <PrivateRoute path='/:userId/orders' exact component={UserOrders} />
                     <PrivateRoute path='/:userId/account/update' exact component={UpdateUserAccount} />
-                    <PrivateRoute path='/product/create' exact component={CreateProduct} />
-                    <PrivateRoute path='/product/update/:productId' exact component={UpdateProduct} />
+                    <AdminRoute path='/product/create' exact component={CreateProduct} />
+                    <AdminRoute path='/product/update/:productId' exact component={UpdateProduct} />
                     <Route path='/product/:productId' exact component={Product} />
                     <Route path='/cart' exact component={Cart} />
                     <Route path='/checkout' exact component={Checkout} />
