@@ -60,6 +60,21 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
         }
     };
 
+    const showButtons = () => showAddToCart ? (
+        <div className='text-center btns-products'>
+            {showAddToCartBtn(showAddToCart)}
+            {showCartQuantityBtn(showCartQuantity)}
+            {showRemoveFromCartBtn(showRemoveFromCart)}
+        </div>
+    ) : (
+        <div className='text-center btns-cart'>
+            {showAddToCartBtn(showAddToCart)}
+            {showCartQuantityBtn(showCartQuantity)}
+            {showRemoveFromCartBtn(showRemoveFromCart)}
+        </div>
+    )
+        
+
     return isClickable ? (
         <div className='h-100 hide-ribbon'>
             <Link className='card text-center h-100' to={`/product/${product._id}`}>
@@ -72,12 +87,8 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
                     <h5 className='card-title'>{product.name}</h5>
                     <p className='card-text'>${product.price}</p>
                 </div>
-                <div className='text-center'>
-                    {showAddToCartBtn(showAddToCart)}
-                    {showCartQuantityBtn(showCartQuantity)}
-                    {showRemoveFromCartBtn(showRemoveFromCart)}
-                </div>
             </Link>
+            {showButtons()}
         </div>
     ) : (
         <div className='card'>

@@ -452,3 +452,13 @@ hr {
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
+.btns-cart {
+    position: relative;
+    top: -100px;
+}
+
+.btns-products {
+    position: relative;
+    top: -50px;
+}
