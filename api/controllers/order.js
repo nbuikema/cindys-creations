@@ -16,7 +16,7 @@ exports.createOrder = (req, res) => {
             user.hashed_password = undefined;
             user.salt = undefined;
             emailData = {
-                to: 'creationsfromcindy@gmail.com',
+                to: 'devnickbusiness@gmail.com',
                 from: 'noreply@cindyscreations.com',
                 subject: `New Order Placed`,
                 html: `
@@ -30,7 +30,7 @@ exports.createOrder = (req, res) => {
         });
     } else {
         emailData = {
-            to: 'creationsfromcindy@gmail.com',
+            to: 'devnickbusiness@gmail.com',
             from: 'noreply@cindyscreations.com',
             subject: `New Order Placed`,
             html: `

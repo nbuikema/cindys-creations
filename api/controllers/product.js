@@ -140,3 +140,20 @@ exports.productsByName = (req, res, next, query) => {
 exports.readProductsByName = (req, res) => {
     return res.json(req.products);
 };
+
+exports.updateSold = (req, res, next) => {
+    let bulk = req.body.order.products.map((product) => {
+        return {
+            updateOne: {
+                filter: {_id: product._id},
+                update: {$inc: {sold: +product.count}}
+            }
+        }
+    });
+    Product.bulkWrite(bulk, {}, (err, products) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not update product.'});
+        }
+        next();
+    });
+};
