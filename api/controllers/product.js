@@ -1,6 +1,7 @@
 const formidable = require('formidable');
 const _ = require('lodash');
 const fs = require('fs');
+const moment = require('moment');
 const Product = require('../models/product');
 
 exports.productById = (req, res, next, id) => {
@@ -88,6 +89,7 @@ exports.updateProduct = (req, res) => {
         }
 
         let product = req.product;
+        product.updatedAt = new Date();
         product = _.extend(product, fields);
         if(files.image) {
             if(files.image.size > 1000000) {
