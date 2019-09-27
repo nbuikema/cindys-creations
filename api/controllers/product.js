@@ -1,7 +1,6 @@
 const formidable = require('formidable');
 const _ = require('lodash');
 const fs = require('fs');
-const moment = require('moment');
 const Product = require('../models/product');
 
 exports.productById = (req, res, next, id) => {
