@@ -81,7 +81,7 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
                 {redirectCart()}
                 {showRibbons()}
                 {product._id !== undefined ? (
-                    <img src={`${API}/product/image/${product._id}`} alt={product.name} />
+                    <img className='card-img-top' src={`${API}/product/image/${product._id}`} alt={product.name} />
                 ) : null}
                 <div className='card-body'>
                     <h5 className='card-title'>{product.name}</h5>
@@ -95,7 +95,7 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
             {redirectCart()}
             <h1 className='card-title text-center mb-3'>{product.name}</h1>
             {product._id !== undefined ? (
-                <img src={`${API}/product/image/${product._id}`} alt={product.name} />
+                <img className='card-img-top' src={`${API}/product/image/${product._id}`} alt={product.name} />
             ) : null}
             <div className='card-body'>
                 <p className='card-text'>${product.price}</p>
