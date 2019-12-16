@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -32,6 +33,11 @@ app.use('/api', categoryRoutes);
 app.use('/api', authRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', braintreeRoutes);
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const port = process.env.PORT || 3001;
 
