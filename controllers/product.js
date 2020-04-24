@@ -2,6 +2,13 @@ const formidable = require('formidable');
 const _ = require('lodash');
 const fs = require('fs');
 const Product = require('../models/product');
+const cloudinary = require("cloudinary");
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+});
 
 exports.productById = (req, res, next, id) => {
     Product.findById(id).exec((err, product) => {
@@ -14,41 +21,31 @@ exports.productById = (req, res, next, id) => {
 };
 
 exports.createProduct = (req, res) => {
-    let form = new formidable.IncomingForm();
-    form.keepExtensions = true;
-    form.parse(req, (err, fields, files) => {
+    const images = [];
+    req.files.forEach(image => {
+        let img = {};
+        img.url = image.secure_url;
+        img.id = image.public_id;
+        images.push(img);
+    });
+    const product = new Product(req.body);
+    product.images = images;
+    const {name, description, category, price} = product;
+    Product.find({name: name}).exec((err, foundProduct) => {
         if(err) {
-            return res.status(400).json({error: 'Image could not be uploaded'});
-        }
-        
-        const {name, description, category, price} = fields;
-        if(!name) {
-            return res.status(400).json({error: 'Name is required.'});
-        }
-        if(!description) {
-            return res.status(400).json({error: 'Description is required.'});
-        }
-        if(!category) {
-            return res.status(400).json({error: 'Category is required.'});
-        }
-        if(!price) {
-            return res.status(400).json({error: 'Price is required.'});
-        }
-        
-        let product = new Product(fields);
-        if(files.image) {
-            if(files.image.size > 1000000) {
-                return res.status(400).json({error: 'Image is too large.'});
+            return res.status(400).json({error: 'Product could not be created.'});
+        } else {
+            if(foundProduct.length === 0) {
+                product.save((err, data) => {
+                    if(err) {
+                        return res.status(400).json({error: 'Product could not be created.'});
+                    }
+                    return res.json({data});
+                });
+            } else {
+                return res.status(400).json({error: 'This product already exists.'});
             }
-            product.image.data = fs.readFileSync(files.image.path);
-            product.image.contentType = files.image.type;
         }
-        product.save((err, result) => {
-            if(err) {
-                return res.status(400).json({error: 'Product could not be created.'});
-            }
-            res.json(result);
-        });
     });
 };
 
