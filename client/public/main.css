@@ -409,9 +409,43 @@ hr {
     font-size: 1.2rem;
 }
 
+.carousel-indicators {
+    position: relative;
+}
+
+.carousel-indicators li {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    height: 50px;
+}
+
+@media (max-width: 575px) {
+    .carousel-item img {
+        height: 240px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+    .carousel-item img {
+        height: 360px;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .carousel-item img {
+        height: 400px;
+    }
+}
+
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav .dropdown-menu {
         left: -27px;
+    }
+
+    .carousel-item img {
+        height: calc(70vh);
+        max-height: 500px;
     }
 }
 

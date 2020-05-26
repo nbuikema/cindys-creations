@@ -72,8 +72,46 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
             {showCartQuantityBtn(showCartQuantity)}
             {showRemoveFromCartBtn(showRemoveFromCart)}
         </div>
-    )
-        
+    );
+
+    const showImages = () => (
+        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+            <div className="carousel-inner">
+                {product.images.map((image, i) => {
+                    return i === 0 ? (
+                        <div key={i} className="carousel-item active no-border">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </div>
+                    ) : (
+                        <div key={i} className="carousel-item no-border">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </div>
+                    );
+                })}
+                <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Previous</span>
+                </a>
+                <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Next</span>
+                </a>
+            </div>
+            <ol className="carousel-indicators row">
+                {product.images.length > 0 && product.images.map((image, i) => {
+                    return i === 0 ? (
+                        <li className='col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
+                        </li>
+                    ) : (
+                        <li className='col-2 px-0 mb-0' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
+                        </li>
+                    );
+                })}
+            </ol>
+        </div>
+    );
 
     return isClickable ? (
         <div className='h-100 hide-ribbon'>
@@ -94,14 +132,19 @@ const ProductCard = ({product, changeCartSize, cartSize, showAddToCart = true, s
         <div className='card'>
             {redirectCart()}
             <h1 className='card-title text-center mb-3'>{product.name}</h1>
-            {product._id !== undefined ? (
-                <img className='card-img-top' src={`${product.images[0].url}`} alt={product.name} />
-            ) : null}
-            <div className='card-body'>
-                <p className='card-text'>${product.price}</p>
-                <p className='card-text'>{product.description}</p>
-                <p className='card-text'>Added {moment(product.createdAt).format('MMMM Do, YYYY')}</p>
-                <p className='card-text'>Last Updated {moment(product.updatedAt).format('MMMM Do, YYYY')}</p>
+            <div className='row'>
+                {product._id !== undefined ? (
+                    <div className='col-12 col-md-8'>
+                        {showImages()}
+                    </div>
+                ) : null}
+                {console.log(product.images)}
+                <div className='card-body col-12 col-md-4'>
+                    <p className='card-text'>${product.price}</p>
+                    <p className='card-text'>{product.description}</p>
+                    <p className='card-text'>Added {moment(product.createdAt).format('MMMM Do, YYYY')}</p>
+                    <p className='card-text'>Last Updated {moment(product.updatedAt).format('MMMM Do, YYYY')}</p>
+                </div>
             </div>
             <div className='text-center'>
                 {showAddToCartBtn(showAddToCart)}

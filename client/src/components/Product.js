@@ -41,8 +41,8 @@ const Product = ({match}) => {
                 <Loader />
             ) : (
                 <div className='row'>
-                    <div className='col-sm-0 col-md-3'></div>
-                    <div className='col-sm-12 col-md-6 mt-3'>
+                    <div className='col-sm-0 col-md-1'></div>
+                    <div className='col-sm-12 col-md-10 mt-3'>
                         <ProductCard product={product} isClickable={false} />
                     </div>
                 </div>
